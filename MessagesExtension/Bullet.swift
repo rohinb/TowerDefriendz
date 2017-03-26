@@ -10,20 +10,20 @@ import Foundation
 import UIKit
 
 class Bullet: UIView {
-	
+    
     var damage : Int
-	
+    
     var velX: CGFloat
     var velY: CGFloat
     
     var updateTimer = Timer()
-	
+    
     init(locationX: Int, locationY: Int, vel: Double, direction: Double, damage: Int){
         self.velY = CGFloat(vel*sin(direction)) // unit circle is y opposite
         self.velX = CGFloat(vel*cos(direction))
         
         self.damage = damage
-		
+        
         super.init(frame: CGRect(x: locationX*Constants.scale + Constants.scale / 2, y: locationY*Constants.scale + Constants.scale / 2, width: 7, height: 7))
         
         updateTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true, block: { (Timer) in
@@ -33,12 +33,18 @@ class Bullet: UIView {
     }
     
     func update() {
-        animateSmoothly(duration: updateTimer.timeInterval) { 
+        animateSmoothly(duration: updateTimer.timeInterval) {
             self.frame = CGRect(x: self.frame.origin.x + self.velX, y: self.frame.origin.y + self.velY, width: 7, height: 7)
         }
+        // kill bullet if it is off the screen!
+        if self.center.x > self.superview!.frame.width || self.center.x < 0
+            || self.center.y > self.superview!.frame.height || self.center.y < 0 {
+            self.die()
+        }
+        
         let posX = Int(self.center.x/CGFloat(Constants.scale))
         let posY = Int(self.center.y/CGFloat(Constants.scale))
-
+        
         for enemy in enemyArray! {
             if enemy.posX == posX && enemy.posY == posY {
                 enemy.hurt(damage: self.damage)
@@ -54,7 +60,7 @@ class Bullet: UIView {
             bulletArray?.remove(at: index)
         }
     }
-	
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
