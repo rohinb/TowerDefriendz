@@ -36,6 +36,12 @@ class Bullet: UIView {
         animateSmoothly(duration: updateTimer.timeInterval) { 
             self.frame = CGRect(x: self.frame.origin.x + self.velX, y: self.frame.origin.y + self.velY, width: 7, height: 7)
         }
+		// kill bullet if it is off the screen!
+		if self.center.x > self.superview!.frame.width || self.center.x < 0
+			|| self.center.y > self.superview!.frame.height || self.center.y < 0 {
+			self.die()
+		}
+		
         let posX = Int(self.center.x/CGFloat(Constants.scale))
         let posY = Int(self.center.y/CGFloat(Constants.scale))
 
