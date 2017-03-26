@@ -26,7 +26,7 @@ class Tower:UIImageView {
         self.posY = posY
         
         super.init(frame: CGRect(x: posX*Constants.scale, y: posY*Constants.scale, width: Constants.scale * 375/255, height: Constants.scale))
-        self.image = UIImage(named: "Image")
+        self.image = UIImage(named: "Tower")
         // not true rate of fire because has to find enemy in order to shoot
         shootTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { (_) in
             self.shoot()

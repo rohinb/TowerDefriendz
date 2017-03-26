@@ -74,7 +74,7 @@ class Enemy: UIImageView {
 			})
 			self.path = [.D, .D, .D, .D, .D, .D, .R, .R, .D, .D, .D, .D, .D, .L, .L, .L, .L, .D, .D, .D, .D, .R, .R, .R, .D, .D]
 			health = 700
-            self.image = UIImage(named: "Image-1")
+            self.image = UIImage(named: "Soldier")
 			self.backgroundColor = UIColor.white
 		case "bird":
 			updateTimer = Timer.scheduledTimer(withTimeInterval: 0.70, repeats: true, block: { (timer) in
@@ -82,7 +82,7 @@ class Enemy: UIImageView {
 			})
 			self.path = [.D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D]
 			health = 200
-            self.image = UIImage(named: "Image-2")
+            self.image = UIImage(named: "Bird")
 			self.backgroundColor = UIColor.blue
 		default:
 			updateTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true, block: { (timer) in
@@ -111,6 +111,14 @@ class Enemy: UIImageView {
 	
 	func hurt(damage: Int) {
 		health -= damage
+        UIView.animate(withDuration: 0.05, animations: { 
+            self.tintColor = UIColor.red
+        }) { (success) in
+            if success {
+                self.tintColor = UIColor.clear
+            }
+        }
+        
 		if health <= 0{
 			self.die()
 		}
