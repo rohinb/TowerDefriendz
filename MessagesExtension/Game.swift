@@ -85,7 +85,7 @@ class Game: UIView, TowerDelegate, UIGestureRecognizerDelegate {
     
     func addedBullet(bullet: Bullet) {
         bulletArray?.append(bullet)
-        self.addSubview(bullet)
+        self.insertSubview(bullet, aboveSubview: imageView)
     }
 }
 

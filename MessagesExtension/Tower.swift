@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class Tower:UIView {
+class Tower:UIImageView {
     
     var radius : CGFloat = 10000
     
@@ -25,8 +25,8 @@ class Tower:UIView {
         self.posX = posX
         self.posY = posY
         
-        super.init(frame: CGRect(x: posX*Constants.scale, y: posY*Constants.scale, width: Constants.scale, height: Constants.scale))
-        self.backgroundColor = UIColor.brown
+        super.init(frame: CGRect(x: posX*Constants.scale, y: posY*Constants.scale, width: Constants.scale * 375/255, height: Constants.scale))
+        self.image = UIImage(named: "Image")
         // not true rate of fire because has to find enemy in order to shoot
         shootTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { (_) in
             self.shoot()
