@@ -39,7 +39,7 @@ class Tower:UIImageView {
             radius = CGFloat(4 * Constants.scale)
             // not true rate of fire because has to find enemy in order to shoot
             shootTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true, block: { (_) in
-                self.shoot()
+                self.shoot(speed: 13, color: UIColor.blue)
             })
         case "ranged":
 			
@@ -48,7 +48,7 @@ class Tower:UIImageView {
             radius = CGFloat(10 * Constants.scale)
             // not true rate of fire because has to find enemy in order to shoot
             shootTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { (_) in
-                self.shoot()
+                self.shoot(speed: 9, color: UIColor.brown)
             })
         case "deadly":
 			
@@ -57,14 +57,14 @@ class Tower:UIImageView {
             radius = CGFloat(3 * Constants.scale)
             // not true rate of fire because has to find enemy in order to shoot
             shootTimer = Timer.scheduledTimer(withTimeInterval: 0.8, repeats: true, block: { (_) in
-                self.shoot()
+                self.shoot(speed: 6, color: UIColor.red)
             })
         default:
             radius = 0
             self.damage = 500
             // not true rate of fire because has to find enemy in order to shoot
             shootTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { (_) in
-                self.shoot()
+                self.shoot(speed: 1, color: UIColor.cyan)
             })
         }
     }
@@ -74,7 +74,7 @@ class Tower:UIImageView {
         shootTimer.invalidate()
     }
     
-    func shoot() {
+    func shoot(speed: Double , color: UIColor) {
         // we want to traverse (for loop) array of enemies and find first one that is within radius
         // then transform/rotate to face it and instantly shoot (with that direction's vel)
         for enemy in enemyArray {
@@ -86,7 +86,7 @@ class Tower:UIImageView {
                     self.transform = CGAffineTransform(rotationAngle: direction)
                 }, completion: { (success) in
                     if success {
-                        let bullet = Bullet(locationX: self.posX, locationY: self.posY, vel: 8, direction: Double(direction), damage : self.damage)
+                        let bullet = Bullet(locationX: self.posX, locationY: self.posY, vel: speed, direction: Double(direction), damage : self.damage, color : color)
                         self.delegate?.addedBullet(bullet: bullet)
                     }
                 })
