@@ -39,7 +39,7 @@ class Enemy: UIView {
             updateTimer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true, block: { (timer) in
                 self.update()
             })
-            self.path = [.D, .D, .D, .D, .D, .D, .R, .R, .D, .D, .D, .D, .D, .L, .L, .L, .L, .D, .D, .D, .D, .R, .R, .R, .D, .D, .D]
+            self.path = [.D, .D, .D, .D, .D, .D, .R, .R, .D, .D, .D, .D, .D, .L, .L, .L, .L, .D, .D, .D, .D, .R, .R, .R, .D, .D]
             health = 50
             self.backgroundColor = UIColor.white
         case "bird":
