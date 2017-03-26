@@ -32,7 +32,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         defendButton.isEnabled = true
         
         Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { (_) in
-            self.createMessage(didWin: true, attackWave: "11100")
+            self.createMessage(didWin: true, attackWave: "1110010101010")
         }
     }
     
