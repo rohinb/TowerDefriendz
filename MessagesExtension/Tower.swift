@@ -26,26 +26,28 @@ class Tower:UIImageView {
         self.posY = posY
         
         super.init(frame: CGRect(x: posX*Constants.scale, y: posY*Constants.scale, width: Constants.scale * 375/255, height: Constants.scale))
+        
+        
         switch(type){
         case "normal":
-            self.image = UIImage(named: "Tower")
+            self.image = #imageLiteral(resourceName: "Tower")
             radius = CGFloat(4 * Constants.scale)
             // not true rate of fire because has to find enemy in order to shoot
             shootTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { (_) in
                 self.shoot()
             })
         case "ranged":
-            self.image = UIImage(named: "")
+            self.image = #imageLiteral(resourceName: "ranged")
             radius = CGFloat(10 * Constants.scale)
             // not true rate of fire because has to find enemy in order to shoot
             shootTimer = Timer.scheduledTimer(withTimeInterval: 0.8, repeats: true, block: { (_) in
                 self.shoot()
             })
         case "deadly":
-            self.image = UIImage(named: "")
+            self.image = #imageLiteral(resourceName: "deadlee")
             radius = CGFloat(2 * Constants.scale)
             // not true rate of fire because has to find enemy in order to shoot
-            shootTimer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true, block: { (_) in
+            shootTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true, block: { (_) in
                 self.shoot()
             })
         default:
@@ -56,6 +58,7 @@ class Tower:UIImageView {
             })
         }
     }
+    
     
     deinit {
         shootTimer.invalidate()
