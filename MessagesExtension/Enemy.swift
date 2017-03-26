@@ -108,13 +108,9 @@ class Enemy: UIImageView {
 	
 	func hurt(damage: Int) {
 		health -= damage
-        UIView.animate(withDuration: 0.05, animations: { 
+        UIView.animate(withDuration: 0.5, animations: {
             self.tintColor = UIColor.red
-        }) { (success) in
-            if success {
-                self.tintColor = UIColor.clear
-            }
-        }
+        })
         
 		if health <= 0{
 			self.die()

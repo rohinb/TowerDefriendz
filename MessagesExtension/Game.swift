@@ -28,6 +28,7 @@ class Game: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegate {
     var delegate : GameDelegate?
 	var lives = 3
 	var isRunning = true
+    var defenderBudget = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -62,6 +63,9 @@ class Game: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegate {
 			tower.delegate = self
 			towerArray?.append(tower)
 			addSubview(tower)
+            
+            //lower budget (different price depending on what tower type
+            self.defenderBudget -= 1000
 		}
 	}
     
@@ -69,11 +73,12 @@ class Game: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegate {
         super.init(coder: aDecoder)
     }
     
-    func start(enemyInts: [Int]) {
+    func start(enemyInts: [Int], turnNumber: Int) {
 		var count = 0
+        defenderBudget = turnNumber * 1000
         for int in enemyInts {
 			Timer.scheduledTimer(withTimeInterval: 1.5 * Double(count), repeats: false) {_ in
-				let enemy = Enemy(posX: 4, posY: 0, type: int == 1 ? "soldier" : "bird")
+                let enemy = int == 1 ? Enemy(posX: 4, posY: 0, type: "soldier") : Enemy(posX: Int(arc4random_uniform(11)), posY: 0, type: "bird")
 				enemy.delegate = self
 				self.addSubview(enemy)
 				enemyArray.append(enemy)
