@@ -21,16 +21,40 @@ class Tower:UIImageView {
     
     var shootTimer = Timer()
     
-    init(posX: Int, posY: Int) {
+    init(posX: Int, posY: Int, type: String) {
         self.posX = posX
         self.posY = posY
         
         super.init(frame: CGRect(x: posX*Constants.scale, y: posY*Constants.scale, width: Constants.scale * 375/255, height: Constants.scale))
-        self.image = UIImage(named: "Tower")
-        // not true rate of fire because has to find enemy in order to shoot
-        shootTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { (_) in
-            self.shoot()
-        })
+        switch(type){
+        case "normal":
+            self.image = UIImage(named: "Tower")
+            radius = CGFloat(4 * Constants.scale)
+            // not true rate of fire because has to find enemy in order to shoot
+            shootTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { (_) in
+                self.shoot()
+            })
+        case "ranged":
+            self.image = UIImage(named: "")
+            radius = CGFloat(10 * Constants.scale)
+            // not true rate of fire because has to find enemy in order to shoot
+            shootTimer = Timer.scheduledTimer(withTimeInterval: 0.8, repeats: true, block: { (_) in
+                self.shoot()
+            })
+        case "deadly":
+            self.image = UIImage(named: "")
+            radius = CGFloat(2 * Constants.scale)
+            // not true rate of fire because has to find enemy in order to shoot
+            shootTimer = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true, block: { (_) in
+                self.shoot()
+            })
+        default:
+            radius = 0
+            // not true rate of fire because has to find enemy in order to shoot
+            shootTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { (_) in
+                self.shoot()
+            })
+        }
     }
     
     deinit {
