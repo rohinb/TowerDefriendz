@@ -29,12 +29,15 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         defendButton.tag = 0
         defendButton.setTitle("DEFEND!", for: .normal)
         
-        if presentationStyle == .compact {
+        /*if presentationStyle == .compact {
             defendButton.isEnabled = false
         } else {
             defendButton.isEnabled = true
 
-        }
+        }*/
+        
+        defendButton.isEnabled = true
+
         
         Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { (_) in
             self.createMessage(didWin: true, attackWave: "1-1-1-0-0")
@@ -102,7 +105,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
             statusLabel.animateAlpha(t: 0.3, a: 0)
             statusLabel.text = "CHOOSE YOUR ARMY!"
             soldierAdditionView.animateAlpha(t: 0.3, a: 1)
-            soldierAdditionView.animateView(direction: .up, t: 0.3, pixels: 10)
+            soldierAdditionView.animateView(direction: .up, t: 0.3, pixels: 70)
             sender.tag = 2
             sender.setTitle("ATTACK!", for: .normal)
             
@@ -152,9 +155,14 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         
         statusLabel.text = didWin ? "YOUR DEFENSE WON!" : "Your defense lost."
         statusLabel.animateAlpha(t: 0.3, a: 1)
-        statusLabel.animateView(direction: .up, t: 0.3, pixels: 20)
+        statusLabel.animateView(direction: .up, t: 0.3, pixels: 50)
         defendButton.setTitle("BUILD ARMY!", for: .normal)
+        defendButton.animateAlpha(t: 0.3, a: 1)
         defendButton.tag = 1
+        game?.animateAlpha(t: 0.3, a: 0)
+        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (_) in
+            self.game?.removeFromSuperview()
+        }
         didWinGame = didWin
     }
     
