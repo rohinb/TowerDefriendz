@@ -34,6 +34,15 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         
     }
     
+    override func willResignActive(with conversation: MSConversation) {
+        defendButton.tag = 0
+        statusLabel.animateAlpha(t: 0.3, a: 0)
+        defendButton.setTitle("DEFEND!", for: .normal)
+        gameViewInitiation()
+    }
+    
+    
+    
     // MARK: - Conversation Handling
     
     override func willBecomeActive(with conversation: MSConversation) {
@@ -49,9 +58,16 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         }
         
         let defaults = UserDefaults.standard
-        guard let a = defaults.value(forKey: conversation.remoteParticipantIdentifiers.first!.uuidString) as? Int else {
+        if let a = defaults.value(forKey: conversation.remoteParticipantIdentifiers.first!.uuidString) as? Int  {
+            if turnNumber == 0 {
+                defendButton.tag = 0
+                statusLabel.animateAlpha(t: 0.3, a: 0)
+                defendButton.setTitle("DEFEND!", for: .normal)
+                gameViewInitiation()
+            }
+        } else {
+            defaults.setValue(0, forKey: conversation.remoteParticipantIdentifiers.first!.uuidString)
             initialAttackSetup()
-            return
         }
     }
     
@@ -98,7 +114,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
     func turnCheck(conversationId: String) {
         let defaults = UserDefaults.standard
         if let conversationTurn = defaults.value(forKey: conversationId) as? Int {
-            if turnNumber <= conversationTurn {
+            if turnNumber < conversationTurn {
                 defendButton.isEnabled = false
                 defendButton.alpha = 0
                 statusLabel.text = "Can't replay old games."
@@ -180,7 +196,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         //layout.image = UIImage(named: "message-background.png")
         //layout.imageTitle = "iMessage Extension"
         if turnNumber != 0 {
-            layout.caption = "Round \(turnNumber) defense \(didWin ? "succeded!" : "failed!")"
+            layout.caption = "Round \(turnNumber) defense \(didWin ? "succeeded!" : "failed!")"
         } else {
             layout.caption = "Tower Defriendz round started!"
         }
@@ -194,7 +210,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         let message = MSMessage(session: session)
         message.layout = layout
         message.url = components.url
-        message.summaryText = "Defense \(didWin ? "succeded!" : "failed!")"
+        message.summaryText = "Defense \(didWin ? "succeeded!" : "failed!")"
         message.shouldExpire = true
         
         conversation?.insert(message)
@@ -240,7 +256,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         if (armyBudget - 50) > 0 {
             soldierCounter += 1
             soldierCountLabel.text = soldierCounter.description
-            armyBudget = 1000*turnNumber - soldierCounter*50 - eagleCounter*70
+            armyBudget = 1000*(turnNumber+1) - soldierCounter*50 - eagleCounter*70
             armyCoinsLabel.text = "\(armyBudget) Coins"
         }
     }
@@ -248,7 +264,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         if (armyBudget - 70) > 0 {
             eagleCounter += 1
             eagleCountLabel.text = eagleCounter.description
-            armyBudget = 1000*turnNumber - soldierCounter*50 - eagleCounter*70
+            armyBudget = 1000*(turnNumber+1) - soldierCounter*50 - eagleCounter*70
             armyCoinsLabel.text = "\(armyBudget) Coins"
         }
     }
