@@ -18,7 +18,7 @@ class Bullet: UIView {
     
     var updateTimer = Timer()
     
-    init(locationX: Int, locationY: Int, vel: Double, direction: Double, damage: Int){
+    init(locationX: Int, locationY: Int, vel: Double, direction: Double, damage: Int, color: UIColor){
         self.velY = CGFloat(vel*sin(direction)) // unit circle is y opposite
         self.velX = CGFloat(vel*cos(direction))
         
@@ -29,7 +29,7 @@ class Bullet: UIView {
         updateTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true, block: { (Timer) in
             self.update()
         })
-        self.backgroundColor = UIColor.black
+        self.backgroundColor = color
     }
     
     func update() {
