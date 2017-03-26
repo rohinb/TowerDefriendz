@@ -23,9 +23,11 @@ var towerArray: [Tower]? = [Tower]()
 var bulletArray: [Bullet]? = [Bullet]()
 let imageView = UIImageView(image: #imageLiteral(resourceName: "path"))
 
-class Game: UIView, TowerDelegate, UIGestureRecognizerDelegate {
+class Game: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegate {
 
     var delegate : GameDelegate?
+	var lives = 3
+	var isRunning = true
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -70,6 +72,7 @@ class Game: UIView, TowerDelegate, UIGestureRecognizerDelegate {
     func start(enemyInts: [Int]) {
         for int in enemyInts {
             let enemy = Enemy(posX: 4, posY: 0, type: int == 1 ? "soldier" : "bird")
+			enemy.delegate = self
             self.addSubview(enemy)
             enemyArray.append(enemy)
         }
@@ -80,6 +83,7 @@ class Game: UIView, TowerDelegate, UIGestureRecognizerDelegate {
     }
     
     func didEnd(didWin: Bool) {
+		isRunning = false
         delegate?.gameDidEnd(didWin: didWin)
     }
     
@@ -87,6 +91,17 @@ class Game: UIView, TowerDelegate, UIGestureRecognizerDelegate {
         bulletArray?.append(bullet)
         self.insertSubview(bullet, aboveSubview: imageView)
     }
+	
+	func enemyReachedEnd() {
+		lives -= 1
+		if lives <= 0 {
+			didEnd(didWin: false)
+		}
+	}
+	
+	func allEnemiesDead() {
+		didEnd(didWin: true)
+	}
 }
 
 

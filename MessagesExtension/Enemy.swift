@@ -46,7 +46,7 @@ class Enemy: UIImageView {
 	
 	var posX: Int
 	var posY: Int
-	
+	var delegate : EnemyDelegate?
 	enum Direction {
 		case L
 		case R
@@ -104,6 +104,9 @@ class Enemy: UIImageView {
 		}) { (success) in
 			self.removeFromSuperview()
 		}
+		if enemyArray.count <= 0 {
+			self.delegate?.allEnemiesDead()
+		}
 	}
 	
 	func hurt(damage: Int) {
@@ -135,10 +138,19 @@ class Enemy: UIImageView {
 		}
 		pIndex += 1
 		
+		if self.frame.origin.y > self.superview!.frame.height {
+			self.delegate?.enemyReachedEnd()
+			self.die()
+		}
 	}
 	
 	
 	required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
+}
+
+protocol EnemyDelegate {
+	func enemyReachedEnd()
+	func allEnemiesDead()
 }
