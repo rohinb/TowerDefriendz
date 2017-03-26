@@ -12,7 +12,7 @@ struct Constants {
     static var scale = 30
 }
 
-var enemyArray: [Enemy]? = [Enemy(posX: 1, posY: 1, type: "soldier"), Enemy(posX: 2, posY: 3, type: "bird")]
+var enemyArray: [Enemy]? = [Enemy(posX: 4, posY: 0, type: "soldier"), Enemy(posX: 4, posY: 0, type: "bird")]
 var towerArray: [Tower]? = [Tower(posX: 7, posY: 3), Tower(posX: 9, posY: 3)]
 var bulletArray: [Bullet]? = [Bullet]()
 

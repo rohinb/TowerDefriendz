@@ -49,7 +49,7 @@ class Tower:UIView {
                     self.transform = CGAffineTransform(rotationAngle: direction)
                 }, completion: { (success) in
                     if success {
-                        let bullet = Bullet(locationX: self.posX, locationY: self.posY, vel: 8, direction: Double(direction))
+                        let bullet = Bullet(locationX: self.posX, locationY: self.posY, vel: 8, direction: Double(direction), damage : 10)
                         self.delegate?.addedBullet(bullet: bullet)
                     }
                 })

@@ -39,17 +39,15 @@ class Enemy: UIView {
             updateTimer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true, block: { (timer) in
                 self.update()
             })
-            self.path = [.R, .R, .R, .R,
-                         .R, .R, .R, .D, .D, .D, .D]
+            self.path = [.D, .D, .D, .D, .D, .D, .R, .R, .D, .D, .D, .D, .D, .L, .L, .L, .L, .D, .D, .D, .D, .R, .R, .R, .D, .D]
             health = 50
             self.backgroundColor = UIColor.white
         case "bird":
-            updateTimer = Timer.scheduledTimer(withTimeInterval: 0.15, repeats: true, block: { (timer) in
+            updateTimer = Timer.scheduledTimer(withTimeInterval: 0.30, repeats: true, block: { (timer) in
                 self.update()
             })
-            self.path = [.D, .D, .D, .D,
-                         .D, .D, .D, .D]
-            health = 10
+            self.path = [.D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D]
+            health = 20
             self.backgroundColor = UIColor.blue
         default:
             updateTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true, block: { (timer) in
@@ -61,10 +59,21 @@ class Enemy: UIView {
     }
     
     func die() {
+        if let index = enemyArray?.index(of: self) {
+            enemyArray?.remove(at: index)
+        }
         updateTimer.invalidate()
         self.removeFromSuperview()
     }
+
+    func hurt(damage: Int) {
+        health -= damage
+        if health <= 0{
+            self.die()
+        }
+    }
     
+
     func update() {
         guard pIndex < path.count else {
             return
