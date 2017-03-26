@@ -58,7 +58,7 @@ class Game: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegate {
 		}
 		if !contains(arr: pathPoints, tuple: tuple) && !occupied {
 			//add tower there
-			let tower = Tower(posX: posX, posY: posY)
+            let tower = Tower(posX: posX, posY: posY, type: "normal")
 			tower.delegate = self
 			towerArray?.append(tower)
 			addSubview(tower)
