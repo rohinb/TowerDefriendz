@@ -25,7 +25,7 @@ class Bullet: UIView {
         self.damage = damage
         
         super.init(frame: CGRect(x: locationX*Constants.scale + Constants.scale / 2 - 3, y: locationY*Constants.scale + Constants.scale / 2 - 3, width: 7, height: 7))
-        
+        self.layer.cornerRadius = 3.5
         updateTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true, block: { (Timer) in
             self.update()
         })
@@ -37,6 +37,10 @@ class Bullet: UIView {
             self.frame = CGRect(x: self.frame.origin.x + self.velX, y: self.frame.origin.y + self.velY, width: 7, height: 7)
         }
         // kill bullet if it is off the screen!
+		if superview == nil {
+			self.die()
+			return
+		}
         if self.center.x > self.superview!.frame.width || self.center.x < 0
             || self.center.y > self.superview!.frame.height || self.center.y < 0 {
             self.die()

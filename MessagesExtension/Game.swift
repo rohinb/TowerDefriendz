@@ -48,7 +48,8 @@ class Game: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegate {
         Constants.scale = Int(self.frame.width / CGFloat(10))
 		
 		for (index, towerType) in towerTypes.enumerated() {
-			let button = UIButton(frame: CGRect(x: 10, y: 200 + index * 50, width: 40, height: 40))
+			let button = UIButton(frame: CGRect(x: 10, y: 200 + index * 50, width: Constants.scale * 375/255, height: Constants.scale))
+			button.backgroundColor = UIColor.white
 			button.setTitle("towerType", for: UIControlState())
 			button.setImage(UIImage(named: towerType), for: UIControlState())
 			button.tag = index
@@ -64,10 +65,15 @@ class Game: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegate {
 			self.insertSubview(imageView, aboveSubview: imageView)
 		}
         
-        budgetLabel = UILabel(frame: CGRect(x: 100, y: 10, width: 100, height: 50))
-        budgetLabel?.text = "hello"
-        budgetLabel?.textColor = UIColor.white
+        budgetLabel = UILabel(frame: CGRect(x: self.frame.width - 50, y: 100, width: 50, height: 30))
+        budgetLabel?.text = ""
+        budgetLabel?.textColor = UIColor.yellow
         self.addSubview(budgetLabel!)
+		
+		let coin = UIImageView(frame: CGRect(x: budgetLabel!.frame.origin.x - 20, y: budgetLabel!.frame.origin.y, width: 10, height: 10))
+		coin.image = #imageLiteral(resourceName: "coin")
+		coin.center.y = budgetLabel!.center.y
+		self.addSubview(coin)
     }
 	
 	@IBAction func setSelectedTowerType(sender: UIButton) {
@@ -137,6 +143,20 @@ class Game: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegate {
 		if !isRunning { return }
         delegate?.gameDidEnd(didWin: didWin)
 		isRunning = false
+		
+		//kill everything
+		for bullet in bulletArray! {
+			bullet.die()
+		}
+		
+		for enemy in enemyArray {
+			enemy.die()
+		}
+		
+		for i in towerArray! {
+			i.removeFromSuperview()
+		}
+		towerArray = [Tower]()
     }
     
     func addedBullet(bullet: Bullet) {
