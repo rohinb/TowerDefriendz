@@ -60,6 +60,16 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         
     }
     
+    override func didSelect(_ message: MSMessage, conversation: MSConversation) {
+        if let messageStr = conversation.selectedMessage?.url!.description {
+            
+            let waveStr = messageStr.substring(from: messageStr.characters.index(after: messageStr.characters.index(of: "=")!))
+            enemyInts = waveStr.components(separatedBy: "-").map({ (str) -> Int in
+                return Int(str)!
+            })
+            
+        }
+    }
     
     override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
         // Called after the extension transitions to a new presentation style.
