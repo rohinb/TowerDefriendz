@@ -78,7 +78,7 @@ class Game: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegate {
         defenderBudget = turnNumber * 1000
         for int in enemyInts {
 			Timer.scheduledTimer(withTimeInterval: 1.5 * Double(count), repeats: false) {_ in
-                let enemy = int == 1 ? Enemy(posX: 4, posY: 0, type: "soldier") : Enemy(posX: Int(arc4random_uniform(11)), posY: 0, type: "bird")
+                let enemy = int == 1 ? Enemy(posX: 4, posY: 0, type: "soldier") : Enemy(posX: Int(arc4random_uniform(9))+1, posY: 0, type: "bird")
 				enemy.delegate = self
 				self.addSubview(enemy)
 				enemyArray.append(enemy)

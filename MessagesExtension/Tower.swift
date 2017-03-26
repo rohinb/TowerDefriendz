@@ -38,7 +38,7 @@ class Tower:UIImageView {
             self.damage = 40
             radius = CGFloat(6 * Constants.scale)
             // not true rate of fire because has to find enemy in order to shoot
-            shootTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { (_) in
+            shootTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true, block: { (_) in
                 self.shoot()
             })
         case "ranged":
@@ -47,7 +47,7 @@ class Tower:UIImageView {
             self.price = 100
             radius = CGFloat(10 * Constants.scale)
             // not true rate of fire because has to find enemy in order to shoot
-            shootTimer = Timer.scheduledTimer(withTimeInterval: 0.8, repeats: true, block: { (_) in
+            shootTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { (_) in
                 self.shoot()
             })
         case "deadly":
@@ -56,7 +56,7 @@ class Tower:UIImageView {
             self.price = 200
             radius = CGFloat(3 * Constants.scale)
             // not true rate of fire because has to find enemy in order to shoot
-            shootTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true, block: { (_) in
+            shootTimer = Timer.scheduledTimer(withTimeInterval: 0.8, repeats: true, block: { (_) in
                 self.shoot()
             })
         default:
