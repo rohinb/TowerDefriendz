@@ -59,36 +59,39 @@ class Enemy: UIImageView {
 	
 	var updateTimer : Timer = Timer()
 	var health : Int = 99
+	var type = ""
+	var initialHealth = 10
 	
 	init(posX: Int, posY: Int, type : String) {
 		
 		self.posX = posX
 		self.posY = posY
-		
+		self.type = type
 		self.pIndex = 0
 		super.init(frame: CGRect(x: posX*Constants.scale, y: posY*Constants.scale, width: Constants.scale, height: Constants.scale))
 		switch type {
 		case "soldier":
-			updateTimer = Timer.scheduledTimer(withTimeInterval: 1.25, repeats: true, block: { (timer) in
+			updateTimer = Timer.scheduledTimer(withTimeInterval: 0.8, repeats: true, block: { (timer) in
 				self.update()
 			})
 			self.path = [.D, .D, .D, .D, .D, .D, .R, .R, .D, .D, .D, .D, .D, .L, .L, .L, .L, .D, .D, .D, .D, .R, .R, .R, .D, .D]
-			health = 500
-            self.image = UIImage(named: "Soldier")
+			health = 1800
+            self.image = UIImage(named: "Soldier")!.withRenderingMode(.alwaysOriginal)
 		case "bird":
-			updateTimer = Timer.scheduledTimer(withTimeInterval: 0.70, repeats: true, block: { (timer) in
+			updateTimer = Timer.scheduledTimer(withTimeInterval: 0.50, repeats: true, block: { (timer) in
 				self.update()
 			})
 			self.path = [.D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D]
-			health = 200
-            self.image = UIImage(named: "Bird")
+			health = 300
+            self.image = UIImage(named: "Bird")!.withRenderingMode(.alwaysOriginal)
 		default:
 			updateTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true, block: { (timer) in
 				self.update()
 			})
 			health = 999
-            self.image = UIImage(named: "Soldier")
+            self.image = UIImage(named: "Soldier")!.withRenderingMode(.alwaysOriginal)
 		}
+		initialHealth = health
 	}
 	
 	func die() {
@@ -108,10 +111,14 @@ class Enemy: UIImageView {
 	
 	func hurt(damage: Int) {
 		health -= damage
-        UIView.animate(withDuration: 0.5, animations: {
-            self.tintColor = UIColor.red
-        })
-        
+		self.image = UIImage(named: type == "soldier" ? "Soldier" : "Bird")!.withRenderingMode(.alwaysTemplate)
+		UIView.animate(withDuration: 0.13, animations: {
+			self.tintColor = UIColor.red
+		}, completion: { (success) in
+			self.tintColor = UIColor.clear
+			self.image = UIImage(named: self.type == "soldier" ? "Soldier" : "Bird")!.withRenderingMode(.alwaysOriginal)
+		})
+		
 		if health <= 0{
 			self.die()
 		}

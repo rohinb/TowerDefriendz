@@ -124,8 +124,8 @@ class Game: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegate {
 		var count = 0
         defenderBudget = turnNumber * 1000
         budgetLabel?.text = "\(defenderBudget)"
-        for int in enemyInts {
-			Timer.scheduledTimer(withTimeInterval: 1.5 * Double(count), repeats: false) {_ in
+        for (index, int) in enemyInts.enumerated() {
+			Timer.scheduledTimer(withTimeInterval: ((index > enemyInts.count / 2 && turnNumber > 2) ? 0.5 : 1.5) * Double(count), repeats: false) {_ in
                 let enemy = int == 1 ? Enemy(posX: 4, posY: 0, type: "soldier") : Enemy(posX: Int(arc4random_uniform(9))+1, posY: 0, type: "bird")
 				enemy.delegate = self
 				self.addSubview(enemy)

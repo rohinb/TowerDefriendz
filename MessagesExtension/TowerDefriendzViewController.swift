@@ -144,7 +144,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         let layout = MSMessageTemplateLayout()
         //layout.image = UIImage(named: "message-background.png")
         //layout.imageTitle = "iMessage Extension"
-        layout.caption = "Attack \(didWin ? "succeded!" : "failed!")"
+        layout.caption = "Defense \(didWin ? "succeded!" : "failed!")"
         layout.subcaption = "Tap to defend your base!"
         
         var components = URLComponents()
@@ -155,7 +155,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         let message = MSMessage(session: session)
         message.layout = layout
         message.url = components.url
-        message.summaryText = "Attack \(didWin ? "succeded!" : "failed!")"
+        message.summaryText = "Defense \(didWin ? "succeded!" : "failed!")"
         
         conversation?.insert(message)
     }
@@ -214,11 +214,14 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
     }
     
     func createArmy() {
-        for _ in 0..<soldierCounter {
-            armyString += "1"
-        }
-		for _ in 0..<eagleCounter {
-			armyString += "0"
+		let count = soldierCounter > eagleCounter ? soldierCounter : eagleCounter
+		for i in 0..<count {
+			if i < soldierCounter {
+				armyString += "1"
+			}
+			if i < eagleCounter {
+				armyString += "0"
+			}
 		}
     }
     
