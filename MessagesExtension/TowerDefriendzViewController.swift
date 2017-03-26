@@ -87,7 +87,26 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
             if waveStr.characters.count != 0 && turnStr.characters.count != 0 {
                 enemyInts = getArray(str: waveStr)
                 turnNumber = Int(turnStr)!
+                turnCheck(conversationId: conversation.remoteParticipantIdentifiers.first!.uuidString)
+                
             }
+        }
+        
+    }
+    
+    func turnCheck(conversationId: String) {
+        let defaults = UserDefaults.standard
+        if let conversationTurn = defaults.value(forKey: conversationId) as? Int {
+            if turnNumber <= conversationTurn {
+                defendButton.isEnabled = false
+                defendButton.alpha = 0
+                statusLabel.text = "Can't replay old games."
+                statusLabel.alpha = 1
+            } else {
+                defaults.setValue(turnNumber, forKey: conversationId)
+            }
+        } else {
+            defaults.setValue(1, forKey: conversationId)
         }
         
     }
@@ -147,7 +166,11 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         let layout = MSMessageTemplateLayout()
         //layout.image = UIImage(named: "message-background.png")
         //layout.imageTitle = "iMessage Extension"
-        layout.caption = "Round \(turnNumber) defense \(didWin ? "succeded!" : "failed!")"
+        if turnNumber != 0 {
+            layout.caption = "Round \(turnNumber) defense \(didWin ? "succeded!" : "failed!")"
+        } else {
+            layout.caption = "Tower Defriendz round started!"
+        }
         layout.subcaption = "Tap to defend your base!"
         
         var components = URLComponents()
