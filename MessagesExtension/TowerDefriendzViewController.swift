@@ -20,7 +20,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
     var didWinGame = false
     var armyToUse = ""
     var enemyInts = [Int]()
-    
+    var turnNumber = 0
     
     
     override func viewDidLoad() {
@@ -52,26 +52,40 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         
         if let messageStr = conversation.selectedMessage?.url!.description {
             
-            let waveStr = messageStr.substring(from: messageStr.characters.index(after: messageStr.characters.index(of: "=")!))
-            if waveStr.characters.count != 0 {
-                enemyInts = waveStr.components(separatedBy: "-").map({ (str) -> Int in
-                    return Int(str)!
-                })
+            let waveStr = getKeyVal(str:getQueries(str: messageStr)[0]).1
+            let turnStr = getKeyVal(str:getQueries(str: messageStr)[1]).1
+            if waveStr.characters.count != 0 && turnStr.characters.count != 0 {
+                enemyInts = getArray(str: waveStr)
+                turnNumber = Int(turnStr)!
             }
         }
+    }
+    
+    func getQueries(str: String) -> [String] {
         
+        return str.components(separatedBy: "&")
         
+    }
+    
+    func getKeyVal(str: String) -> (String,String) {
+        let array = str.components(separatedBy: "=")
+        return (array[0],array[1])
+    }
+    
+    func getArray(str: String) -> [Int] {
+        return str.components(separatedBy: "-").map({ (str) -> Int in
+            return Int(str)!
+        })
     }
     
     override func didSelect(_ message: MSMessage, conversation: MSConversation) {
         if let messageStr = conversation.selectedMessage?.url!.description {
             
-            let waveStr = messageStr.substring(from: messageStr.characters.index(after: messageStr.characters.index(of: "=")!))
-            if waveStr.characters.count != 0 {
-                enemyInts = waveStr.components(separatedBy: "-").filter({$0 != ""}).map({ (str) -> Int in
-                    
-                    return Int(str)!
-                })
+            let waveStr = getKeyVal(str:getQueries(str: messageStr)[0]).1
+            let turnStr = getKeyVal(str:getQueries(str: messageStr)[1]).1
+            if waveStr.characters.count != 0 && turnStr.characters.count != 0 {
+                enemyInts = getArray(str: waveStr)
+                turnNumber = Int(turnStr)!
             }
         }
     }
@@ -135,8 +149,9 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         layout.subcaption = "Tap to defend your base!"
         
         var components = URLComponents()
-        let queryItem = URLQueryItem(name: "wave", value: attackWave)
-        components.queryItems = [queryItem]
+        let waveItem = URLQueryItem(name: "wave", value: attackWave)
+        let turnItem = URLQueryItem(name: "turn", value: String(turnNumber))
+        components.queryItems = [waveItem,turnItem]
         
         let message = MSMessage(session: session)
         message.layout = layout
