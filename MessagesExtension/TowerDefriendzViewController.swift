@@ -20,6 +20,93 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
     var didWinGame = false
     var armyToUse = ""
     var enemyInts = [Int]()
+
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        defendButton.tag = 0
+        defendButton.setTitle("DEFEND!", for: .normal)
+        
+        if presentationStyle == .compact {
+            defendButton.isEnabled = false
+        } else {
+            defendButton.isEnabled = true
+
+        }
+        
+        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { (_) in
+            self.createMessage(didWin: true, attackWave: "1-1-1-0-0")
+        }
+
+    }
+
+    
+    // MARK: - Conversation Handling
+    
+    override func willBecomeActive(with conversation: MSConversation) {
+        
+        if let messageStr = conversation.selectedMessage?.url!.description {
+        
+            let waveStr = messageStr.substring(from: messageStr.characters.index(after: messageStr.characters.index(of: "=")!))
+            enemyInts = waveStr.components(separatedBy: "-").map({ (str) -> Int in
+                return Int(str)!
+            })
+            
+        }
+        
+        // SEND INFO TO GAME ENGINE!!!!!!
+        
+    }
+    
+    
+    override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
+        // Called after the extension transitions to a new presentation style.
+    
+        // Use this method to finalize any behaviors associated with the change in presentation style.
+        if presentationStyle == .expanded {
+            defendButton.isEnabled = true
+            defendButton.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
+        } else {
+            statusLabel.animateAlpha(t: 0.3, a: 0)
+            defendButton.isEnabled = false
+            defendButton.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
+        }
+    }
+
+    @IBAction func defendButtonClicked(_ sender: UIButton) {
+        
+        if sender.tag == 0 {
+            
+            // Defend clicked
+            statusLabel.animateAlpha(t: 0.3, a: 0)
+            defendButton.animateAlpha(t: 0.3, a: 0)
+            sender.setTitle("BUILD ARMY!", for: .normal)
+            gameViewInitiation()
+            
+        } else if sender.tag == 1 {
+            
+            // Build army clicked
+            statusLabel.animateView(direction: .up, t: 0.3, pixels: 70)
+            statusLabel.animateAlpha(t: 0.3, a: 0)
+            statusLabel.text = "CHOOSE YOUR ARMY!"
+            soldierAdditionView.animateAlpha(t: 0.3, a: 1)
+            soldierAdditionView.animateView(direction: .up, t: 0.3, pixels: 10)
+            sender.tag = 2
+            sender.setTitle("ATTACK!", for: .normal)
+            
+        } else if sender.tag == 2 {
+            
+            // Attack clicked
+            soldierAdditionView.animateAlpha(t: 0.3, a: 0)
+            requestPresentationStyle(.compact)
+            statusLabel.text = "SEND THE MESSAGE!"
+            statusLabel.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.width/2)
+            createMessage(didWin: didWinGame, attackWave: armyString)
+            
+        }
+    }
     
     func createMessage(didWin: Bool, attackWave: String) {
         let conversation = activeConversation
@@ -43,118 +130,10 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         conversation?.insert(message)
     }
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        defendButton.tag = 0
-        defendButton.setTitle("DEFEND!", for: .normal)
-
-    }
-
-    
-    // MARK: - Conversation Handling
-    
-    override func willBecomeActive(with conversation: MSConversation) {
-        
-        if let messageStr = conversation.selectedMessage?.url!.description {
-        
-            let waveStr = messageStr.substring(from: messageStr.characters.index(after: messageStr.characters.index(of: "=")!))
-            enemyInts = waveStr.components(separatedBy: "-").map({ (str) -> Int in
-                return Int(str)!
-            })
-        }
-        
-        // SEND INFO TO GAME ENGINE!!!!!!
-        
-    }
-    
-    override func didResignActive(with conversation: MSConversation) {
-        // Called when the extension is about to move from the active to inactive state.
-        // This will happen when the user dissmises the extension, changes to a different
-        // conversation or quits Messages.
-        
-        // Use this method to release shared resources, save user data, invalidate timers,
-        // and store enough state information to restore your extension to its current state
-        // in case it is terminated later.
-    }
-   
-    override func didReceive(_ message: MSMessage, conversation: MSConversation) {
-        // Called when a message arrives that was generated by another instance of this
-        // extension on a remote device.
-        
-        // Use this method to trigger UI updates in response to the message.
-        
-        print(message)
-        
-
-    }
-    
-    override func didStartSending(_ message: MSMessage, conversation: MSConversation) {
-        // Called when the user taps the send button.
-    }
-    
-    override func didCancelSending(_ message: MSMessage, conversation: MSConversation) {
-        // Called when the user deletes the message without sending it.
-    
-        // Use this to clean up state related to the deleted message.
-    }
-    
-    override func willTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
-        // Called before the extension transitions to a new presentation style.
-    
-        // Use this method to prepare for the change in presentation style.
-
-    }
-    
-    override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
-        // Called after the extension transitions to a new presentation style.
-    
-        // Use this method to finalize any behaviors associated with the change in presentation style.
-        if presentationStyle == .expanded {
-            statusLabel.animateAlpha(t: 0.3, a: 1)
-            defendButton.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
-        } else {
-            statusLabel.animateAlpha(t: 0.3, a: 0)
-            defendButton.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
-        }
-    }
-
-    @IBAction func defendButtonClicked(_ sender: UIButton) {
-        
-        if sender.tag == 0 {
-            
-            // Defend clicked
-            statusLabel.animateAlpha(t: 0.3, a: 0)
-            defendButton.animateAlpha(t: 0.3, a: 0)
-            sender.setTitle("BUILD ARMY!", for: .normal)
-            gameViewInitiation()
-            
-        } else if sender.tag == 1 {
-            
-            // Build army clicked
-            statusLabel.animateView(direction: .up, t: 0.3, pixels: 70)
-            statusLabel.text = "CHOOSE YOUR ARMY!"
-            soldierAdditionView.animateAlpha(t: 0.3, a: 1)
-            soldierAdditionView.animateView(direction: .up, t: 0.3, pixels: 10)
-            sender.tag = 2
-            sender.setTitle("ATTACK!", for: .normal)
-            
-        } else if sender.tag == 2 {
-            
-            // Attack clicked
-            soldierAdditionView.animateAlpha(t: 0.3, a: 0)
-            requestPresentationStyle(.compact)
-            statusLabel.text = "SEND THE MESSAGE!"
-            statusLabel.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.width/2)
-            createMessage(didWin: didWinGame, attackWave: armyString)
-            
-        }
-    }
-    
     func gameViewInitiation() {
         game = Game(frame: view.bounds)
         game?.delegate = self
+        game?.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         view.addSubview(game!)
         game?.start(enemyInts: enemyInts)
     }

@@ -173,13 +173,13 @@
 				TargetAttributes = {
 					607821841D3B8A9200FDAB5A = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 78EJNNQKLH;
+						DevelopmentTeam = 6S335WJ5J9;
 						DevelopmentTeamName = "Davis Allie";
 						ProvisioningStyle = Automatic;
 					};
 					6078218E1D3B8A9200FDAB5A = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 78EJNNQKLH;
+						DevelopmentTeam = 6S335WJ5J9;
 						DevelopmentTeamName = "Davis Allie";
 						ProvisioningStyle = Automatic;
 					};
@@ -350,7 +350,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				DEVELOPMENT_TEAM = 78EJNNQKLH;
+				DEVELOPMENT_TEAM = 6S335WJ5J9;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.5ever.TowerDefriendz.MessageExtension;
@@ -364,7 +364,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				DEVELOPMENT_TEAM = 78EJNNQKLH;
+				DEVELOPMENT_TEAM = 6S335WJ5J9;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.5ever.TowerDefriendz.MessageExtension;
@@ -380,7 +380,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 78EJNNQKLH;
+				DEVELOPMENT_TEAM = 6S335WJ5J9;
 				INFOPLIST_FILE = MessageApp/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.5ever.TowerDefriendz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -397,7 +397,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 78EJNNQKLH;
+				DEVELOPMENT_TEAM = 6S335WJ5J9;
 				INFOPLIST_FILE = MessageApp/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.5ever.TowerDefriendz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
