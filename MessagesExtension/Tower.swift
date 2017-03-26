@@ -36,7 +36,7 @@ class Tower:UIImageView {
             self.price = 50
 			
             self.damage = 40
-            radius = CGFloat(6 * Constants.scale)
+            radius = CGFloat(4 * Constants.scale)
             // not true rate of fire because has to find enemy in order to shoot
             shootTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true, block: { (_) in
                 self.shoot(speed: 13, color: UIColor.blue)

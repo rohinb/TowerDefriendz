@@ -31,7 +31,6 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         defendButton.setTitle("DEFEND!", for: .normal)
         defendButton.isEnabled = true
         
-
         
     }
     
@@ -75,8 +74,9 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
     }
     
     func getArray(str: String) -> [Int] {
-        return str.components(separatedBy: "-").map({ (str) -> Int in
-            return Int(str)!
+		if str == "" { return [Int]() }
+        return str.characters.map({ (char) -> Int in
+            return Int(char.description)!
         })
     }
     
@@ -254,13 +254,10 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
     }
     
     func createArmy() {
-        for _ in 0...soldierCounter {
-            armyString += "1-"
+        for _ in 0..<soldierCounter {
+            armyString += "1"
         }
-        for _ in 0...eagleCounter-1 {
-            armyString += "0-"
-        }
-		if eagleCounter > 0 {
+		for _ in 0..<eagleCounter {
 			armyString += "0"
 		}
     }
