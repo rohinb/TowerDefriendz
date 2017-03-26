@@ -30,11 +30,11 @@ class Tower:UIImageView {
         
         super.init(frame: CGRect(x: posX*Constants.scale, y: posY*Constants.scale, width: Constants.scale * 375/255, height: Constants.scale))
         
-        
+        self.image = UIImage(named: type)
         switch(type){
         case "normal":
             self.price = 50
-            self.image = #imageLiteral(resourceName: "Tower")
+			
             self.damage = 40
             radius = CGFloat(6 * Constants.scale)
             // not true rate of fire because has to find enemy in order to shoot
@@ -42,7 +42,7 @@ class Tower:UIImageView {
                 self.shoot()
             })
         case "ranged":
-            self.image = #imageLiteral(resourceName: "ranged")
+			
             self.damage = 30
             self.price = 100
             radius = CGFloat(10 * Constants.scale)
@@ -51,7 +51,7 @@ class Tower:UIImageView {
                 self.shoot()
             })
         case "deadly":
-            self.image = #imageLiteral(resourceName: "deadlee")
+			
             self.damage = 50
             self.price = 200
             radius = CGFloat(3 * Constants.scale)

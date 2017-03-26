@@ -29,7 +29,10 @@ class Game: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegate {
 	var lives = 3
 	var isRunning = true
     var defenderBudget = 0
-    
+	var hearts = [UIImageView]()
+	let towerTypes = ["normal", "ranged", "deadly"]
+	var selectedTowerType = "ranged"
+	
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -42,8 +45,36 @@ class Game: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegate {
 		addGestureRecognizer(tap)
         
         Constants.scale = Int(self.frame.width / CGFloat(10))
-        
+		
+		for (index, towerType) in towerTypes.enumerated() {
+			let button = UIButton(frame: CGRect(x: 10, y: 200 + index * 50, width: 40, height: 40))
+			button.setTitle("towerType", for: UIControlState())
+			button.setImage(UIImage(named: towerType), for: UIControlState())
+			button.tag = index
+			button.addTarget(self, action: #selector(self.setSelectedTowerType(sender:)), for: .touchUpInside)
+			self.insertSubview(button, aboveSubview: imageView)
+		}
+		
+		for live in 0..<lives {
+			let imageView = UIImageView(frame: CGRect(x: 10 + live * 25, y: 100, width: 20, height: 20))
+			imageView.image = UIImage(named: "heart")
+			imageView.contentMode = .scaleToFill
+			hearts.insert(imageView, at: 0)
+			self.insertSubview(imageView, aboveSubview: imageView)
+		}
     }
+	
+	@IBAction func setSelectedTowerType(sender: UIButton) {
+		for view in sender.superview!.subviews {
+			if let button = view as? UIButton {
+				button.layer.borderWidth = 0.0
+			}
+		}
+		selectedTowerType = towerTypes[sender.tag]
+		sender.layer.borderWidth = 2.0
+		sender.layer.borderColor = UIColor.blue.cgColor
+		
+	}
 	
 	func tapReceived(gestureRecognizer: UITapGestureRecognizer) {
 		let point = gestureRecognizer.location(in: self)
@@ -59,7 +90,7 @@ class Game: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegate {
 		}
 		if !contains(arr: pathPoints, tuple: tuple) && !occupied {
 			//add tower there
-            let tower = Tower(posX: posX, posY: posY, type: "ranged")
+            let tower = Tower(posX: posX, posY: posY, type: selectedTowerType)
 			tower.delegate = self
 			towerArray?.append(tower)
 			addSubview(tower)
@@ -92,8 +123,9 @@ class Game: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegate {
     }
     
     func didEnd(didWin: Bool) {
-		isRunning = false
+		if !isRunning { return }
         delegate?.gameDidEnd(didWin: didWin)
+		isRunning = false
     }
     
     func addedBullet(bullet: Bullet) {
@@ -103,6 +135,10 @@ class Game: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegate {
 	
 	func enemyReachedEnd() {
 		lives -= 1
+		if let heart = hearts.first {
+			heart.removeFromSuperview()
+			hearts.remove(at:0)
+		}
 		if lives <= 0 {
 			didEnd(didWin: false)
 		}
