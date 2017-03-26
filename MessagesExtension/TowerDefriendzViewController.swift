@@ -29,23 +29,11 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         
         defendButton.tag = 0
         defendButton.setTitle("DEFEND!", for: .normal)
-        
-        /*if presentationStyle == .compact {
-         defendButton.isEnabled = false
-         } else {
-         defendButton.isEnabled = true
-         
-         }*/
-        
         defendButton.isEnabled = true
         
-        
-        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { (_) in
-            self.createMessage(didWin: true, attackWave: "1-1-1-0-0")
-        }
+
         
     }
-    
     
     // MARK: - Conversation Handling
     
@@ -60,7 +48,20 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
                 turnNumber = Int(turnStr)!
             }
         }
+        
+        let defaults = UserDefaults.standard
+        guard let a = defaults.value(forKey: conversation.remoteParticipantIdentifiers.first!.uuidString) as? Int else {
+            initialAttackSetup()
+            return
+        }
     }
+    
+    func initialAttackSetup() {
+        defendButton.tag = 1
+        statusLabel.text = "LAUNCH AN ATTACK!"
+        buildArmyClicked(sender: defendButton)
+    }
+    
     
     func getQueries(str: String) -> [String] {
         
@@ -130,33 +131,45 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         if sender.tag == 0 {
             
             // Defend clicked
-            statusLabel.animateAlpha(t: 0.3, a: 0)
-            defendButton.animateAlpha(t: 0.3, a: 0)
-            sender.setTitle("BUILD ARMY!", for: .normal)
-            gameViewInitiation()
+            defendClicked(sender: sender)
             
         } else if sender.tag == 1 {
             
             // Build army clicked
-            statusLabel.animateView(direction: .up, t: 0.3, pixels: 70)
-            statusLabel.animateAlpha(t: 0.3, a: 0)
-            statusLabel.text = "CHOOSE YOUR ARMY!"
-            soldierAdditionView.animateAlpha(t: 0.3, a: 1)
-            soldierAdditionView.animateView(direction: .up, t: 0.3, pixels: 70)
-            sender.tag = 2
-            sender.setTitle("ATTACK!", for: .normal)
+            buildArmyClicked(sender: sender)
             
         } else if sender.tag == 2 {
             
             // Attack clicked
-            soldierAdditionView.animateAlpha(t: 0.3, a: 0)
-            requestPresentationStyle(.compact)
-            statusLabel.text = "SEND THE MESSAGE!"
-            statusLabel.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.width/2)
-            createArmy()
-            createMessage(didWin: didWinGame, attackWave: armyString)
+            attackClicked()
             
         }
+    }
+    
+    func defendClicked(sender: UIButton) {
+        statusLabel.animateAlpha(t: 0.3, a: 0)
+        defendButton.animateAlpha(t: 0.3, a: 0)
+        sender.setTitle("BUILD ARMY!", for: .normal)
+        gameViewInitiation()
+    }
+    
+    func buildArmyClicked(sender: UIButton) {
+        statusLabel.animateView(direction: .up, t: 0.3, pixels: 70)
+        statusLabel.animateAlpha(t: 0.3, a: 0)
+        statusLabel.text = "CHOOSE YOUR ARMY!"
+        soldierAdditionView.animateAlpha(t: 0.3, a: 1)
+        soldierAdditionView.animateView(direction: .up, t: 0.3, pixels: 70)
+        sender.tag = 2
+        sender.setTitle("ATTACK!", for: .normal)
+    }
+    
+    func attackClicked() {
+        soldierAdditionView.animateAlpha(t: 0.3, a: 0)
+        requestPresentationStyle(.compact)
+        statusLabel.text = "SEND THE MESSAGE!"
+        statusLabel.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.width/2)
+        createArmy()
+        createMessage(didWin: didWinGame, attackWave: armyString)
     }
     
     func createMessage(didWin: Bool, attackWave: String) {
