@@ -240,7 +240,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         if (armyBudget - 50) > 0 {
             soldierCounter += 1
             soldierCountLabel.text = soldierCounter.description
-            armyBudget = 1000*turnNumber - soldierCounter*50 - eagleCounter*70
+            armyBudget = 1000*(turnNumber+1) - soldierCounter*50 - eagleCounter*70
             armyCoinsLabel.text = "\(armyBudget) Coins"
         }
     }
@@ -248,7 +248,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         if (armyBudget - 70) > 0 {
             eagleCounter += 1
             eagleCountLabel.text = eagleCounter.description
-            armyBudget = 1000*turnNumber - soldierCounter*50 - eagleCounter*70
+            armyBudget = 1000*(turnNumber+1) - soldierCounter*50 - eagleCounter*70
             armyCoinsLabel.text = "\(armyBudget) Coins"
         }
     }
