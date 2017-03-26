@@ -31,7 +31,9 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         defendButton.setTitle("DEFEND!", for: .normal)
         defendButton.isEnabled = true
         
-        
+        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { (_) in
+            self.createMessage(didWin: true, attackWave: "1-1-1-0-0")
+        }
     }
     
     override func willResignActive(with conversation: MSConversation) {
@@ -56,28 +58,8 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
                 turnNumber = Int(turnStr)!
             }
         }
-        
-        let defaults = UserDefaults.standard
-        if let a = defaults.value(forKey: conversation.remoteParticipantIdentifiers.first!.uuidString) as? Int  {
-            if turnNumber == 0 {
-                defendButton.tag = 0
-                statusLabel.animateAlpha(t: 0.3, a: 0)
-                defendButton.setTitle("DEFEND!", for: .normal)
-                gameViewInitiation()
-            }
-        } else {
-            defaults.setValue(0, forKey: conversation.remoteParticipantIdentifiers.first!.uuidString)
-            initialAttackSetup()
-        }
     }
-    
-    func initialAttackSetup() {
-        defendButton.tag = 1
-        statusLabel.text = "LAUNCH AN ATTACK!"
-        buildArmyClicked(sender: defendButton)
-    }
-    
-    
+
     func getQueries(str: String) -> [String] {
         
         return str.components(separatedBy: "&")
@@ -104,30 +86,9 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
             if waveStr.characters.count != 0 && turnStr.characters.count != 0 {
                 enemyInts = getArray(str: waveStr)
                 turnNumber = Int(turnStr)!
-                turnCheck(conversationId: conversation.remoteParticipantIdentifiers.first!.uuidString)
-                
             }
         }
-        
     }
-    
-    func turnCheck(conversationId: String) {
-        let defaults = UserDefaults.standard
-        if let conversationTurn = defaults.value(forKey: conversationId) as? Int {
-            if turnNumber < conversationTurn {
-                defendButton.isEnabled = false
-                defendButton.alpha = 0
-                statusLabel.text = "Can't replay old games."
-                statusLabel.alpha = 1
-            } else {
-                defaults.setValue(turnNumber, forKey: conversationId)
-            }
-        } else {
-            defaults.setValue(1, forKey: conversationId)
-        }
-        
-    }
-    
     override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
         // Called after the extension transitions to a new presentation style.
         
@@ -147,45 +108,33 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         if sender.tag == 0 {
             
             // Defend clicked
-            defendClicked(sender: sender)
+            statusLabel.animateAlpha(t: 0.3, a: 0)
+            defendButton.animateAlpha(t: 0.3, a: 0)
+            sender.setTitle("BUILD ARMY!", for: .normal)
+            gameViewInitiation()
             
         } else if sender.tag == 1 {
             
             // Build army clicked
-            buildArmyClicked(sender: sender)
+            statusLabel.animateView(direction: .up, t: 0.3, pixels: 70)
+            statusLabel.animateAlpha(t: 0.3, a: 0)
+            statusLabel.text = "CHOOSE YOUR ARMY!"
+            soldierAdditionView.animateAlpha(t: 0.3, a: 1)
+            soldierAdditionView.animateView(direction: .up, t: 0.3, pixels: 70)
+            sender.tag = 2
+            sender.setTitle("ATTACK!", for: .normal)
             
         } else if sender.tag == 2 {
             
             // Attack clicked
-            attackClicked()
+            soldierAdditionView.animateAlpha(t: 0.3, a: 0)
+            requestPresentationStyle(.compact)
+            statusLabel.text = "SEND THE MESSAGE!"
+            statusLabel.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.width/2)
+            createArmy()
+            createMessage(didWin: didWinGame, attackWave: armyString)
             
         }
-    }
-    
-    func defendClicked(sender: UIButton) {
-        statusLabel.animateAlpha(t: 0.3, a: 0)
-        defendButton.animateAlpha(t: 0.3, a: 0)
-        sender.setTitle("BUILD ARMY!", for: .normal)
-        gameViewInitiation()
-    }
-    
-    func buildArmyClicked(sender: UIButton) {
-        statusLabel.animateView(direction: .up, t: 0.3, pixels: 70)
-        statusLabel.animateAlpha(t: 0.3, a: 0)
-        statusLabel.text = "CHOOSE YOUR ARMY!"
-        soldierAdditionView.animateAlpha(t: 0.3, a: 1)
-        soldierAdditionView.animateView(direction: .up, t: 0.3, pixels: 70)
-        sender.tag = 2
-        sender.setTitle("ATTACK!", for: .normal)
-    }
-    
-    func attackClicked() {
-        soldierAdditionView.animateAlpha(t: 0.3, a: 0)
-        requestPresentationStyle(.compact)
-        statusLabel.text = "SEND THE MESSAGE!"
-        statusLabel.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.width/2)
-        createArmy()
-        createMessage(didWin: didWinGame, attackWave: armyString)
     }
     
     func createMessage(didWin: Bool, attackWave: String) {
@@ -195,11 +144,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         let layout = MSMessageTemplateLayout()
         //layout.image = UIImage(named: "message-background.png")
         //layout.imageTitle = "iMessage Extension"
-        if turnNumber != 0 {
-            layout.caption = "Round \(turnNumber) defense \(didWin ? "succeeded!" : "failed!")"
-        } else {
-            layout.caption = "Tower Defriendz round started!"
-        }
+        layout.caption = "Attack \(didWin ? "succeded!" : "failed!")"
         layout.subcaption = "Tap to defend your base!"
         
         var components = URLComponents()
@@ -210,8 +155,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         let message = MSMessage(session: session)
         message.layout = layout
         message.url = components.url
-        message.summaryText = "Defense \(didWin ? "succeeded!" : "failed!")"
-        message.shouldExpire = true
+        message.summaryText = "Attack \(didWin ? "succeded!" : "failed!")"
         
         conversation?.insert(message)
     }
