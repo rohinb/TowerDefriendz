@@ -42,7 +42,7 @@ let pathPoints =	[startPathPoint,
                 	  (3, 14),
                 	  (4, 14),
                 	  (5, 14)]
-class Enemy: UIView {
+class Enemy: UIImageView {
 	
 	var posX: Int
 	var posY: Int
@@ -74,6 +74,7 @@ class Enemy: UIView {
 			})
 			self.path = [.D, .D, .D, .D, .D, .D, .R, .R, .D, .D, .D, .D, .D, .L, .L, .L, .L, .D, .D, .D, .D, .R, .R, .R, .D, .D]
 			health = 700
+            self.image = UIImage(named: "Image-1")
 			self.backgroundColor = UIColor.white
 		case "bird":
 			updateTimer = Timer.scheduledTimer(withTimeInterval: 0.70, repeats: true, block: { (timer) in
@@ -81,12 +82,14 @@ class Enemy: UIView {
 			})
 			self.path = [.D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D]
 			health = 200
+            self.image = UIImage(named: "Image-2")
 			self.backgroundColor = UIColor.blue
 		default:
 			updateTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true, block: { (timer) in
 				self.update()
 			})
 			health = 999
+            self.image = UIImage(named: "Image-1")
 			self.backgroundColor = UIColor.red
 		}
 	}

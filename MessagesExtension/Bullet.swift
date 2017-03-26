@@ -24,7 +24,7 @@ class Bullet: UIView {
         
         self.damage = damage
         
-        super.init(frame: CGRect(x: locationX*Constants.scale + Constants.scale / 2, y: locationY*Constants.scale + Constants.scale / 2, width: 7, height: 7))
+        super.init(frame: CGRect(x: locationX*Constants.scale + Constants.scale / 2 - 3, y: locationY*Constants.scale + Constants.scale / 2 - 3, width: 7, height: 7))
         
         updateTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true, block: { (Timer) in
             self.update()
