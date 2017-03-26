@@ -15,13 +15,14 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var defendButton: UIButton!
     @IBOutlet weak var soldierAdditionView: UIView!
+    @IBOutlet weak var armyCoinsLabel: UILabel!
     
     var game : Game?
     var didWinGame = false
     var armyToUse = ""
     var enemyInts = [Int]()
     var turnNumber = 0
-    
+    var armyBudget = 500
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -150,7 +151,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         
         var components = URLComponents()
         let waveItem = URLQueryItem(name: "wave", value: attackWave)
-        let turnItem = URLQueryItem(name: "turn", value: String(turnNumber))
+        let turnItem = URLQueryItem(name: "turn", value: String(turnNumber+1))
         components.queryItems = [waveItem,turnItem]
         
         let message = MSMessage(session: session)
@@ -167,7 +168,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
             game?.delegate = self
             game?.autoresizingMask = [.flexibleHeight, .flexibleWidth]
             view.addSubview(game!)
-            game?.start(enemyInts: enemyInts)
+            game?.start(enemyInts: enemyInts,turnNumber: turnNumber)
         } else {
             let alert = UIAlertController(title: "Bad attack wave (empty)", message: "Abort", preferredStyle: .alert)
             self.present(alert, animated: true, completion: nil)
@@ -197,14 +198,21 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
     @IBOutlet weak var soldierCountLabel: UILabel!
     @IBOutlet weak var eagleCountLabel: UILabel!
     
-    
     @IBAction func increaseSoldierClicked(_ sender: Any) {
-        soldierCounter += 1
-        soldierCountLabel.text = soldierCounter.description
+        if (armyBudget - 50) > 0 {
+            soldierCounter += 1
+            soldierCountLabel.text = soldierCounter.description
+            armyBudget = 1000*turnNumber - soldierCounter*50 - eagleCounter*70
+            armyCoinsLabel.text = "\(armyBudget) Coins"
+        }
     }
     @IBAction func increaseEagleClicked(_ sender: Any) {
-        eagleCounter += 1
-        eagleCountLabel.text = eagleCounter.description
+        if (armyBudget - 70) > 0 {
+            eagleCounter += 1
+            eagleCountLabel.text = eagleCounter.description
+            armyBudget = 1000*turnNumber - soldierCounter*50 - eagleCounter*70
+            armyCoinsLabel.text = "\(armyBudget) Coins"
+        }
     }
     
     func createArmy() {
