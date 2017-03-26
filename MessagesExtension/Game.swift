@@ -32,6 +32,7 @@ class Game: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegate {
 	var hearts = [UIImageView]()
 	let towerTypes = ["normal", "ranged", "deadly"]
 	var selectedTowerType = "ranged"
+    var budgetLabel : UILabel?
 	
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -62,6 +63,11 @@ class Game: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegate {
 			hearts.insert(imageView, at: 0)
 			self.insertSubview(imageView, aboveSubview: imageView)
 		}
+        
+        budgetLabel = UILabel(frame: CGRect(x: 100, y: 10, width: 100, height: 50))
+        budgetLabel?.text = "hello"
+        budgetLabel?.textColor = UIColor.white
+        self.addSubview(budgetLabel!)
     }
 	
 	@IBAction func setSelectedTowerType(sender: UIButton) {
@@ -91,12 +97,16 @@ class Game: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegate {
 		if !contains(arr: pathPoints, tuple: tuple) && !occupied {
 			//add tower there
             let tower = Tower(posX: posX, posY: posY, type: selectedTowerType)
-			tower.delegate = self
-			towerArray?.append(tower)
-			addSubview(tower)
-            
-            //lower budget (different price depending on what tower type
-            self.defenderBudget -= 1000
+            if defenderBudget - tower.price >= 0 {
+                tower.delegate = self
+                towerArray?.append(tower)
+                addSubview(tower)
+                
+                
+                //lower budget (different price depending on what tower type
+                self.defenderBudget -= tower.price
+                budgetLabel?.text = "\(defenderBudget)"
+            }
 		}
 	}
     
@@ -107,6 +117,7 @@ class Game: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegate {
     func start(enemyInts: [Int], turnNumber: Int) {
 		var count = 0
         defenderBudget = turnNumber * 1000
+        budgetLabel?.text = "\(defenderBudget)"
         for int in enemyInts {
 			Timer.scheduledTimer(withTimeInterval: 1.5 * Double(count), repeats: false) {_ in
                 let enemy = int == 1 ? Enemy(posX: 4, posY: 0, type: "soldier") : Enemy(posX: Int(arc4random_uniform(9))+1, posY: 0, type: "bird")
