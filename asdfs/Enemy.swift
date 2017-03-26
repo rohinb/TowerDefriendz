@@ -40,7 +40,7 @@ class Enemy: UIView {
                 self.update()
             })
             self.path = [.R, .R, .R, .R,
-                         .R, .R, .R, .D]
+                         .R, .R, .R, .D, .D, .D, .D]
             health = 50
             self.backgroundColor = UIColor.white
         case "bird":

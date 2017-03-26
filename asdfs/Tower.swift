@@ -44,12 +44,12 @@ class Tower:UIView {
             let dx = enemy.center.x - self.center.x
             let dy = enemy.center.y - self.center.y
             if pow(dx,2) + pow(dy,2) < pow(radius,2) {
-                let direction = dx > 0 ? -atan(dy/dx) : atan(dy/dx)
+                let direction = dx < 0 ? atan(dy/dx) + 3.14 : atan(dy/dx)
                 UIView.animate(withDuration: shootTimer.timeInterval, delay: 0.0, options: .curveLinear, animations: {
                     self.transform = CGAffineTransform(rotationAngle: direction)
                 }, completion: { (success) in
                     if success {
-                        let bullet = Bullet(locationX: self.posX, locationY: self.posY, vel: 3, direction: Double(direction))
+                        let bullet = Bullet(locationX: self.posX, locationY: self.posY, vel: 8, direction: Double(direction))
                         self.delegate?.addedBullet(bullet: bullet)
                     }
                 })

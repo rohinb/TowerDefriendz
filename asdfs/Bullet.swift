@@ -17,12 +17,12 @@ class Bullet: UIView {
     var updateTimer = Timer()
     
     init(locationX: Int, locationY: Int, vel: Double, direction: Double){
-        self.velY = CGFloat(-vel*sin(direction)) // unit circle is y opposi
-        self.velX = CGFloat(-vel*cos(direction))
+        self.velY = CGFloat(vel*sin(direction)) // unit circle is y opposi
+        self.velX = CGFloat(vel*cos(direction))
         
-        super.init(frame: CGRect(x: locationX*Constants.scale + Constants.scale / 2, y: locationY*Constants.scale + Constants.scale / 2, width: 4, height: 4))
+        super.init(frame: CGRect(x: locationX*Constants.scale + Constants.scale / 2, y: locationY*Constants.scale + Constants.scale / 2, width: 7, height: 7))
         
-        updateTimer = Timer.scheduledTimer(withTimeInterval: 0.15, repeats: true, block: { (Timer) in
+        updateTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true, block: { (Timer) in
             self.update()
         })
         self.backgroundColor = UIColor.black
@@ -30,8 +30,10 @@ class Bullet: UIView {
     
     func update() {
         animateSmoothly(duration: updateTimer.timeInterval) { 
-            self.frame = CGRect(x: self.frame.origin.x + self.velX, y: self.frame.origin.y + self.velY, width: 4, height: 4)
+            self.frame = CGRect(x: self.frame.origin.x + self.velX, y: self.frame.origin.y + self.velY, width: 7, height: 7)
         }
+        
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
