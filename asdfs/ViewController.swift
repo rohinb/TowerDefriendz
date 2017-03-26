@@ -8,18 +8,35 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+struct Constants {
+    static var scale = 30
+}
 
+var enemyArray: [Enemy]? = [Enemy(posX: 4, posY: 0, type: "soldier"), Enemy(posX: 4, posY: 0, type: "bird")]
+var towerArray: [Tower]? = [Tower(posX: 7, posY: 3), Tower(posX: 9, posY: 3)]
+var bulletArray: [Bullet]? = [Bullet]()
+
+class ViewController: UIViewController, TowerDelegate {
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        Constants.scale = Int(view.frame.width / CGFloat(10))
+        
+        for enemy in enemyArray! {
+            view.addSubview(enemy)
+        }
+        for tower in towerArray! {
+            tower.delegate = self
+            view.addSubview(tower)
+        }
+        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func addedBullet(bullet: Bullet) {
+        bulletArray?.append(bullet)
+        view.addSubview(bullet)
     }
-
-
 }
 
