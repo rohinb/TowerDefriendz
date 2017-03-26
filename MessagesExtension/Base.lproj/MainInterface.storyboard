@@ -103,7 +103,9 @@
                     <size key="freeformSize" width="320" height="528"/>
                     <connections>
                         <outlet property="defendButton" destination="8Lh-0T-gli" id="ybt-kE-Vny"/>
+                        <outlet property="eagleCountLabel" destination="xqZ-Du-DTU" id="ClB-ju-cT2"/>
                         <outlet property="soldierAdditionView" destination="Xt2-0H-DSj" id="0cC-dv-BFV"/>
+                        <outlet property="soldierCountLabel" destination="EGS-WN-yBR" id="Lg1-PM-GKE"/>
                         <outlet property="statusLabel" destination="MJb-Yh-WLO" id="drX-5F-9aR"/>
                     </connections>
                 </viewController>

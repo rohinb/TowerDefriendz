@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MessagesExtension/TowerDefriendzViewController.swift"
-            timestampString = "512212065.462891"
+            timestampString = "512218939.543168"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "createMessage(didWin:attackWave:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MessagesExtension/TowerDefriendzViewController.swift"
-            timestampString = "512212065.462891"
+            timestampString = "512218939.543168"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
             landmarkName = "gameViewInitiation()"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,11 +74,11 @@
                   moduleName = "MessagesExtension"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sahandedrisian/Desktop/Tower%20Defriendz/TowerDefriendz/MessagesExtension/TowerDefriendzViewController.swift"
-                  timestampString = "512211838.184342"
+                  timestampString = "512218202.519444"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "64"
-                  endingLineNumber = "64"
+                  startingLineNumber = "67"
+                  endingLineNumber = "67"
                   offsetFromSymbolStart = "44">
                </Location>
                <Location
@@ -89,11 +89,11 @@
                   moduleName = "MessagesExtension"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sahandedrisian/Desktop/Tower%20Defriendz/TowerDefriendz/MessagesExtension/TowerDefriendzViewController.swift"
-                  timestampString = "512211838.185626"
+                  timestampString = "512218202.521719"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "64"
-                  endingLineNumber = "64"
+                  startingLineNumber = "67"
+                  endingLineNumber = "67"
                   offsetFromSymbolStart = "424">
                </Location>
             </Locations>
@@ -113,6 +113,118 @@
             endingLineNumber = "107"
             landmarkName = "die()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MessagesExtension/TowerDefriendzViewController.swift"
+            timestampString = "512218034.070624"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "didTransition(to:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MessagesExtension/TowerDefriendzViewController.swift"
+            timestampString = "512218056.888498"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "willBecomeActive(with:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MessagesExtension.TowerDefriendzViewController.willBecomeActive (with : __ObjC.MSConversation) -&gt; ()"
+                  moduleName = "MessagesExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sahandedrisian/Desktop/Tower%20Defriendz/TowerDefriendz/MessagesExtension/TowerDefriendzViewController.swift"
+                  timestampString = "512218202.536476"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MessagesExtension.TowerDefriendzViewController.willBecomeActive (with : __ObjC.MSConversation) -&gt; ()"
+                  moduleName = "MessagesExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sahandedrisian/Desktop/Tower%20Defriendz/TowerDefriendz/MessagesExtension/TowerDefriendzViewController.swift"
+                  timestampString = "512218202.537977"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "416">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MessagesExtension/TowerDefriendzViewController.swift"
+            timestampString = "512218247.86728"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "didSelect(_:conversation:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MessagesExtension.TowerDefriendzViewController.didSelect (__ObjC.MSMessage, conversation : __ObjC.MSConversation) -&gt; ()"
+                  moduleName = "MessagesExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sahandedrisian/Desktop/Tower%20Defriendz/TowerDefriendz/MessagesExtension/TowerDefriendzViewController.swift"
+                  timestampString = "512218257.242598"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "800">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MessagesExtension.TowerDefriendzViewController.(didSelect (__ObjC.MSMessage, conversation : __ObjC.MSConversation) -&gt; ()).(closure #1)"
+                  moduleName = "MessagesExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sahandedrisian/Desktop/Tower%20Defriendz/TowerDefriendz/MessagesExtension/TowerDefriendzViewController.swift"
+                  timestampString = "512218257.243955"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

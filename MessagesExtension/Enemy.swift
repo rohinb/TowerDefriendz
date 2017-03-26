@@ -75,22 +75,19 @@ class Enemy: UIImageView {
 			self.path = [.D, .D, .D, .D, .D, .D, .R, .R, .D, .D, .D, .D, .D, .L, .L, .L, .L, .D, .D, .D, .D, .R, .R, .R, .D, .D]
 			health = 700
             self.image = UIImage(named: "Soldier")
-			self.backgroundColor = UIColor.white
 		case "bird":
 			updateTimer = Timer.scheduledTimer(withTimeInterval: 0.70, repeats: true, block: { (timer) in
 				self.update()
 			})
-			self.path = [.D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D]
+			self.path = [.D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D]
 			health = 200
             self.image = UIImage(named: "Bird")
-			self.backgroundColor = UIColor.blue
 		default:
 			updateTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true, block: { (timer) in
 				self.update()
 			})
 			health = 999
-            self.image = UIImage(named: "Image-1")
-			self.backgroundColor = UIColor.red
+            self.image = UIImage(named: "Soldier")
 		}
 	}
 	
@@ -146,7 +143,7 @@ class Enemy: UIImageView {
 		}
 		pIndex += 1
 		
-		if self.frame.origin.y > self.superview!.frame.height {
+		if self.center.y >= self.superview!.frame.height {
 			self.delegate?.enemyReachedEnd()
 			self.die()
 		}

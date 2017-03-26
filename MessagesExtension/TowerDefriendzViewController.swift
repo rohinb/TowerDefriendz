@@ -84,7 +84,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         } else {
             statusLabel.animateAlpha(t: 0.3, a: 0)
             defendButton.isEnabled = false
-            defendButton.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
+            defendButton.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 + 10)
         }
     }
 
@@ -116,6 +116,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
             requestPresentationStyle(.compact)
             statusLabel.text = "SEND THE MESSAGE!"
             statusLabel.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.width/2)
+            createArmy()
             createMessage(didWin: didWinGame, attackWave: armyString)
             
         }
@@ -170,11 +171,17 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
     var eagleCounter = 0
     var armyString = ""
     
+    @IBOutlet weak var soldierCountLabel: UILabel!
+    @IBOutlet weak var eagleCountLabel: UILabel!
+    
+    
     @IBAction func increaseSoldierClicked(_ sender: Any) {
         soldierCounter += 1
+        soldierCountLabel.text = soldierCounter.description
     }
     @IBAction func increaseEagleClicked(_ sender: Any) {
         eagleCounter += 1
+        eagleCountLabel.text = eagleCounter.description
     }
     
     func createArmy() {

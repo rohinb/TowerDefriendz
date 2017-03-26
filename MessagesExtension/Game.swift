@@ -70,11 +70,15 @@ class Game: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegate {
     }
     
     func start(enemyInts: [Int]) {
+		var count = 0
         for int in enemyInts {
-            let enemy = Enemy(posX: 4, posY: 0, type: int == 1 ? "soldier" : "bird")
-			enemy.delegate = self
-            self.addSubview(enemy)
-            enemyArray.append(enemy)
+			Timer.scheduledTimer(withTimeInterval: 1.5 * Double(count), repeats: false) {_ in
+				let enemy = Enemy(posX: 4, posY: 0, type: int == 1 ? "soldier" : "bird")
+				enemy.delegate = self
+				self.addSubview(enemy)
+				enemyArray.append(enemy)
+			}
+			count += 1
         }
         for tower in towerArray! {
             tower.delegate = self
