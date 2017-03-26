@@ -20,7 +20,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
     var didWinGame = false
     var armyToUse = ""
     var enemyInts = [Int]()
-
+    
     
     
     override func viewDidLoad() {
@@ -30,36 +30,36 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         defendButton.setTitle("DEFEND!", for: .normal)
         
         /*if presentationStyle == .compact {
-            defendButton.isEnabled = false
-        } else {
-            defendButton.isEnabled = true
-
-        }*/
+         defendButton.isEnabled = false
+         } else {
+         defendButton.isEnabled = true
+         
+         }*/
         
         defendButton.isEnabled = true
-
+        
         
         Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { (_) in
             self.createMessage(didWin: true, attackWave: "1-1-1-0-0")
         }
-
+        
     }
-
+    
     
     // MARK: - Conversation Handling
     
     override func willBecomeActive(with conversation: MSConversation) {
         
         if let messageStr = conversation.selectedMessage?.url!.description {
-        
-            let waveStr = messageStr.substring(from: messageStr.characters.index(after: messageStr.characters.index(of: "=")!))
-            enemyInts = waveStr.components(separatedBy: "-").map({ (str) -> Int in
-                return Int(str)!
-            })
             
+            let waveStr = messageStr.substring(from: messageStr.characters.index(after: messageStr.characters.index(of: "=")!))
+            if waveStr.characters.count != 0 {
+                enemyInts = waveStr.components(separatedBy: "-").map({ (str) -> Int in
+                    return Int(str)!
+                })
+            }
         }
         
-        // SEND INFO TO GAME ENGINE!!!!!!
         
     }
     
@@ -67,16 +67,18 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         if let messageStr = conversation.selectedMessage?.url!.description {
             
             let waveStr = messageStr.substring(from: messageStr.characters.index(after: messageStr.characters.index(of: "=")!))
-            enemyInts = waveStr.components(separatedBy: "-").map({ (str) -> Int in
-                return Int(str)!
-            })
-            
+            if waveStr.characters.count != 0 {
+                enemyInts = waveStr.components(separatedBy: "-").filter({$0 != ""}).map({ (str) -> Int in
+                    
+                    return Int(str)!
+                })
+            }
         }
     }
     
     override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
         // Called after the extension transitions to a new presentation style.
-    
+        
         // Use this method to finalize any behaviors associated with the change in presentation style.
         if presentationStyle == .expanded {
             defendButton.isEnabled = true
@@ -87,7 +89,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
             defendButton.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 + 10)
         }
     }
-
+    
     @IBAction func defendButtonClicked(_ sender: UIButton) {
         
         if sender.tag == 0 {
@@ -145,11 +147,17 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
     }
     
     func gameViewInitiation() {
-        game = Game(frame: view.bounds)
-        game?.delegate = self
-        game?.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        view.addSubview(game!)
-        game?.start(enemyInts: enemyInts)
+        if enemyInts.count != 0 {
+            game = Game(frame: view.bounds)
+            game?.delegate = self
+            game?.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+            view.addSubview(game!)
+            game?.start(enemyInts: enemyInts)
+        } else {
+            let alert = UIAlertController(title: "Bad attack wave (empty)", message: "Abort", preferredStyle: .alert)
+            self.present(alert, animated: true, completion: nil)
+            
+        }
     }
     
     func gameDidEnd(didWin: Bool) {
@@ -191,7 +199,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         for _ in 0...eagleCounter {
             armyString += "0-"
         }
-        armyString.remove(at: armyString.startIndex)
+        armyString.remove(at: armyString.endIndex)
     }
     
 }
@@ -201,7 +209,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
 extension UIView {
     
     func animateAlpha(t: Double, a: Double) {
-        UIView.animate(withDuration: t) { 
+        UIView.animate(withDuration: t) {
             self.alpha = CGFloat(a)
         }
     }
@@ -209,14 +217,14 @@ extension UIView {
     func animateView(direction: UIViewAnimationDirection, t: Double, pixels: Double) {
         UIView.animate(withDuration: t) {
             switch direction {
-                case .up:
-                    self.frame.origin.y -= CGFloat(pixels)
-                case .down:
-                    self.frame.origin.y += CGFloat(pixels)
-                case .right:
-                    self.frame.origin.x += CGFloat(pixels)
-                case .left:
-                    self.frame.origin.x -= CGFloat(pixels)
+            case .up:
+                self.frame.origin.y -= CGFloat(pixels)
+            case .down:
+                self.frame.origin.y += CGFloat(pixels)
+            case .right:
+                self.frame.origin.x += CGFloat(pixels)
+            case .left:
+                self.frame.origin.x -= CGFloat(pixels)
             }
         }
     }

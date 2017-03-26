@@ -11,11 +11,14 @@ import UIKit
 
 class Tower:UIImageView {
     
+    var price : Int = 10000000
+    
     var radius : CGFloat = 10000
     
     var posX: Int
     var posY: Int
     
+    var damage: Int = 0
     
     var delegate : TowerDelegate?
     
@@ -30,14 +33,18 @@ class Tower:UIImageView {
         
         switch(type){
         case "normal":
+            self.price = 50
             self.image = #imageLiteral(resourceName: "Tower")
-            radius = CGFloat(4 * Constants.scale)
+            self.damage = 40
+            radius = CGFloat(6 * Constants.scale)
             // not true rate of fire because has to find enemy in order to shoot
             shootTimer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { (_) in
                 self.shoot()
             })
         case "ranged":
             self.image = #imageLiteral(resourceName: "ranged")
+            self.damage = 30
+            self.price = 100
             radius = CGFloat(10 * Constants.scale)
             // not true rate of fire because has to find enemy in order to shoot
             shootTimer = Timer.scheduledTimer(withTimeInterval: 0.8, repeats: true, block: { (_) in
@@ -45,13 +52,16 @@ class Tower:UIImageView {
             })
         case "deadly":
             self.image = #imageLiteral(resourceName: "deadlee")
-            radius = CGFloat(2 * Constants.scale)
+            self.damage = 50
+            self.price = 200
+            radius = CGFloat(3 * Constants.scale)
             // not true rate of fire because has to find enemy in order to shoot
             shootTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true, block: { (_) in
                 self.shoot()
             })
         default:
             radius = 0
+            self.damage = 500
             // not true rate of fire because has to find enemy in order to shoot
             shootTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { (_) in
                 self.shoot()
@@ -76,7 +86,7 @@ class Tower:UIImageView {
                     self.transform = CGAffineTransform(rotationAngle: direction)
                 }, completion: { (success) in
                     if success {
-                        let bullet = Bullet(locationX: self.posX, locationY: self.posY, vel: 8, direction: Double(direction), damage : 10)
+                        let bullet = Bullet(locationX: self.posX, locationY: self.posY, vel: 8, direction: Double(direction), damage : self.damage)
                         self.delegate?.addedBullet(bullet: bullet)
                     }
                 })

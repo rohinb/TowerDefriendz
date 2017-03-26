@@ -73,7 +73,7 @@ class Enemy: UIImageView {
 				self.update()
 			})
 			self.path = [.D, .D, .D, .D, .D, .D, .R, .R, .D, .D, .D, .D, .D, .L, .L, .L, .L, .D, .D, .D, .D, .R, .R, .R, .D, .D]
-			health = 700
+			health = 500
             self.image = UIImage(named: "Soldier")
 		case "bird":
 			updateTimer = Timer.scheduledTimer(withTimeInterval: 0.70, repeats: true, block: { (timer) in
