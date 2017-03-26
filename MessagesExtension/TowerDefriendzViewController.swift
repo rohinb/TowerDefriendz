@@ -221,10 +221,12 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         for _ in 0...soldierCounter {
             armyString += "1-"
         }
-        for _ in 0...eagleCounter {
+        for _ in 0...eagleCounter-1 {
             armyString += "0-"
         }
-        armyString.remove(at: armyString.endIndex)
+		if eagleCounter > 0 {
+			armyString += "0"
+		}
     }
     
 }
