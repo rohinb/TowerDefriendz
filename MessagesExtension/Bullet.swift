@@ -39,7 +39,7 @@ class Bullet: UIView {
         let posX = Int(self.center.x/CGFloat(Constants.scale))
         let posY = Int(self.center.y/CGFloat(Constants.scale))
 
-        for enemy in enemyArray! {
+        for enemy in enemyArray {
             if enemy.posX == posX && enemy.posY == posY {
                 enemy.hurt(damage: self.damage)
                 self.die() // if not piercing

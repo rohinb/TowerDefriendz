@@ -40,7 +40,7 @@ class Tower:UIView {
     func shoot() {
         // we want to traverse (for loop) array of enemies and find first one that is within radius
         // then transform/rotate to face it and instantly shoot (with that direction's vel)
-        for enemy in enemyArray! {
+        for enemy in enemyArray {
             let dx = enemy.center.x - self.center.x
             let dy = enemy.center.y - self.center.y
             if pow(dx,2) + pow(dy,2) < pow(radius,2) {
