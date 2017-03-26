@@ -89,6 +89,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
                 turnNumber = Int(turnStr)!
             }
         }
+        
     }
     
     override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
@@ -146,7 +147,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         let layout = MSMessageTemplateLayout()
         //layout.image = UIImage(named: "message-background.png")
         //layout.imageTitle = "iMessage Extension"
-        layout.caption = "Attack \(didWin ? "succeded!" : "failed!")"
+        layout.caption = "Round \(turnNumber) defense \(didWin ? "succeded!" : "failed!")"
         layout.subcaption = "Tap to defend your base!"
         
         var components = URLComponents()
@@ -157,7 +158,8 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         let message = MSMessage(session: session)
         message.layout = layout
         message.url = components.url
-        message.summaryText = "Attack \(didWin ? "succeded!" : "failed!")"
+        message.summaryText = "Defense \(didWin ? "succeded!" : "failed!")"
+        message.shouldExpire = true
         
         conversation?.insert(message)
     }
