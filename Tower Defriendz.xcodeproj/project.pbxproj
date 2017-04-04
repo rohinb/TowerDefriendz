@@ -55,6 +55,7 @@
 		873ACB301E8780E100B900FB /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
 		873ACB311E8780E100B900FB /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		873ACB321E8780E100B900FB /* Tower.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tower.swift; sourceTree = "<group>"; };
+		F463A9A71E93262C000DBCBF /* MessagesExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = MessagesExtension.entitlements; path = MessagesExtension/MessagesExtension.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +73,7 @@
 		6078217E1D3B8A9200FDAB5A = {
 			isa = PBXGroup;
 			children = (
+				F463A9A71E93262C000DBCBF /* MessagesExtension.entitlements */,
 				607821871D3B8A9200FDAB5A /* Tower Defriendz */,
 				607821961D3B8A9200FDAB5A /* Tower Defriendz Extension */,
 				607821931D3B8A9200FDAB5A /* Frameworks */,
@@ -170,15 +172,20 @@
 				TargetAttributes = {
 					607821841D3B8A9200FDAB5A = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 6S335WJ5J9;
+						DevelopmentTeam = 45WG29SXF4;
 						DevelopmentTeamName = "Davis Allie";
 						ProvisioningStyle = Automatic;
 					};
 					6078218E1D3B8A9200FDAB5A = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 6S335WJ5J9;
+						DevelopmentTeam = 45WG29SXF4;
 						DevelopmentTeamName = "Davis Allie";
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -346,7 +353,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				DEVELOPMENT_TEAM = 6S335WJ5J9;
+				CODE_SIGN_ENTITLEMENTS = MessagesExtension/MessagesExtension.entitlements;
+				DEVELOPMENT_TEAM = 45WG29SXF4;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.5ever.TowerDefriendz.MessageExtension;
@@ -360,7 +368,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				DEVELOPMENT_TEAM = 6S335WJ5J9;
+				CODE_SIGN_ENTITLEMENTS = MessagesExtension/MessagesExtension.entitlements;
+				DEVELOPMENT_TEAM = 45WG29SXF4;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.5ever.TowerDefriendz.MessageExtension;
@@ -375,7 +384,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 6S335WJ5J9;
+				DEVELOPMENT_TEAM = 45WG29SXF4;
 				INFOPLIST_FILE = MessageApp/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.5ever.TowerDefriendz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -391,7 +400,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 6S335WJ5J9;
+				DEVELOPMENT_TEAM = 45WG29SXF4;
 				INFOPLIST_FILE = MessageApp/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = com.5ever.TowerDefriendz;
 				PRODUCT_NAME = "$(TARGET_NAME)";

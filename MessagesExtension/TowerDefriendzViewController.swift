@@ -7,7 +7,11 @@
 //
 
 import UIKit
+import ImageIO
+import MobileCoreServices
+import QuartzCore
 import Messages
+import Photos
 
 class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
     
@@ -24,6 +28,11 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
     var turnNumber = 0
     var armyBudget = 500
     
+    //Global vars needed for recording
+    var timer: Timer!
+    var globalImagesArray: [UIImage]!
+    var data: Data!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,6 +42,9 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         
         Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { (_) in
             self.createMessage(didWin: true, attackWave: "1110010101010")
+            
+            self.startRecording()
+            let testingTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.stopRecording), userInfo: nil, repeats: false)
         }
     }
     
@@ -225,9 +237,74 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
 		}
     }
     
+    /*Rohin, start reading here:
+     There are a few functions I've implemented here - let me just explain them.
+     
+     startRecording - func called on button press to start recording; it uses calls screenCapture function as a selector for the timer repetition
+     screenCapture - takes a screenshot and saves it to the global array that I've made for storing Images
+     stopRecording - this invalidates the timer and finally calls createGif to write a gif file to the disk and to the photo library
+     createGif - this function is called to actually stitch the images together into a gif
+     
+     Testing: to test whether the operation was successful, call startRecording and then stopRecording five seconds after in viewDidLoad. Then, check the photo library of the sim and it should have a gif. The reason I didn't add a UIImageView is because they don't actually support gif playback
+     
+     This should be more than enough explanation and you've probably already stopped reading but yeah you get the point.
+    */
+    
+    //startRecording
+    func startRecording(){
+        globalImagesArray = [UIImage]()
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        timer = Timer.scheduledTimer(timeInterval: 0.125, target: self, selector: #selector(self.screenCapture), userInfo: nil, repeats: true)
+    }
+    //screenCapture
+    func screenCapture(){
+        self.view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let capturedImage = UIGraphicsGetImageFromCurrentImageContext()
+        globalImagesArray.append(capturedImage!)
+    }
+    
+    func stopRecording(){
+        UIGraphicsEndImageContext()
+        timer.invalidate()
+        createGIF(images: globalImagesArray!)
+        if FileManager.default.fileExists(atPath: "/recording.gif") {
+            let url = URL(string: "/recording.gif")
+            do {
+                data = try Data(contentsOf: url!)
+            } catch {
+                print(error.localizedDescription)
+            }
+            let savedGifImage = UIImage(data: data)
+            PHPhotoLibrary.shared().performChanges({
+                PHAssetChangeRequest.creationRequestForAsset(from: savedGifImage!)
+            }, completionHandler: nil)
+        }
+    }
+    //createGif
+    func createGIF(images: [UIImage]){
+        
+        let destinationURL = NSURL(fileURLWithPath: "/recording.gif")
+        
+        //destinationGIF is being recognized as nil - see the screenshot I sent you.
+        let destinationGIF = CGImageDestinationCreateWithURL(destinationURL, kUTTypeGIF, images.count, nil)!
+        
+        // Dictionary controls delay in frames - set to 1/8 because that's the rate at which I'm doing screen captures (see startRecording)
+        let properties = [
+            (kCGImagePropertyGIFDictionary as String): [(kCGImagePropertyGIFDelayTime as String): 1.0/8.0]
+        ]
+        
+        
+        for img in images {
+            //let cgImage = img.CGImageForProposedRect(&rect, context: nil, hints: nil)!
+            let cgImage = img.cgImage
+            
+            CGImageDestinationAddImage(destinationGIF, cgImage!, properties as CFDictionary)
+        }
+        
+        // Write the GIF file to disk
+        CGImageDestinationFinalize(destinationGIF)
+    }
 }
-
-
 
 extension UIView {
     
@@ -258,6 +335,7 @@ extension UIView {
         case left
         case right
     }
+    
     
 }
 
