@@ -31,7 +31,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "72"
             endingLineNumber = "72"
-            landmarkName = "getKeyVal(str:)"
+            landmarkName = "willBecomeActive(with:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -47,8 +47,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "57"
             endingLineNumber = "57"
-            landmarkName = "willBecomeActive(with:)"
-            landmarkType = "7">
+            landmarkName = "TowerDefriendzViewController"
+            landmarkType = "3">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -95,7 +95,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "164"
             endingLineNumber = "164"
-            landmarkName = "gameViewInitiation()"
+            landmarkName = "createMessage(didWin:attackWave:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -111,8 +111,40 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "43"
             endingLineNumber = "43"
-            landmarkName = "willResignActive(with:)"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MessagesExtension.TowerDefriendzViewController.viewDidLoad () -&gt; ()"
+                  moduleName = "MessagesExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sahandedrisian/Desktop/tower/TowerDefriendz/MessagesExtension/TowerDefriendzViewController.swift"
+                  timestampString = "513535641.330811"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "748">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MessagesExtension.TowerDefriendzViewController.(viewDidLoad () -&gt; ()).(closure #1)"
+                  moduleName = "MessagesExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sahandedrisian/Desktop/tower/TowerDefriendz/MessagesExtension/TowerDefriendzViewController.swift"
+                  timestampString = "513535641.331928"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "40">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
