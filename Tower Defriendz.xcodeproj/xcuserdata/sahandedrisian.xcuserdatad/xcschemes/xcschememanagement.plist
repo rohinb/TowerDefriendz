@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Tower Defriendz Extension.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>Tower Defriendz.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -23,6 +28,11 @@
 			<true/>
 		</dict>
 		<key>87FFB6931E9C4FFD0099A13A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>87FFB6A91E9C50250099A13A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
