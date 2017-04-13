@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		873D32731E9C56A2002C8FA3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 873D32721E9C56A2002C8FA3 /* GoogleService-Info.plist */; };
+		87A0C4041EA0016F006A2237 /* GameHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A0C4031EA0016F006A2237 /* GameHandler.swift */; };
 		87AF42AE1E9C50BB00BF5498 /* Army.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AF42991E9C50BB00BF5498 /* Army.swift */; };
 		87AF42AF1E9C50BB00BF5498 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87AF429A1E9C50BB00BF5498 /* Assets.xcassets */; };
 		87AF42B11E9C50BB00BF5498 /* Bullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AF429C1E9C50BB00BF5498 /* Bullet.swift */; };
@@ -82,6 +83,7 @@
 		87331CE51E9C530F001EE2A3 /* Tower Defriendz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Tower Defriendz.entitlements"; sourceTree = "<group>"; };
 		87331CE61E9C5321001EE2A3 /* Tower Defriendz Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Tower Defriendz Extension.entitlements"; sourceTree = "<group>"; };
 		873D32721E9C56A2002C8FA3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		87A0C4031EA0016F006A2237 /* GameHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameHandler.swift; sourceTree = "<group>"; };
 		87AF42981E9C50BA00BF5498 /* Tower Defriendz Extension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tower Defriendz Extension-Bridging-Header.h"; sourceTree = "<group>"; };
 		87AF42991E9C50BB00BF5498 /* Army.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Army.swift; sourceTree = "<group>"; };
 		87AF429A1E9C50BB00BF5498 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				87AF429F1E9C50BB00BF5498 /* GameStage.swift */,
 				87AF42A41E9C50BB00BF5498 /* MainButton.swift */,
 				87AF42A71E9C50BB00BF5498 /* StatusLabel.swift */,
+				87A0C4031EA0016F006A2237 /* GameHandler.swift */,
 			);
 			name = VC;
 			sourceTree = "<group>";
@@ -595,6 +598,7 @@
 				87AF42B81E9C50BB00BF5498 /* StatusLabel.swift in Sources */,
 				87AF42BA1E9C50BB00BF5498 /* UIViewExtension.swift in Sources */,
 				87AF42AE1E9C50BB00BF5498 /* Army.swift in Sources */,
+				87A0C4041EA0016F006A2237 /* GameHandler.swift in Sources */,
 				87AF42BE1E9C50BB00BF5498 /* VCMessageHandling.swift in Sources */,
 				87AF42BC1E9C50BB00BF5498 /* VCAttackView.swift in Sources */,
 				87AF42B51E9C50BB00BF5498 /* Glimpse.m in Sources */,
