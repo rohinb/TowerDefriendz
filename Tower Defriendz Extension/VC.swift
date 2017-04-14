@@ -12,12 +12,14 @@ import Messages
 
 class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
 
-    var gameHandler = GameHandler()
+    var gameHandler : GameHandler?
     var incomingAttack : Attack?
+    var pendingAttack : Attack?
     var gameStage = GameStage.initial
     var stages : [GameStage] = [.initial, .defend, .game, .soldierSelection, .attack]
     var gameView : GameView?
     var defenseSucceeded = false
+
 
     @IBOutlet weak var statusLabel: StatusLabel!
     @IBOutlet weak var mainButton: MainButton!
@@ -25,8 +27,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
     var armyBudget = 500
     var soldierCounter = 0
     var eagleCounter = 0
-    var armyToUse = ""
-    var armyString = ""
+    var soldierArray : [Int]?
 
     @IBOutlet weak var soldierAdditionView: UIView!
     @IBOutlet weak var armyCoinsLabel: UILabel!
@@ -37,9 +38,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { (_) in
-            self.createMessage(didWin: true, attackWave: "1110010101010")
-        }
+
     }
     
     override func willResignActive(with conversation: MSConversation) {
@@ -65,6 +64,8 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         switch gameStage {
 
         case .initial:
+            pendingAttack = Attack(gameid: gameHandler!.gameId, atackerid: gameHandler!.currentUserId, defenderid: gameHandler!.remoteUserId, turnnumber: 0, soldierarray: soldierArray!)
+            createInitialAttackMessage(withAttack: pendingAttack!)
             break
 
         case .defend:
@@ -77,6 +78,15 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
             break
 
         case .attack:
+
+            gameHandler?.getGame(withGameId: gameHandler!.gameId, completion: { (success, game) in
+                if success {
+                    self.pendingAttack = Attack(gameid: self.gameHandler!.gameId, atackerid: self.gameHandler!.currentUserId, defenderid: self.gameHandler!.remoteUserId, turnnumber: game!.turnNumber!, soldierarray: self.soldierArray!)
+                    self.createAttackMessage(withAttack: self.pendingAttack!, defenseDidWin: self.defenseSucceeded)
+                }
+            })
+
+
             break
 
         }

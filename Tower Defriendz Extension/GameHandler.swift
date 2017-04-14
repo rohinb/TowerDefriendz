@@ -11,50 +11,29 @@ import Firebase
 
 class GameHandler {
 
-    static let shared = GameHandler()
+    var currentUserId = ""
+    var remoteUserId = ""
     let ref = FIRDatabase.database().reference()
-    var currentUser : FIRUser?
+    var currentUser : GameUser?
+    var gameId = ""
 
-    init() {
-
-        signupAnon { (success) in
-            if success {
-
-            } else {
-
-            }
-        }
-
+    init(withCurrentUserId: String, withRemoteUserId: String) {
+        currentUserId = withCurrentUserId
+        remoteUserId = withRemoteUserId
+        gameId = "\(currentUserId)&\(remoteUserId)"
     }
 
-    func signupAnon(completion: @escaping (_ success: Bool) -> ()) {
-        guard let user = FIRAuth.auth()?.currentUser else {
-            FIRAuth.auth()?.signInAnonymously(completion: { (user, error) in
-                if error != nil {
-                    print("error signing up")
-                    completion(false)
-                } else {
-                    completion(true)
-                }
-            })
-            return
-        }
-        currentUser = user
-    }
-
-    func createGame(withUser: FIRUser, completion: @escaping (_ success: Bool) -> ()) {
-
-        gameExists(withUser: withUser) { (exists) in
+    func createGame(completion: @escaping (_ success: Bool) -> ()) {
+        gameExists() { (exists) in
             if exists {
                 completion(false)
             } else {
                 let gameDictionary : [String : Any] = [FirebaseGameOptions.turnNumber.rawValue : 0,
-                                      FirebaseGameOptions.user1Id.rawValue : self.currentUser!.uid,
-                                      FirebaseGameOptions.user2Id.rawValue : withUser.uid,
+                                      FirebaseGameOptions.user1Id.rawValue : self.currentUserId,
+                                      FirebaseGameOptions.user2Id.rawValue : self.remoteUserId,
                                       FirebaseGameOptions.user1Score.rawValue : 0,
                                       FirebaseGameOptions.user2Score.rawValue : 0]
-                let gameId = "\(String(describing: self.currentUser?.uid))-\(withUser.uid)"
-                self.ref.child("Game").child(gameId).setValue(gameDictionary, withCompletionBlock: { (error, gameRef) in
+                self.ref.child("Game").child(self.gameId).setValue(gameDictionary, withCompletionBlock: { (error, gameRef) in
                     if error != nil {
                         print("error creating game")
                     } else {
@@ -65,9 +44,8 @@ class GameHandler {
         }
     }
 
-    func gameExists(withUser: FIRUser, completion: @escaping (_ success: Bool) -> ()) {
-        let gameId = "\(String(describing: currentUser?.uid))-\(withUser.uid)"
-        ref.child("Game").child(gameId).observe(.value, with: { (snap) in
+    func gameExists(completion: @escaping (_ success: Bool) -> ()) {
+        ref.child("Game").child(self.remoteUserId).observe(.value, with: { (snap) in
             if snap.value == nil {
                 completion(false)
             } else {
@@ -103,7 +81,7 @@ class GameHandler {
         }
     }
 
-    func attackFinished(inGameId: String, withWinner: FIRUser) {
+    func attackFinished(inGameId: String, withWinner: GameUser) {
         getGame(withGameId: inGameId) { (success, game) in
             if success {
                 if game?.user1Id! == withWinner.uid {
@@ -116,13 +94,12 @@ class GameHandler {
         }
     }
 
-    func createAttack(toUser: FIRUser, withSoldierArray: [Int], completion: @escaping (_ success: Bool) -> ()) {
-        let gameId = "\(String(describing: currentUser?.uid))-\(toUser.uid)"
+    func createAttack(withSoldierArray: [Int], completion: @escaping (_ success: Bool) -> ()) {
         let attackDictionary : [String: Any] = [FirebaseGameOptions.gameId.rawValue : gameId,
-                                                FirebaseGameOptions.attackerId.rawValue : currentUser!.uid,
-                                                FirebaseGameOptions.defenderId.rawValue : toUser.uid,
+                                                FirebaseGameOptions.attackerId.rawValue : self.currentUserId,
+                                                FirebaseGameOptions.defenderId.rawValue : self.remoteUserId,
                                                 FirebaseGameOptions.soldierArray.rawValue : withSoldierArray]
-        ref.child("Attack").child(toUser.uid).child(currentUser!.uid).setValue(attackDictionary) { (error, attackRef) in
+        ref.child("Attack").child(self.remoteUserId).child(currentUser!.uid).setValue(attackDictionary) { (error, attackRef) in
             if error != nil {
                 print("error creating attack")
                 completion(false)
@@ -146,7 +123,7 @@ class GameHandler {
     }
 
     func getUsersFromGameId(gameId: String) -> (String, String){
-        let components = gameId.components(separatedBy: "-")
+        let components = gameId.components(separatedBy: "&")
         return (components.first!,components.last!)
     }
 
@@ -165,7 +142,13 @@ enum FirebaseGameOptions : String {
 }
 
 
+class GameUser {
+    var uid : String
 
+    init(withId : String) {
+        uid = withId
+    }
+}
 
 
 class Attack {

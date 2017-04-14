@@ -27,17 +27,4 @@ extension TowerDefriendzViewController {
             armyCoinsLabel.text = "\(armyBudget) Coins"
         }
     }
-
-    func createArmy() {
-        let count = soldierCounter > eagleCounter ? soldierCounter : eagleCounter
-        for i in 0..<count {
-            if i < soldierCounter {
-                armyString += "1"
-            }
-            if i < eagleCounter {
-                armyString += "0"
-            }
-        }
-    }
-
 }
