@@ -23,7 +23,7 @@ var towerArray: [Tower]? = [Tower]()
 var bulletArray: [Bullet]? = [Bullet]()
 let imageView = UIImageView(image: #imageLiteral(resourceName: "path"))
 
-class Game: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegate {
+class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegate {
 
     var delegate : GameDelegate?
 	var lives = 3

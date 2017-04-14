@@ -12,15 +12,15 @@ import Messages
 extension TowerDefriendzViewController {
 
     func gameViewInitiation() {
-        if enemyInts.count != 0 {
-            game = Game(frame: view.bounds)
-            game?.delegate = self
-            game?.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-            view.addSubview(game!)
-            game?.start(enemyInts: enemyInts,turnNumber: turnNumber)
+        if incomingAttack?.soldierArray!.count != 0 {
+            gameView = GameView(frame: view.bounds)
+            gameView?.delegate = self
+            gameView?.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+            view.addSubview(gameView!)
+            gameView?.start(enemyInts: incomingAttack!.soldierArray! ,turnNumber: incomingAttack!.turnNumber!)
         } else {
-            let alert = UIAlertController(title: "Bad attack wave (empty)", message: "Abort", preferredStyle: .alert)
-            self.present(alert, animated: true, completion: nil)
+
+            alert(withTitle: "Empty attack wave", withMessage: "abort")
 
         }
     }
@@ -33,11 +33,11 @@ extension TowerDefriendzViewController {
         mainButton.setTitle("BUILD ARMY!", for: .normal)
         mainButton.animateAlpha(t: 0.3, a: 1)
         mainButton.tag = 1
-        game?.animateAlpha(t: 0.3, a: 0)
+        gameView?.animateAlpha(t: 0.3, a: 0)
         Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (_) in
-            self.game?.removeFromSuperview()
+            self.gameView?.removeFromSuperview()
         }
-        didWinGame = didWin
+        defenseSucceeded = didWin
     }
 
 }

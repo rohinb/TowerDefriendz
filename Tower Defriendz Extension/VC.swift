@@ -12,12 +12,12 @@ import Messages
 
 class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
 
-    var turnNumber = 0
+    var gameHandler = GameHandler()
+    var incomingAttack : Attack?
     var gameStage = GameStage.initial
     var stages : [GameStage] = [.initial, .defend, .game, .soldierSelection, .attack]
-    var game : Game?
-    var didWinGame = false
-    var enemyInts = [Int]()
+    var gameView : GameView?
+    var defenseSucceeded = false
 
     @IBOutlet weak var statusLabel: StatusLabel!
     @IBOutlet weak var mainButton: MainButton!
@@ -86,6 +86,11 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         progressGameStage()
     }
 
+    func alert(withTitle: String, withMessage: String) {
+        let alert = UIAlertController(title: withTitle, message: withMessage, preferredStyle: .alert)
+        self.present(alert, animated: true, completion: nil)
+    }
+
 
     /* @IBAction func mainButtonClicked(_ sender: UIButton) {
         
@@ -125,5 +130,6 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
 
 
 }
+
 
 

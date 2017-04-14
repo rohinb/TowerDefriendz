@@ -13,22 +13,67 @@ extension TowerDefriendzViewController {
 
 
     override func willBecomeActive(with conversation: MSConversation) {
+        retrieveAttack(fromConversation: conversation)
+    }
 
-        if let messageStr = conversation.selectedMessage?.url!.description {
+    override func didSelect(_ message: MSMessage, conversation: MSConversation) {
+        retrieveAttack(fromConversation: conversation)
+    }
 
-            let waveStr = getKeyVal(str:getQueries(str: messageStr)[0]).1
-            let turnStr = getKeyVal(str:getQueries(str: messageStr)[1]).1
-            if waveStr.characters.count != 0 && turnStr.characters.count != 0 {
-                enemyInts = getArray(str: waveStr)
-                turnNumber = Int(turnStr)!
-            }
+    func retrieveAttack(fromConversation: MSConversation) {
+        if let messageStr = fromConversation.selectedMessage?.url!.description {
+            let queries = getQueries(str: messageStr)
+            let gameId = queries[0]
+            gameHandler.getLatestAttack(inGameId: gameId, completion: { (success, attack) in
+                if success {
+                    self.incomingAttack = attack!
+                    self.mainButton.visible = true
+                } else {
+                    self.alert(withTitle: "Cannot retrieve attack.", withMessage: "abort")
+                    self.mainButton.visible = false
+                }
+            })
         }
     }
+
+
+
+
+
+
+
+
+    func createMessage(didWin: Bool, attackWave: String) {
+        let conversation = activeConversation
+        let session = conversation?.selectedMessage?.session ?? MSSession()
+
+        let layout = MSMessageTemplateLayout()
+        //layout.image = UIImage(named: "message-background.png")
+        //layout.imageTitle = "iMessage Extension"
+        layout.caption = "Defense \(didWin ? "succeded!" : "failed!")"
+        layout.subcaption = "Tap to defend your base!"
+
+        var components = URLComponents()
+        let waveItem = URLQueryItem(name: "gameId", value: attackWave)
+        components.queryItems = [waveItem]
+
+        let message = MSMessage(session: session)
+        message.layout = layout
+        message.url = components.url
+        message.summaryText = "Defense \(didWin ? "succeded!" : "failed!")"
+
+        conversation?.insert(message)
+    }
+
+
+
+
+
+    ///////////////////////////////////////////////////////
 
     func getQueries(str: String) -> [String] {
 
         return str.components(separatedBy: "&")
-
     }
 
     func getKeyVal(str: String) -> (String,String) {
@@ -43,39 +88,6 @@ extension TowerDefriendzViewController {
         })
     }
 
-    override func didSelect(_ message: MSMessage, conversation: MSConversation) {
-        if let messageStr = conversation.selectedMessage?.url!.description {
-
-            let waveStr = getKeyVal(str:getQueries(str: messageStr)[0]).1
-            let turnStr = getKeyVal(str:getQueries(str: messageStr)[1]).1
-            if waveStr.characters.count != 0 && turnStr.characters.count != 0 {
-                enemyInts = getArray(str: waveStr)
-                turnNumber = Int(turnStr)!
-            }
-        }
-    }
-
-    func createMessage(didWin: Bool, attackWave: String) {
-        let conversation = activeConversation
-        let session = conversation?.selectedMessage?.session ?? MSSession()
-
-        let layout = MSMessageTemplateLayout()
-        //layout.image = UIImage(named: "message-background.png")
-        //layout.imageTitle = "iMessage Extension"
-        layout.caption = "Defense \(didWin ? "succeded!" : "failed!")"
-        layout.subcaption = "Tap to defend your base!"
-
-        var components = URLComponents()
-        let waveItem = URLQueryItem(name: "wave", value: attackWave)
-        let turnItem = URLQueryItem(name: "turn", value: String(turnNumber+1))
-        components.queryItems = [waveItem,turnItem]
-
-        let message = MSMessage(session: session)
-        message.layout = layout
-        message.url = components.url
-        message.summaryText = "Defense \(didWin ? "succeded!" : "failed!")"
-
-        conversation?.insert(message)
-    }
+    ///////////////////////////////////////////////////////
 
 }
