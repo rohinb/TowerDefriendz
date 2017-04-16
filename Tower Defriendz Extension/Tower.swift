@@ -61,8 +61,8 @@ enum TowerType {
 	
 	var radius : CGFloat {
 		switch self {
-		case .normal: return CGFloat(4 * Constants.scale)
-		case .ranged: return CGFloat(10 * Constants.scale)
+		case .normal: return CGFloat(0 * Constants.scale)
+		case .ranged: return CGFloat(0 * Constants.scale)
 		case .deadly: return CGFloat(3 * Constants.scale)
 		}
 	}
@@ -91,6 +91,7 @@ class Tower:UIImageView {
     var posY: Int
     var delegate : TowerDelegate?
     var shootTimer = Timer()
+	let TOWER_ROTATION_INTERVAL = 0.3 // keeping this constant for all towers
     
     init(posX: Int, posY: Int, type: TowerType) {
         self.posX = posX
@@ -121,7 +122,7 @@ class Tower:UIImageView {
             let dy = enemy.center.y - self.center.y
             if pow(dx,2) + pow(dy,2) < pow(type.radius,2) {
                 let direction = dx < 0 ? atan(dy/dx) + 3.14 : atan(dy/dx)
-                UIView.animate(withDuration: shootTimer.timeInterval, delay: 0.0, options: .curveLinear, animations: {
+                UIView.animate(withDuration: self.TOWER_ROTATION_INTERVAL, delay: 0.0, options: .curveLinear, animations: {
                     self.transform = CGAffineTransform(rotationAngle: direction)
                 }, completion: { (success) in
                     if success {
