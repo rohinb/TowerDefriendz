@@ -26,6 +26,7 @@ extension TowerDefriendzViewController {
             soldierCountLabel.text = soldierCounter.description
             armyBudget = 1000*(pendingAttack!.turnNumber! + 1) - soldierCounter*50 - eagleCounter*70
             armyCoinsLabel.text = "\(armyBudget) Coins"
+            pendingAttack?.soldierArray?.append(0)
         }
     }
     @IBAction func increaseEagleClicked(_ sender: Any) {
@@ -34,6 +35,7 @@ extension TowerDefriendzViewController {
             eagleCountLabel.text = eagleCounter.description
             armyBudget = 1000*(pendingAttack!.turnNumber! + 1) - soldierCounter*50 - eagleCounter*70
             armyCoinsLabel.text = "\(armyBudget) Coins"
+            pendingAttack?.soldierArray?.append(1)
         }
     }
 }
