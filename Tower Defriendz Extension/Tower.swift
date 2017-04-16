@@ -76,6 +76,14 @@ enum TowerType {
 		}
 	}
 	
+	var bulletColor : UIColor {
+		switch self {
+		case .normal: return UIColor.blue
+		case .ranged: return UIColor.brown
+		case .deadly: return UIColor.red
+		}
+	}
+	
 	var firingInterval : Double {
 		switch self {
 		case .normal: return 0.3
@@ -105,7 +113,7 @@ class Tower:UIImageView {
                                  height: Constants.scale))
 		
 		self.shootTimer = Timer.scheduledTimer(withTimeInterval: self.type.firingInterval, repeats: true, block: { (_) in
-			self.shoot(speed: self.type.bulletSpeed, color: UIColor.blue)
+			self.shoot(speed: self.type.bulletSpeed, color: self.type.bulletColor)
 		})
 		self.image = type.image
 	}
