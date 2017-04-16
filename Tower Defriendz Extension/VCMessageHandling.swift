@@ -25,22 +25,29 @@ extension TowerDefriendzViewController {
     }
 
     override func didSelect(_ message: MSMessage, conversation: MSConversation) {
-        retrieveAttack(fromConversation: conversation)
+        if !retrieveAttack(fromConversation: conversation) {
+            stages = [.initial, .initialSoldierSelection, .initialAttack]
+        } else {
+            stages = [.defend, .game, .soldierSelection, .attack]
+            gameStage = .defend
+        }
     }
 
     func retrieveAttack(fromConversation: MSConversation) -> Bool{
         if let messageStr = fromConversation.selectedMessage?.url!.description {
-            let queries = getQueries(str: messageStr)
-            let gameId = queries[0]
-            gameHandler?.getLatestAttack(inGameId: gameId, completion: { (success, attack) in
-                if success {
-                    self.incomingAttack = attack!
-                    self.mainButton.visible = true
-                } else {
-                    self.alert(withTitle: "Cannot retrieve attack.", withMessage: "abort")
-                    self.mainButton.visible = false
-                }
-            })
+            if messageStr != "" {
+                let queries = getQueries(str: messageStr)
+                let gameId = queries[0]
+                gameHandler?.getLatestAttack(inGameId: gameId, completion: { (success, attack) in
+                    if success {
+                        self.incomingAttack = attack!
+                        self.mainButton.visible = true
+                    } else {
+                        self.alert(withTitle: "Cannot retrieve attack.", withMessage: "abort")
+                        self.mainButton.visible = false
+                    }
+                })
+            }
         } else {
             return false
         }
@@ -62,6 +69,7 @@ extension TowerDefriendzViewController {
                 let caption = "Defense \(defenseDidWin ? "succeded!" : "failed!")"
                 let subcaption = "Tap to defend your base! You are \((yourScore > opponentScore) ? "in the lead" : "losing")!"
                 self.sendMessage(withCaption: caption, withSubcaption: subcaption, withQueries: ["gameId" : self.gameHandler!.gameId])
+                self.createAttack()
             }
         }
     }
@@ -72,6 +80,7 @@ extension TowerDefriendzViewController {
                 let caption = "PREPARE FOR WAR!"
                 let subcaption = "Tap to defend your base!"
                 self.sendMessage(withCaption: caption, withSubcaption: subcaption, withQueries: ["gameId" : self.gameHandler!.gameId])
+                self.createAttack()
             }
         })
     }
@@ -85,19 +94,21 @@ extension TowerDefriendzViewController {
         //layout.image = UIImage(named: "message-background.png")
         //layout.imageTitle = "iMessage Extension"
         var components = URLComponents()
-        for query in withQueries {
-            let queryItem = URLQueryItem(name: query.key, value: query.value)
-            components.queryItems?.append(queryItem)
-        }
+        let queryItem = URLQueryItem(name: withQueries.first!.key, value: withQueries.first!.value)
+        components.queryItems = [queryItem]
         let message = MSMessage(session: session)
         message.layout = layout
-        message.url = components.url
+        message.url = components.url!
         message.summaryText = withCaption
         conversation?.insert(message)
     }
 
     override func didReceive(_ message: MSMessage, conversation: MSConversation) {
-        self.gameHandler?.createAttack(withSoldierArray: pendingAttack!.soldierArray!, completion: { (success) in
+
+    }
+
+    func createAttack() {
+        self.gameHandler?.createAttack(withAttack: pendingAttack!, completion: { (success) in
             if success {
                 print("Attack created successfully")
             } else {
@@ -126,7 +137,7 @@ extension TowerDefriendzViewController {
             return Int(char.description)!
         })
     }
-
+    
     ///////////////////////////////////////////////////////
-
+    
 }

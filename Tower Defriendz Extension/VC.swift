@@ -42,6 +42,8 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
             case .defend:
                 mainButton.stage = .defend
                 statusLabel.stage = .defend
+                gameViewInitiation()
+
                 break
 
             case .game:
