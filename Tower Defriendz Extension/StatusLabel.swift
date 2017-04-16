@@ -48,7 +48,7 @@ class StatusLabel: UILabel {
         didSet {
 
             var labelCenter = screenCenter
-            labelCenter.y -= 70
+            labelCenter.y -= 230
 
             switch stage {
 
