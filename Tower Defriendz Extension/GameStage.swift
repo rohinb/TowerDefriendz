@@ -15,4 +15,6 @@ enum GameStage {
     case game
     case soldierSelection
     case attack
+    case waitingForOpponent
+    case cannotGetAttack
 }

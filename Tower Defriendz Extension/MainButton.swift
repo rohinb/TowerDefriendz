@@ -84,6 +84,18 @@ class MainButton : UIButton {
                 visible = false
                 break
 
+            case .waitingForOpponent:
+                title = ""
+                location = screenCenter
+                visible = false
+                break
+
+            case .cannotGetAttack:
+                title = ""
+                location = screenCenter
+                visible = false
+                break
+
             }
         }
     }

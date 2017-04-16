@@ -14,7 +14,6 @@ class GameHandler {
     var currentUserId = ""
     var remoteUserId = ""
     let ref = FIRDatabase.database().reference()
-    var currentUser : GameUser?
     var gameId = ""
 
     init(withCurrentUserId: String, withRemoteUserId: String) {
@@ -110,21 +109,14 @@ class GameHandler {
         }
     }
 
-    // Attack:
-    //   userKey1:
-    //      user2:
-    //         attack info
-
-
     func getLatestAttack(inGameId: String, completion: @escaping ( _ success: Bool, _ attack: Attack?) -> ()) {
 
-        let users = getUsersFromGameId(gameId: inGameId)
-        ref.child("Attack").child(users.0).child(users.1).observe(.value, with: { (snap) in
+        ref.child("Attack").child(currentUserId).child(remoteUserId).observe(.value, with: { (snap) in
             if let attackDictionary = snap.value as? [String : Any] {
                 let attack = Attack(gameid: inGameId, atackerid: attackDictionary[FirebaseGameOptions.attackerId.rawValue] as! String, defenderid: attackDictionary[FirebaseGameOptions.defenderId.rawValue] as! String, turnnumber: attackDictionary[FirebaseGameOptions.turnNumber.rawValue] as! Int, soldierarray: attackDictionary[FirebaseGameOptions.soldierArray.rawValue] as! [Int])
                 completion(true, attack)
             } else {
-                self.ref.child("Attack").child(users.1).child(users.0).observe(.value, with: { (snap) in
+                self.ref.child("Attack").child(self.remoteUserId).child(self.currentUserId).observe(.value, with: { (snap) in
                     if let attackDictionary = snap.value as? [String : Any] {
                         let attack = Attack(gameid: inGameId,
                                             atackerid: attackDictionary[FirebaseGameOptions.attackerId.rawValue] as! String,
@@ -145,7 +137,6 @@ class GameHandler {
         components[0] = (components.first?.substring(from: (components.first?.characters.index(after: (components.first?.characters.index(of: "=")!)!))!))!
         return (components.first!, components.last!)
     }
-
 }
 
 enum FirebaseGameOptions : String {

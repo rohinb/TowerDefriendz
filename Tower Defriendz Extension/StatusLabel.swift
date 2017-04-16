@@ -107,6 +107,20 @@ class StatusLabel: UILabel {
                 visible = true
                 fontSize = .small
                 break
+
+            case .waitingForOpponent:
+                title = "Waiting for oponent..."
+                location = labelCenter
+                visible = true
+                fontSize = .small
+                break
+
+            case .cannotGetAttack:
+                title = "Oops! There was a problem."
+                location = labelCenter
+                visible = true
+                fontSize = .small
+                break
                 
             }
         }
