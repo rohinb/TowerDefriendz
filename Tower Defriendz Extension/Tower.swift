@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 
+// TODO: Balance towers for price; right now .normal is overpowered
 enum TowerType {
 	case normal
 	case ranged
@@ -61,8 +62,8 @@ enum TowerType {
 	
 	var radius : CGFloat {
 		switch self {
-		case .normal: return CGFloat(0 * Constants.scale)
-		case .ranged: return CGFloat(0 * Constants.scale)
+		case .normal: return CGFloat(4 * Constants.scale)
+		case .ranged: return CGFloat(10 * Constants.scale)
 		case .deadly: return CGFloat(3 * Constants.scale)
 		}
 	}
@@ -121,7 +122,7 @@ class Tower:UIImageView {
             let dx = enemy.center.x - self.center.x
             let dy = enemy.center.y - self.center.y
             if pow(dx,2) + pow(dy,2) < pow(type.radius,2) {
-                let direction = dx < 0 ? atan(dy/dx) + 3.14 : atan(dy/dx)
+                let direction = dx < 0 ? atan(dy/dx) + 3.14159265535 : atan(dy/dx)
                 UIView.animate(withDuration: self.TOWER_ROTATION_INTERVAL, delay: 0.0, options: .curveLinear, animations: {
                     self.transform = CGAffineTransform(rotationAngle: direction)
                 }, completion: { (success) in

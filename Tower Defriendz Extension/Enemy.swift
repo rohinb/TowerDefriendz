@@ -23,75 +23,116 @@ let pathPoints =	[startPathPoint,
                 	 (6, 6),
                 	 (6, 7),
                 	 (6, 8),
-                	  (6, 9),
-                	  (6, 10),
-                	  (6, 11),
-                	  (5, 11),
-                	  (4, 11),
-                	  (3, 11),
-                	  (2, 11),
-                	  (2, 12),
-                	  (2, 13),
-                	  (2, 14),
-                	  (2, 15),
-                	  (3, 15),
-                	  (4, 15),
-                	  (5, 15),
-                	  (5, 16),
-                	  (5, 17),
-                	  (3, 14),
-                	  (4, 14),
-                	  (5, 14)]
+                	 (6, 9),
+                	 (6, 10),
+                	 (6, 11),
+                	 (5, 11),
+                	 (4, 11),
+                	 (3, 11),
+                	 (2, 11),
+                	 (2, 12),
+                	 (2, 13),
+                	 (2, 14),
+                	 (2, 15),
+                	 (3, 15),
+                	 (4, 15),
+                	 (5, 15),
+                	 (5, 16),
+                	 (5, 17),
+                	 (3, 14),
+                	 (4, 14),
+                	 (5, 14)]
+
+fileprivate enum Direction {
+	case L
+	case R
+	case U
+	case D
+	
+}
+
+// TODO: Balance with towers and price
+enum EnemyType {
+	case soldier
+	case bird
+	
+	init(name: String) {
+		switch name.lowercased() {
+		case "soldier" : self = .soldier
+		case "bird" : self = .bird
+		default:		self = .bird // don't let this happen
+		}
+	}
+	
+	var name : String {
+		switch self {
+		case .bird: return "Eagle"
+		case .soldier: return "Soldier"
+		}
+	}
+	
+	var image : UIImage {
+		switch self {
+		case .bird: return #imageLiteral(resourceName: "Bird")
+		case .soldier: return #imageLiteral(resourceName: "Soldier")
+		}
+	}
+	
+	var price : Int {
+		switch self {
+		case .bird: return 75
+		case .soldier: return 50
+		}
+	}
+	
+	var initialHealth : Int {
+		switch self {
+		case .bird: return 300
+		case .soldier: return 1800
+		}
+	}
+	
+	var moveInterval : Double {
+		switch self {
+		case .bird: return 0.5
+		case .soldier: return 0.8
+		}
+	}
+	
+	fileprivate var path : [Direction] {
+		switch self {
+		case .soldier: return [.D, .D, .D, .D, .D, .D, .R, .R, .D, .D, .D, .D, .D, .L,
+		                       .L, .L, .L, .D, .D, .D, .D, .R, .R, .R, .D, .D]
+		case .bird: return [.D, .D, .D, .D, .D, .D, .D, .D, .D, .D,
+		                    .D, .D, .D, .D, .D, .D, .D, .D, .D]
+		}
+	}
+}
+
 class Enemy: UIImageView {
 	
 	var posX: Int
 	var posY: Int
 	var delegate : EnemyDelegate?
-	enum Direction {
-		case L
-		case R
-		case U
-		case D
-		
-	}
-	var path = [Direction]()
+	
 	var pIndex: Int
 	
 	var updateTimer : Timer = Timer()
 	var health : Int = 99
-	var type = ""
-	var initialHealth = 10
+	var type : EnemyType
 	
-	init(posX: Int, posY: Int, type : String) {
+	init(posX: Int, posY: Int, type : EnemyType) {
 		
 		self.posX = posX
 		self.posY = posY
 		self.type = type
 		self.pIndex = 0
 		super.init(frame: CGRect(x: posX*Constants.scale, y: posY*Constants.scale, width: Constants.scale, height: Constants.scale))
-		switch type {
-		case "soldier":
-			updateTimer = Timer.scheduledTimer(withTimeInterval: 0.8, repeats: true, block: { (timer) in
-				self.update()
-			})
-			self.path = [.D, .D, .D, .D, .D, .D, .R, .R, .D, .D, .D, .D, .D, .L, .L, .L, .L, .D, .D, .D, .D, .R, .R, .R, .D, .D]
-			health = 1800
-            self.image = UIImage(named: "Soldier")!.withRenderingMode(.alwaysOriginal)
-		case "bird":
-			updateTimer = Timer.scheduledTimer(withTimeInterval: 0.50, repeats: true, block: { (timer) in
-				self.update()
-			})
-			self.path = [.D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D, .D]
-			health = 300
-            self.image = UIImage(named: "Bird")!.withRenderingMode(.alwaysOriginal)
-		default:
-			updateTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true, block: { (timer) in
-				self.update()
-			})
-			health = 999
-            self.image = UIImage(named: "Soldier")!.withRenderingMode(.alwaysOriginal)
-		}
-		initialHealth = health
+		updateTimer = Timer.scheduledTimer(withTimeInterval: 0.8, repeats: true, block: { (timer) in
+			self.update()
+		})
+		health = type.initialHealth
+		self.image = type.image.withRenderingMode(.alwaysOriginal)
 	}
 	
 	func die() {
@@ -111,26 +152,29 @@ class Enemy: UIImageView {
 	
 	func hurt(damage: Int) {
 		health -= damage
-		self.image = UIImage(named: type == "soldier" ? "Soldier" : "Bird")!.withRenderingMode(.alwaysTemplate)
-		UIView.animate(withDuration: 0.13, animations: {
-			self.tintColor = UIColor.red
-		}, completion: { (success) in
-			self.tintColor = UIColor.clear
-			self.image = UIImage(named: self.type == "soldier" ? "Soldier" : "Bird")!.withRenderingMode(.alwaysOriginal)
-		})
+		self.image = type.image.withRenderingMode(.alwaysTemplate)
 		
+		self.flashRed()
 		if health <= 0{
 			self.die()
 		}
 	}
 	
+	fileprivate func flashRed() {
+		self.tintColor = UIColor.red
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.15, execute: {
+			self.tintColor = UIColor.clear
+			self.image = self.type.image.withRenderingMode(.alwaysOriginal)
+		})
+	}
 	
-	func update() {
-		guard pIndex < path.count else {
+	
+	fileprivate func update() {
+		guard pIndex < type.path.count else {
 			return
 		}
 		
-		switch path[pIndex] {
+		switch type.path[pIndex] {
 		case Direction.R:
 			self.posX += 1
 		case Direction.L:
