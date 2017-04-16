@@ -18,7 +18,6 @@ extension TowerDefriendzViewController {
         gameHandler = GameHandler(withCurrentUserId: currentUserId, withRemoteUserId: remoteUserId)
         gameHandler?.getLatestAttack(inGameId: gameHandler!.gameId, completion: { (success, attack) in
             if success {
-                self.stages = [.waitingForOpponent]
                 self.gameStage = .waitingForOpponent
             } else {
                 self.stages = [.initial, .initialSoldierSelection, .initialAttack]
@@ -35,7 +34,6 @@ extension TowerDefriendzViewController {
                     self.gameStage = .openingDefend
                     self.incomingAttack = attack
                 } else {
-                    self.stages = [.waitingForOpponent]
                     self.gameStage = .waitingForOpponent
                 }
             } else {

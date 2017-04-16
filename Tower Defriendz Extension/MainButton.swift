@@ -8,7 +8,7 @@
 
 import UIKit
 
-var screenCenter = CGPoint(x: UIScreen.main.bounds.width/2, y:UIScreen.main.bounds.height/2)
+let screenCenter = CGPoint(x: UIScreen.main.bounds.width/2, y:UIScreen.main.bounds.height/2)
 
 class MainButton : UIButton {
 
