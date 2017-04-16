@@ -38,33 +38,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Tower Defriendz Extension/VCMessageHandling.swift"
-            timestampString = "514075740.529283"
+            filePath = "Tower Defriendz Extension/GameHandler.swift"
+            timestampString = "514078120.621468"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "62"
             endingLineNumber = "62"
-            landmarkName = "createAttackMessage(withAttack:defenseDidWin:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Tower Defriendz Extension/GameHandler.swift"
-            timestampString = "514057845.851579"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
             landmarkName = "getGame(withGameId:completion:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tower_Defriendz_Extension.GameHandler.getGame (withGameId : Swift.String, completion : (Swift.Bool, Swift.Optional&lt;Tower_Defriendz_Extension.Game&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Tower Defriendz Extension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sahandedrisian/Desktop/Tower%20Defriendz/Tower%20Defriendz%20Extension/GameHandler.swift"
+                  timestampString = "514078769.489084"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tower_Defriendz_Extension.GameHandler.(getGame (withGameId : Swift.String, completion : (Swift.Bool, Swift.Optional&lt;Tower_Defriendz_Extension.Game&gt;) -&gt; ()) -&gt; ()).(closure #1)"
+                  moduleName = "Tower Defriendz Extension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sahandedrisian/Desktop/Tower%20Defriendz/Tower%20Defriendz%20Extension/GameHandler.swift"
+                  timestampString = "514078769.490163"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "48">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -74,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tower Defriendz Extension/GameHandler.swift"
-            timestampString = "514074799.895029"
+            timestampString = "514077293.662506"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
             landmarkName = "createAttack(withAttack:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -86,16 +102,80 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Tower Defriendz Extension/VC.swift"
+            timestampString = "514078181.185736"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "handleGameStages()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tower_Defriendz_Extension.TowerDefriendzViewController.handleGameStages () -&gt; ()"
+                  moduleName = "Tower Defriendz Extension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sahandedrisian/Desktop/Tower%20Defriendz/Tower%20Defriendz%20Extension/VC.swift"
+                  timestampString = "514078769.493379"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "98"
+                  endingLineNumber = "98"
+                  offsetFromSymbolStart = "2228">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Tower_Defriendz_Extension.TowerDefriendzViewController.(handleGameStages () -&gt; ()).(closure #1)"
+                  moduleName = "Tower Defriendz Extension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sahandedrisian/Desktop/Tower%20Defriendz/Tower%20Defriendz%20Extension/VC.swift"
+                  timestampString = "514078769.494478"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "99"
+                  endingLineNumber = "99"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Tower Defriendz Extension/VCMessageHandling.swift"
-            timestampString = "514074826.028501"
+            filePath = "Tower Defriendz Extension/GameHandler.swift"
+            timestampString = "514078593.592564"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
-            landmarkName = "willBecomeActive(with:)"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "getLatestAttack(inGameId:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Tower Defriendz Extension/GameHandler.swift"
+            timestampString = "514078600.825886"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "getLatestAttack(inGameId:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

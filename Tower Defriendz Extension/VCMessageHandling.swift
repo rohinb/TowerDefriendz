@@ -13,18 +13,14 @@ extension TowerDefriendzViewController {
 
 
     override func willBecomeActive(with conversation: MSConversation) {
-        let currentUserId = conversation.localParticipantIdentifier.uuidString
-        let remoteUserId = conversation.remoteParticipantIdentifiers.first!.uuidString
-        gameHandler = GameHandler(withCurrentUserId: currentUserId, withRemoteUserId: remoteUserId)
-        gameHandler?.getLatestAttack(inGameId: gameHandler!.gameId, completion: { (success, attack) in
-            if success {
-                self.stages = [.waitingForOpponent]
-                self.gameStage = .waitingForOpponent
-            } else {
-                self.stages = [.initial, .initialSoldierSelection, .initialAttack]
-                self.gameStage = .initial
-            }
-        })
+
+        if conversation.selectedMessage == nil {
+            let currentUserId = conversation.localParticipantIdentifier.uuidString
+            let remoteUserId = conversation.remoteParticipantIdentifiers.first!.uuidString
+            gameHandler = GameHandler(withCurrentUserId: currentUserId, withRemoteUserId: remoteUserId)
+            self.stages = [.initial, .initialSoldierSelection, .initialAttack]
+            self.gameStage = .initial
+        }
     }
 
     override func didSelect(_ message: MSMessage, conversation: MSConversation) {
@@ -32,14 +28,14 @@ extension TowerDefriendzViewController {
         if gameId != "" {
             gameHandler?.getLatestAttack(inGameId: gameId, completion: { (success, attack) in
                 if success {
-                    if attack?.attackerId != self.gameHandler?.currentUserId {
+//                    if attack?.attackerId != self.gameHandler?.currentUserId {
                         self.stages = [.defend, .game, .soldierSelection, .attack]
                         self.gameStage = .defend
                         self.incomingAttack = attack
-                    } else {
-                        self.stages = [.waitingForOpponent]
-                        self.gameStage = .waitingForOpponent
-                    }
+//                    } else {
+//                        self.stages = [.waitingForOpponent]
+//                        self.gameStage = .waitingForOpponent
+//                    }
                 } else {
                     self.gameStage = .cannotGetAttack
                 }
