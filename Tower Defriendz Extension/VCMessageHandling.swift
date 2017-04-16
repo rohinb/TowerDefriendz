@@ -28,20 +28,33 @@ extension TowerDefriendzViewController {
     }
 
     override func didSelect(_ message: MSMessage, conversation: MSConversation) {
-        gameHandler?.getLatestAttack(inGameId: gameHandler!.gameId, completion: { (success, attack) in
-            if success {
-                if attack?.attackerId != self.gameHandler?.currentUserId {
-                    self.stages = [.openingDefend, .defend, .game, .soldierSelection, .attack]
-                    self.gameStage = .openingDefend
-                    self.incomingAttack = attack
+        let gameId = getKeyVal(str: getGameId(message: message)).1
+        if gameId != "" {
+            gameHandler?.getLatestAttack(inGameId: gameId, completion: { (success, attack) in
+                if success {
+                    if attack?.attackerId != self.gameHandler?.currentUserId {
+                        self.stages = [.defend, .game, .soldierSelection, .attack]
+                        self.gameStage = .defend
+                        self.incomingAttack = attack
+                    } else {
+                        self.stages = [.waitingForOpponent]
+                        self.gameStage = .waitingForOpponent
+                    }
                 } else {
-                    self.stages = [.waitingForOpponent]
-                    self.gameStage = .waitingForOpponent
+                    self.gameStage = .cannotGetAttack
                 }
-            } else {
-                self.gameStage = .cannotGetAttack
+            })
+        }
+    }
+
+    func getGameId(message: MSMessage) -> String {
+        if let messageStr = message.url?.description {
+            if messageStr != "" {
+                let queries = getQueries(str: messageStr)
+                return queries[0]
             }
-        })
+        }
+        return ""
     }
 
     func createAttackMessage(withAttack: Attack, defenseDidWin: Bool) {
@@ -127,7 +140,7 @@ extension TowerDefriendzViewController {
             return Int(char.description)!
         })
     }
-
+    
     ///////////////////////////////////////////////////////
-
+    
 }
