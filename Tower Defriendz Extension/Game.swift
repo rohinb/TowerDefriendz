@@ -31,7 +31,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
     var defenderBudget = 0
 	var hearts = [UIImageView]()
 	let towerTypes = ["normal", "ranged", "deadly"]
-	var selectedTowerType = "ranged"
+	var selectedTowerType = TowerType.normal
     var budgetLabel : UILabel?
 
     var stage = GameStage.game {
@@ -96,7 +96,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
 				button.layer.borderWidth = 0.0
 			}
 		}
-		selectedTowerType = towerTypes[sender.tag]
+		selectedTowerType = TowerType.types[sender.tag]
 		sender.layer.borderWidth = 2.0
 		sender.layer.borderColor = UIColor.blue.cgColor
 		
@@ -117,14 +117,14 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
 		if !contains(arr: pathPoints, tuple: tuple) && !occupied {
 			//add tower there
             let tower = Tower(posX: posX, posY: posY, type: selectedTowerType)
-            if defenderBudget - tower.price >= 0 {
+            if defenderBudget - tower.type.price >= 0 {
                 tower.delegate = self
                 towerArray?.append(tower)
                 addSubview(tower)
                 
                 
                 //lower budget (different price depending on what tower type
-                self.defenderBudget -= tower.price
+                self.defenderBudget -= tower.type.price
                 budgetLabel?.text = "\(defenderBudget)"
             }
 		}
@@ -140,7 +140,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
         budgetLabel?.text = "\(defenderBudget)"
         for (index, int) in enemyInts.enumerated() {
 			Timer.scheduledTimer(withTimeInterval: ((index > enemyInts.count / 2 && turnNumber > 2) ? 0.5 : 1.5) * Double(count), repeats: false) {_ in
-                let enemy = int == 1 ? Enemy(posX: 4, posY: 0, type: "soldier") : Enemy(posX: Int(arc4random_uniform(9))+1, posY: 0, type: "bird")
+                let enemy = int == 1 ? Enemy(posX: 4, posY: 0, type: .soldier) : Enemy(posX: Int(arc4random_uniform(9))+1, posY: 0, type: .bird)
 				enemy.delegate = self
 				self.addSubview(enemy)
 				enemyArray.append(enemy)

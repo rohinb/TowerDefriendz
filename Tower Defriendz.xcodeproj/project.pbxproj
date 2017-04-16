@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F5EB5351EA3048500D02355 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 873D32721E9C56A2002C8FA3 /* GoogleService-Info.plist */; };
 		873D32731E9C56A2002C8FA3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 873D32721E9C56A2002C8FA3 /* GoogleService-Info.plist */; };
 		87995D721EA3048000B7846F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 873D32721E9C56A2002C8FA3 /* GoogleService-Info.plist */; };
 		87A0C4041EA0016F006A2237 /* GameHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A0C4031EA0016F006A2237 /* GameHandler.swift */; };
@@ -482,7 +483,11 @@
 			files = (
 				87AF42AF1E9C50BB00BF5498 /* Assets.xcassets in Resources */,
 				87AF42C61E9C51EB00BF5498 /* MainInterface.storyboard in Resources */,
+<<<<<<< HEAD
 				87995D721EA3048000B7846F /* GoogleService-Info.plist in Resources */,
+=======
+				0F5EB5351EA3048500D02355 /* GoogleService-Info.plist in Resources */,
+>>>>>>> 8e21e1470de5b398a3fd94467ebed0db15ea1652
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
