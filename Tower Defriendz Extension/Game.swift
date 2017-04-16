@@ -32,6 +32,9 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
 	var hearts = [UIImageView]()
 	let towerTypes = ["normal", "ranged", "deadly"]
 	var selectedTowerType = TowerType.normal
+	var currentConfirmPosition : (Int, Int)?
+	var currentConfirmTower : Tower?
+	var currentConfirmCircle : UIView?
     var budgetLabel : UILabel?
 
     var stage = GameStage.game {
@@ -106,35 +109,70 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
 		let point = gestureRecognizer.location(in: self)
 		let posX = Int(point.x) / Constants.scale
 		let posY = Int(point.y) / Constants.scale
-		print("(\(posX), \(posY)) ")
-		let tuple = (posX, posY)
+
 		var occupied = false
 		for tower in towerArray! {
 			if tower.posX == posX && tower.posY == posY {
 				occupied = true
 			}
 		}
-		if !contains(arr: pathPoints, tuple: tuple) && !occupied {
-			//add tower there
-            let tower = Tower(posX: posX, posY: posY, type: selectedTowerType)
-            if defenderBudget - tower.type.price >= 0 {
-				
-                tower.delegate = self
-                towerArray?.append(tower)
-                addSubview(tower)
-                
-                
-                //lower budget (different price depending on what tower type
-                self.defenderBudget -= tower.type.price
-                budgetLabel?.text = "\(defenderBudget)"
-            }
+		if !contains(arr: pathPoints, tuple: (posX, posY)) && !occupied {
+			currentConfirmCircle?.removeFromSuperview()
+			currentConfirmCircle = nil
+			if posX == currentConfirmPosition?.0 && posY == currentConfirmPosition?.1 {
+				confirmTower(posX: posX, posY: posY, tower: currentConfirmTower!)
+				return
+			} else {
+				currentConfirmPosition = nil
+				currentConfirmTower?.removeFromSuperview()
+				currentConfirmTower = nil
+			}
+			showTowerRadius(posX: posX, posY: posY)
 		}
 	}
-    
+	
+	func showTowerRadius(posX: Int, posY : Int) {
+		let tower = Tower(posX: posX, posY: posY, type: selectedTowerType)
+		addSubview(tower)
+		tower.alpha = 0.3
+		
+		let circleView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: selectedTowerType.radius, height: selectedTowerType.radius))
+		circleView.center = tower.center
+		let color = defenderBudget - tower.type.price >= 0 ? UIColor(hex: 0x00A6ED): UIColor(hex: 0xF6511D)
+		circleView.backgroundColor = color.withAlphaComponent(0.25)
+		circleView.layer.masksToBounds = true
+		circleView.layer.cornerRadius = circleView.frame.width / 2.0
+		circleView.layer.borderColor = color.withAlphaComponent(0.75).cgColor
+		circleView.layer.borderWidth = 2.0
+		addSubview(circleView)
+		
+		currentConfirmCircle = circleView
+		currentConfirmPosition = (posX, posY)
+		currentConfirmTower = tower
+	}
+	
+	func confirmTower(posX: Int, posY : Int, tower: Tower) {
+		if defenderBudget - tower.type.price >= 0 {
+			
+			tower.alpha = 1.0
+			tower.delegate = self
+			towerArray?.append(tower)
+			tower.startShooting()
+			currentConfirmTower = nil
+			
+			self.defenderBudget -= tower.type.price
+			budgetLabel?.text = "\(defenderBudget)"
+		} else {
+			currentConfirmPosition = nil
+			currentConfirmTower?.removeFromSuperview()
+			currentConfirmTower = nil
+		}
+	}
+	
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
+	
     func start(enemyInts: [Int], turnNumber: Int) {
 		var count = 0
         defenderBudget = (turnNumber+1) * 1000

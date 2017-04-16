@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0F5EB5351EA3048500D02355 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 873D32721E9C56A2002C8FA3 /* GoogleService-Info.plist */; };
+		0F5EB5371EA3487600D02355 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5EB5361EA3487600D02355 /* UIColorExtensions.swift */; };
+		0F5EB5381EA3487E00D02355 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5EB5361EA3487600D02355 /* UIColorExtensions.swift */; };
 		873D32731E9C56A2002C8FA3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 873D32721E9C56A2002C8FA3 /* GoogleService-Info.plist */; };
 		87A0C4041EA0016F006A2237 /* GameHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A0C4031EA0016F006A2237 /* GameHandler.swift */; };
 		87AF42AE1E9C50BB00BF5498 /* Army.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AF42991E9C50BB00BF5498 /* Army.swift */; };
@@ -79,6 +81,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0F5EB5361EA3487600D02355 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		1AA151642BAA4D3A3A1AA27B /* Pods-Tower Defriendz Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tower Defriendz Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tower Defriendz Extension/Pods-Tower Defriendz Extension.debug.xcconfig"; sourceTree = "<group>"; };
 		1CB92B8BF4FDE8D3BC9C5C48 /* Pods-Tower Defriendz Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tower Defriendz Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tower Defriendz Extension/Pods-Tower Defriendz Extension.release.xcconfig"; sourceTree = "<group>"; };
 		87331CE51E9C530F001EE2A3 /* Tower Defriendz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Tower Defriendz.entitlements"; sourceTree = "<group>"; };
@@ -217,6 +220,7 @@
 			children = (
 				87AF42C51E9C51EB00BF5498 /* MainInterface.storyboard */,
 				87AF429A1E9C50BB00BF5498 /* Assets.xcassets */,
+				0F5EB5361EA3487600D02355 /* UIColorExtensions.swift */,
 				87AF42A61E9C50BB00BF5498 /* MessagesExtension.entitlements */,
 				87AF42A91E9C50BB00BF5498 /* UIViewExtension.swift */,
 				87FFB6B61E9C50250099A13A /* Info.plist */,
@@ -571,6 +575,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F5EB5381EA3487E00D02355 /* UIColorExtensions.swift in Sources */,
 				87FFB67B1E9C4FFD0099A13A /* ViewController.swift in Sources */,
 				87FFB6791E9C4FFD0099A13A /* AppDelegate.swift in Sources */,
 			);
@@ -604,6 +609,7 @@
 				87AF42BE1E9C50BB00BF5498 /* VCMessageHandling.swift in Sources */,
 				87AF42BC1E9C50BB00BF5498 /* VCAttackView.swift in Sources */,
 				87AF42B51E9C50BB00BF5498 /* Glimpse.m in Sources */,
+				0F5EB5371EA3487600D02355 /* UIColorExtensions.swift in Sources */,
 				87AF42B11E9C50BB00BF5498 /* Bullet.swift in Sources */,
 				87AF42BD1E9C50BB00BF5498 /* VCGameView.swift in Sources */,
 				87AF42B71E9C50BB00BF5498 /* MainButton.swift in Sources */,

@@ -112,9 +112,6 @@ class Tower:UIImageView {
                                  width: Constants.scale * 375 / 255, //FIXME: Get rid of these magic numbers
                                  height: Constants.scale))
 		
-		self.shootTimer = Timer.scheduledTimer(withTimeInterval: self.type.firingInterval, repeats: true, block: { (_) in
-			self.shoot(speed: self.type.bulletSpeed, color: self.type.bulletColor)
-		})
 		self.image = type.image
 	}
     
@@ -122,6 +119,12 @@ class Tower:UIImageView {
     deinit {
         shootTimer.invalidate()
     }
+	
+	func startShooting() {
+		self.shootTimer = Timer.scheduledTimer(withTimeInterval: self.type.firingInterval, repeats: true, block: { (_) in
+			self.shoot(speed: self.type.bulletSpeed, color: self.type.bulletColor)
+		})
+	}
     
     fileprivate func shoot(speed: Double , color: UIColor) {
         // we want to traverse (for loop) array of enemies and find first one that is within radius
