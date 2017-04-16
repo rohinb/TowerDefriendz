@@ -20,10 +20,10 @@ class StatusLabel: UILabel {
         didSet {
             switch fontSize {
             case .small:
-                font = font.withSize(15)
+                font = font.withSize(19)
                 break
             case .large:
-                font = font.withSize(19)
+                font = font.withSize(21)
                 break
             }
         }
@@ -46,53 +46,64 @@ class StatusLabel: UILabel {
 
     var stage = GameStage.initial {
         didSet {
+
+            var labelCenter = screenCenter
+            labelCenter.y -= 70
+
             switch stage {
 
             case .initial:
                 title = "Expand app to attack!"
-                location = screenCenter
+                location = labelCenter
                 visible = true
                 fontSize = .small
                 break
 
             case .initialSoldierSelection:
                 title = "Choose your army!"
-                location = screenCenter
+                location = labelCenter
                 visible = true
-                fontSize = .small
+                fontSize = .large
                 break
 
             case .initialAttack:
                 title = "Send your attack!"
-                location = screenCenter
+                location = labelCenter
+                visible = true
+                fontSize = .large
+                break
+
+            case .openingDefend:
+                title = "Expand to defend your base"
+                location = labelCenter
                 visible = true
                 fontSize = .small
                 break
 
             case .defend:
                 title = "They have attacked our base!"
-                location = screenCenter
+                location = labelCenter
                 visible = true
-                fontSize = .small
+                fontSize = .large
                 break
 
             case .game:
                 title = ""
-                location = screenCenter
+                location = labelCenter
                 visible = false
-                fontSize = .small
+                fontSize = .large
                 break
 
             case .soldierSelection:
                 title = "Choose your army!"
-                location = screenCenter
+                location = labelCenter
                 visible = true
-                fontSize = .small
+                fontSize = .large
                 break
 
             case .attack:
                 title = "Attack sent!"
-                location = screenCenter
+                location = labelCenter
                 visible = true
                 fontSize = .small
                 break

@@ -54,6 +54,12 @@ class MainButton : UIButton {
                 visible = false
                 break
 
+            case .openingDefend:
+                title = ""
+                location = screenCenter
+                visible = false
+                break
+
             case .defend:
                 title = "DEFEND!"
                 location = screenCenter

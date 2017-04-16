@@ -57,7 +57,7 @@ class GameHandler {
     func getGame(withGameId: String, completion: @escaping (Bool, Game?) -> ()) {
 
         ref.child("Game").child(withGameId).observe(.value, with: { (snap) in
-            if snap.value == nil {
+            if snap.value != nil {
                 let gameDictionary = snap.value as! [String : Any]
                 let game = Game(gameid: withGameId, user1id: gameDictionary[FirebaseGameOptions.user1Id.rawValue] as! String, user2id: gameDictionary[FirebaseGameOptions.user2Id.rawValue] as! String, turnnumber: gameDictionary[FirebaseGameOptions.turnNumber.rawValue] as! Int, user1score: gameDictionary[FirebaseGameOptions.user1Score.rawValue] as! Int, user2score: gameDictionary[FirebaseGameOptions.user2Score.rawValue] as! Int)
                 completion(true, game)
