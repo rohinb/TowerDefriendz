@@ -22,10 +22,6 @@ class GameHandler {
         gameId = "\(currentUserId)+\(remoteUserId)"
     }
 
-    init() {
-
-    }
-
     func createGame(completion: @escaping (_ success: Bool) -> ()) {
         gameExists() { (exists) in
             if exists {
@@ -116,9 +112,6 @@ class GameHandler {
     func getLatestAttack(inGameId: String, completion: @escaping ( _ success: Bool, _ attack: Attack?) -> ()) {
         if inGameId != "" {
             let users = getUsersFromGameId(gameId: inGameId)
-            currentUserId = users.1
-            remoteUserId = users.0
-            self.gameId = inGameId
             ref.child("Attack").child(users.0).child(users.1).observe(.value, with: { (snap) in
                 if let attackDictionary = snap.value as? [String : Any] {
                     let attack = Attack(gameid: inGameId, atackerid: attackDictionary[FirebaseGameOptions.attackerId.rawValue] as! String, defenderid: attackDictionary[FirebaseGameOptions.defenderId.rawValue] as! String, turnnumber: attackDictionary[FirebaseGameOptions.turnNumber.rawValue] as! Int, soldierarray: attackDictionary[FirebaseGameOptions.soldierArray.rawValue] as! [Int])
