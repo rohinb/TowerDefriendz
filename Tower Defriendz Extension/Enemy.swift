@@ -105,9 +105,9 @@ enum EnemyType {
 	fileprivate var path : [Direction] {
 		switch self {
 		case .soldier: return [.D, .D, .D, .D, .D, .D, .R, .R, .D, .D, .D, .D, .D, .L,
-		                       .L, .L, .L, .D, .D, .D, .D, .R, .R, .R, .D, .D]
+		                       .L, .L, .L, .D, .D, .D, .D, .R, .R, .R, .D, .D, .D, .D]
 		case .bird: return [.D, .D, .D, .D, .D, .D, .D, .D, .D, .D,
-		                    .D, .D, .D, .D, .D, .D, .D, .D, .D]
+		                    .D, .D, .D, .D, .D, .D, .D, .D, .D, .D]
 		}
 	}
 }
@@ -166,7 +166,7 @@ class Enemy: UIImageView {
 	//TODO: Test when Sahand fixes imessage flow
 	fileprivate func flashRed() {
 		self.tintColor = UIColor.red
-		DispatchQueue.main.asyncAfter(deadline: .now() + 0.15, execute: {
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.07, execute: {
 			self.tintColor = UIColor.clear
 			self.image = self.type.image.withRenderingMode(.alwaysOriginal)
 		})
@@ -194,6 +194,9 @@ class Enemy: UIImageView {
 		}
 		pIndex += 1
 		
+		if type == .soldier {
+			print(self.center.y, self.superview!.frame.height)
+		}
 		if self.center.y >= self.superview!.frame.height {
 			self.delegate?.enemyReachedEnd()
 			self.die()

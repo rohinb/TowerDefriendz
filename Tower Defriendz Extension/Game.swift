@@ -106,7 +106,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
 		let point = gestureRecognizer.location(in: self)
 		let posX = Int(point.x) / Constants.scale
 		let posY = Int(point.y) / Constants.scale
-		print("(\(posX), \(posY)), ")
+		print("(\(posX), \(posY)) ")
 		let tuple = (posX, posY)
 		var occupied = false
 		for tower in towerArray! {
@@ -136,7 +136,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
     
     func start(enemyInts: [Int], turnNumber: Int) {
 		var count = 0
-        defenderBudget = turnNumber * 1000
+        defenderBudget = (turnNumber+1) * 1000
         budgetLabel?.text = "\(defenderBudget)"
         for (index, int) in enemyInts.enumerated() {
 			Timer.scheduledTimer(withTimeInterval: ((index > enemyInts.count / 2 && turnNumber > 2) ? 0.5 : 1.5) * Double(count), repeats: false) {_ in
