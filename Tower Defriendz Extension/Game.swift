@@ -118,6 +118,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
 			//add tower there
             let tower = Tower(posX: posX, posY: posY, type: selectedTowerType)
             if defenderBudget - tower.type.price >= 0 {
+				
                 tower.delegate = self
                 towerArray?.append(tower)
                 addSubview(tower)

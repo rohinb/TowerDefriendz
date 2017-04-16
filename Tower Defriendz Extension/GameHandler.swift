@@ -126,7 +126,11 @@ class GameHandler {
             } else {
                 self.ref.child("Attack").child(users.1).child(users.0).observe(.value, with: { (snap) in
                     if let attackDictionary = snap.value as? [String : Any] {
-                        let attack = Attack(gameid: inGameId, atackerid: attackDictionary[FirebaseGameOptions.attackerId.rawValue] as! String, defenderid: attackDictionary[FirebaseGameOptions.defenderId.rawValue] as! String, turnnumber: attackDictionary[FirebaseGameOptions.turnNumber.rawValue] as! Int, soldierarray: attackDictionary[FirebaseGameOptions.soldierArray.rawValue] as! [Int])
+                        let attack = Attack(gameid: inGameId,
+                                            atackerid: attackDictionary[FirebaseGameOptions.attackerId.rawValue] as! String,
+                                            defenderid: attackDictionary[FirebaseGameOptions.defenderId.rawValue] as! String,
+                                            turnnumber: attackDictionary[FirebaseGameOptions.turnNumber.rawValue] as! Int,
+                                            soldierarray: attackDictionary[FirebaseGameOptions.soldierArray.rawValue] as! [Int])
                         completion(true, attack)
                     } else {
                         completion(false, nil)
