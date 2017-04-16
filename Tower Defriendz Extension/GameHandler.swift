@@ -28,10 +28,10 @@ class GameHandler {
                 completion(false)
             } else {
                 let gameDictionary : [String : Any] = [FirebaseGameOptions.turnNumber.rawValue : 0,
-                                                       FirebaseGameOptions.user1Id.rawValue : self.currentUserId,
-                                                       FirebaseGameOptions.user2Id.rawValue : self.remoteUserId,
-                                                       FirebaseGameOptions.user1Score.rawValue : 0,
-                                                       FirebaseGameOptions.user2Score.rawValue : 0]
+                                      FirebaseGameOptions.user1Id.rawValue : self.currentUserId,
+                                      FirebaseGameOptions.user2Id.rawValue : self.remoteUserId,
+                                      FirebaseGameOptions.user1Score.rawValue : 0,
+                                      FirebaseGameOptions.user2Score.rawValue : 0]
                 self.ref.child("Game").child(self.gameId).setValue(gameDictionary, withCompletionBlock: { (error, gameRef) in
                     if error != nil {
                         print("error creating game")
@@ -110,34 +110,31 @@ class GameHandler {
     }
 
     func getLatestAttack(inGameId: String, completion: @escaping ( _ success: Bool, _ attack: Attack?) -> ()) {
-        if inGameId != "" {
-            let users = getUsersFromGameId(gameId: inGameId)
-            ref.child("Attack").child(users.0).child(users.1).observe(.value, with: { (snap) in
-                if let attackDictionary = snap.value as? [String : Any] {
-                    let attack = Attack(gameid: inGameId, atackerid: attackDictionary[FirebaseGameOptions.attackerId.rawValue] as! String, defenderid: attackDictionary[FirebaseGameOptions.defenderId.rawValue] as! String, turnnumber: attackDictionary[FirebaseGameOptions.turnNumber.rawValue] as! Int, soldierarray: attackDictionary[FirebaseGameOptions.soldierArray.rawValue] as! [Int])
-                    completion(true, attack)
-                } else {
-                    self.ref.child("Attack").child(users.1).child(users.0).observe(.value, with: { (snap2) in
-                        if let attackDictionary2 = snap2.value as? [String : Any] {
-                            let attack2 = Attack(gameid: inGameId,
-                                                 atackerid: attackDictionary2[FirebaseGameOptions.attackerId.rawValue] as! String,
-                                                 defenderid: attackDictionary2[FirebaseGameOptions.defenderId.rawValue] as! String,
-                                                 turnnumber: attackDictionary2[FirebaseGameOptions.turnNumber.rawValue] as! Int,
-                                                 soldierarray: attackDictionary2[FirebaseGameOptions.soldierArray.rawValue] as! [Int])
-                            completion(true, attack2)
-                        } else {
-                            completion(false, nil)
-                        }
-                    })
-                }
-            })
-        } else {
-            completion(false, nil)
-        }
+
+        ref.child("Attack").child(currentUserId).child(remoteUserId).observe(.value, with: { (snap) in
+            if let attackDictionary = snap.value as? [String : Any] {
+                let attack = Attack(gameid: inGameId, atackerid: attackDictionary[FirebaseGameOptions.attackerId.rawValue] as! String, defenderid: attackDictionary[FirebaseGameOptions.defenderId.rawValue] as! String, turnnumber: attackDictionary[FirebaseGameOptions.turnNumber.rawValue] as! Int, soldierarray: attackDictionary[FirebaseGameOptions.soldierArray.rawValue] as! [Int])
+                completion(true, attack)
+            } else {
+                self.ref.child("Attack").child(self.remoteUserId).child(self.currentUserId).observe(.value, with: { (snap) in
+                    if let attackDictionary = snap.value as? [String : Any] {
+                        let attack = Attack(gameid: inGameId,
+                                            atackerid: attackDictionary[FirebaseGameOptions.attackerId.rawValue] as! String,
+                                            defenderid: attackDictionary[FirebaseGameOptions.defenderId.rawValue] as! String,
+                                            turnnumber: attackDictionary[FirebaseGameOptions.turnNumber.rawValue] as! Int,
+                                            soldierarray: attackDictionary[FirebaseGameOptions.soldierArray.rawValue] as! [Int])
+                        completion(true, attack)
+                    } else {
+                        completion(false, nil)
+                    }
+                })
+            }
+        })
     }
 
     func getUsersFromGameId(gameId: String) -> (String, String){
-        let components = gameId.components(separatedBy: "+")
+        var components = gameId.components(separatedBy: "+")
+        components[0] = (components.first?.substring(from: (components.first?.characters.index(after: (components.first?.characters.index(of: "=")!)!))!))!
         return (components.first!, components.last!)
     }
 }
