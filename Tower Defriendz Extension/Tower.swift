@@ -16,7 +16,7 @@ enum TowerType {
 	case ranged
 	case deadly
 	// if you add a tower, you must add a case to ALL
-	// the following switch statements
+	// the following switch statements and this array:
 	static let types = [normal, ranged, deadly]
 	
 	init(name: String) {

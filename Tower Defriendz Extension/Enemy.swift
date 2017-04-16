@@ -55,7 +55,10 @@ fileprivate enum Direction {
 enum EnemyType {
 	case soldier
 	case bird
-	
+	// if you add an enemy, you must add a case to ALL
+	// the following switch statements and this array:
+
+	static let type = [soldier, bird]
 	init(name: String) {
 		switch name.lowercased() {
 		case "soldier" : self = .soldier

@@ -8,6 +8,7 @@
 
 import UIKit
 import Messages
+import Firebase
 
 
 class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
@@ -37,8 +38,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
+		FIRApp.configure()
     }
     
     override func willResignActive(with conversation: MSConversation) {
