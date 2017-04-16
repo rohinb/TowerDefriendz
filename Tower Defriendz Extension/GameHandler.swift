@@ -109,6 +109,12 @@ class GameHandler {
         }
     }
 
+    // Attack:
+    //   userKey1:
+    //      user2:
+    //         attack info
+
+
     func getLatestAttack(inGameId: String, completion: @escaping ( _ success: Bool, _ attack: Attack?) -> ()) {
 
         let users = getUsersFromGameId(gameId: inGameId)

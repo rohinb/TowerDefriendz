@@ -8,7 +8,7 @@
 
 import UIKit
 import Messages
-
+import Firebase
 
 class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
 
@@ -38,6 +38,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        FIRApp.configure()
 
     }
     
@@ -69,24 +70,30 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
             break
 
         case .defend:
+            mainButton.stage = .defend
+            statusLabel.stage = .defend
             break
 
         case .game:
+            mainButton.stage = .game
+            statusLabel.stage = .game
+            gameViewInitiation()
             break
 
         case .soldierSelection:
+            mainButton.stage = .soldierSelection
+            statusLabel.stage = .soldierSelection
             break
 
         case .attack:
-
+            mainButton.stage = .attack
+            statusLabel.stage = .attack
             gameHandler?.getGame(withGameId: gameHandler!.gameId, completion: { (success, game) in
                 if success {
                     self.pendingAttack = Attack(gameid: self.gameHandler!.gameId, atackerid: self.gameHandler!.currentUserId, defenderid: self.gameHandler!.remoteUserId, turnnumber: game!.turnNumber!, soldierarray: self.soldierArray!)
                     self.createAttackMessage(withAttack: self.pendingAttack!, defenseDidWin: self.defenseSucceeded)
                 }
             })
-
-
             break
 
         }
