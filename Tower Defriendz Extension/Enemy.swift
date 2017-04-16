@@ -160,6 +160,7 @@ class Enemy: UIImageView {
 		}
 	}
 	
+	//TODO: Test when Sahand fixes imessage flow
 	fileprivate func flashRed() {
 		self.tintColor = UIColor.red
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.15, execute: {

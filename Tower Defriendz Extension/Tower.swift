@@ -115,7 +115,7 @@ class Tower:UIImageView {
         shootTimer.invalidate()
     }
     
-    func shoot(speed: Double , color: UIColor) {
+    fileprivate func shoot(speed: Double , color: UIColor) {
         // we want to traverse (for loop) array of enemies and find first one that is within radius
         // then transform/rotate to face it and instantly shoot (with that direction's vel)
         for enemy in enemyArray {
