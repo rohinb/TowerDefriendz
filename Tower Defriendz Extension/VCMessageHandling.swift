@@ -16,14 +16,19 @@ extension TowerDefriendzViewController {
         let currentUserId = conversation.localParticipantIdentifier.uuidString
         let remoteUserId = conversation.remoteParticipantIdentifiers.first!.uuidString
         gameHandler = GameHandler(withCurrentUserId: currentUserId, withRemoteUserId: remoteUserId)
-        retrieveAttack(fromConversation: conversation)
+        gameStage = .initial
+        if !retrieveAttack(fromConversation: conversation) {
+            stages = [.initial, .initialSoldierSelection, .initialAttack]
+        } else {
+            stages = [.defend, .game, .soldierSelection, .attack]
+        }
     }
 
     override func didSelect(_ message: MSMessage, conversation: MSConversation) {
         retrieveAttack(fromConversation: conversation)
     }
 
-    func retrieveAttack(fromConversation: MSConversation) {
+    func retrieveAttack(fromConversation: MSConversation) -> Bool{
         if let messageStr = fromConversation.selectedMessage?.url!.description {
             let queries = getQueries(str: messageStr)
             let gameId = queries[0]
@@ -36,7 +41,10 @@ extension TowerDefriendzViewController {
                     self.mainButton.visible = false
                 }
             })
+        } else {
+            return false
         }
+        return true
     }
 
     func createAttackMessage(withAttack: Attack, defenseDidWin: Bool) {

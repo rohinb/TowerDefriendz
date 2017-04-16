@@ -42,6 +42,18 @@ class MainButton : UIButton {
                 location = screenCenter
                 visible = false
 
+            case .initialSoldierSelection:
+                title = "ATTACK!"
+                location = screenCenter
+                visible = true
+                break
+
+            case .initialAttack:
+                title = ""
+                location = screenCenter
+                visible = false
+                break
+
             case .defend:
                 title = "DEFEND!"
                 location = screenCenter

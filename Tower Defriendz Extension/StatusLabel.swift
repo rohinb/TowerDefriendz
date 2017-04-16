@@ -49,7 +49,21 @@ class StatusLabel: UILabel {
             switch stage {
 
             case .initial:
-                title = "Expand app to defend!"
+                title = "Expand app to attack!"
+                location = screenCenter
+                visible = true
+                fontSize = .small
+                break
+
+            case .initialSoldierSelection:
+                title = "Choose your army!"
+                location = screenCenter
+                visible = true
+                fontSize = .small
+                break
+
+            case .initialAttack:
+                title = "Send your attack!"
                 location = screenCenter
                 visible = true
                 fontSize = .small
@@ -59,24 +73,28 @@ class StatusLabel: UILabel {
                 title = "They have attacked our base!"
                 location = screenCenter
                 visible = true
+                fontSize = .small
                 break
 
             case .game:
                 title = ""
                 location = screenCenter
                 visible = false
+                fontSize = .small
                 break
 
             case .soldierSelection:
                 title = "Choose your army!"
                 location = screenCenter
                 visible = true
+                fontSize = .small
                 break
 
             case .attack:
                 title = "Attack sent!"
                 location = screenCenter
                 visible = true
+                fontSize = .small
                 break
                 
             }

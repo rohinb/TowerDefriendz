@@ -16,8 +16,60 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
     var gameHandler : GameHandler?
     var incomingAttack : Attack?
     var pendingAttack : Attack?
-    var gameStage = GameStage.initial
-    var stages : [GameStage] = [.initial, .defend, .game, .soldierSelection, .attack]
+    var gameStage = GameStage.initial {
+        didSet {
+            switch gameStage {
+
+            case .initial:
+                mainButton.stage = .initial
+                statusLabel.stage = .initial
+                break
+
+            case .initialSoldierSelection:
+                mainButton.stage = .initialSoldierSelection
+                statusLabel.stage = .initialSoldierSelection
+                pendingAttack = Attack(gameid: gameHandler!.gameId, atackerid: gameHandler!.currentUserId, defenderid: gameHandler!.remoteUserId, turnnumber: 0, soldierarray: [Int]())
+                showSoldierSelection()
+                break
+
+            case .initialAttack:
+                mainButton.stage = .initialAttack
+                statusLabel.stage = .initialAttack
+                createInitialAttackMessage(withAttack: pendingAttack!)
+                hideSoldierSelection()
+                break
+
+            case .defend:
+                mainButton.stage = .defend
+                statusLabel.stage = .defend
+                break
+
+            case .game:
+                mainButton.stage = .game
+                statusLabel.stage = .game
+                gameViewInitiation()
+                break
+
+            case .soldierSelection:
+                mainButton.stage = .soldierSelection
+                statusLabel.stage = .soldierSelection
+                break
+
+            case .attack:
+                mainButton.stage = .attack
+                statusLabel.stage = .attack
+                gameHandler?.getGame(withGameId: gameHandler!.gameId, completion: { (success, game) in
+                    if success {
+                        self.pendingAttack = Attack(gameid: self.gameHandler!.gameId, atackerid: self.gameHandler!.currentUserId, defenderid: self.gameHandler!.remoteUserId, turnnumber: game!.turnNumber!, soldierarray: self.soldierArray!)
+                        self.createAttackMessage(withAttack: self.pendingAttack!, defenseDidWin: self.defenseSucceeded)
+                    }
+                })
+                break
+            }
+
+        }
+    }
+    var stages : [GameStage] = [.initial, .initialAttack, .defend, .game, .soldierSelection, .attack]
     var gameView : GameView?
     var defenseSucceeded = false
 
@@ -41,19 +93,18 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
 
         FIRApp.configure()
     }
-    
+
     override func willResignActive(with conversation: MSConversation) {
 
     }
 
     override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
         if presentationStyle == .expanded {
-            mainButton.isEnabled = true
-            mainButton.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
+            if [GameStage.initial, GameStage.defend].contains(gameStage) {
+                progressGameStage()
+            }
         } else {
-            statusLabel.animateAlpha(t: 0.3, a: 0)
-            mainButton.isEnabled = false
-            mainButton.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 + 10)
+
         }
     }
 
@@ -62,41 +113,6 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
         stages.removeFirst()
         gameStage = stages.first!
 
-        switch gameStage {
-
-        case .initial:
-            pendingAttack = Attack(gameid: gameHandler!.gameId, atackerid: gameHandler!.currentUserId, defenderid: gameHandler!.remoteUserId, turnnumber: 0, soldierarray: soldierArray!)
-            createInitialAttackMessage(withAttack: pendingAttack!)
-            break
-
-        case .defend:
-            mainButton.stage = .defend
-            statusLabel.stage = .defend
-            break
-
-        case .game:
-            mainButton.stage = .game
-            statusLabel.stage = .game
-            gameViewInitiation()
-            break
-
-        case .soldierSelection:
-            mainButton.stage = .soldierSelection
-            statusLabel.stage = .soldierSelection
-            break
-
-        case .attack:
-            mainButton.stage = .attack
-            statusLabel.stage = .attack
-            gameHandler?.getGame(withGameId: gameHandler!.gameId, completion: { (success, game) in
-                if success {
-                    self.pendingAttack = Attack(gameid: self.gameHandler!.gameId, atackerid: self.gameHandler!.currentUserId, defenderid: self.gameHandler!.remoteUserId, turnnumber: game!.turnNumber!, soldierarray: self.soldierArray!)
-                    self.createAttackMessage(withAttack: self.pendingAttack!, defenseDidWin: self.defenseSucceeded)
-                }
-            })
-            break
-
-        }
     }
 
     @IBAction func mainButtonClicked(_ sender: MainButton) {
@@ -110,42 +126,42 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
 
 
     /* @IBAction func mainButtonClicked(_ sender: UIButton) {
-        
-        if sender.tag == 0 {
-            
-            // Defend clicked
-            statusLabel.animateAlpha(t: 0.3, a: 0)
-            mainButton.animateAlpha(t: 0.3, a: 0)
-            sender.setTitle("BUILD ARMY!", for: .normal)
-            gameViewInitiation()
-            
-        } else if sender.tag == 1 {
-            
-            // Build army clicked
-            statusLabel.animateView(direction: .up, t: 0.3, pixels: 70)
-            statusLabel.animateAlpha(t: 0.3, a: 0)
-            statusLabel.text = "CHOOSE YOUR ARMY!"
-            soldierAdditionView.animateAlpha(t: 0.3, a: 1)
-            soldierAdditionView.animateView(direction: .up, t: 0.3, pixels: 70)
-            sender.tag = 2
-            sender.setTitle("ATTACK!", for: .normal)
-            
-        } else if sender.tag == 2 {
-            
-            // Attack clicked
-            soldierAdditionView.animateAlpha(t: 0.3, a: 0)
-            requestPresentationStyle(.compact)
-            statusLabel.text = "SEND THE MESSAGE!"
-            statusLabel.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.width/2)
-            createArmy()
-            createMessage(didWin: didWinGame, attackWave: armyString)
-            
-        }
-    }*/
+
+     if sender.tag == 0 {
+
+     // Defend clicked
+     statusLabel.animateAlpha(t: 0.3, a: 0)
+     mainButton.animateAlpha(t: 0.3, a: 0)
+     sender.setTitle("BUILD ARMY!", for: .normal)
+     gameViewInitiation()
+
+     } else if sender.tag == 1 {
+
+     // Build army clicked
+     statusLabel.animateView(direction: .up, t: 0.3, pixels: 70)
+     statusLabel.animateAlpha(t: 0.3, a: 0)
+     statusLabel.text = "CHOOSE YOUR ARMY!"
+     soldierAdditionView.animateAlpha(t: 0.3, a: 1)
+     soldierAdditionView.animateView(direction: .up, t: 0.3, pixels: 70)
+     sender.tag = 2
+     sender.setTitle("ATTACK!", for: .normal)
+     
+     } else if sender.tag == 2 {
+     
+     // Attack clicked
+     soldierAdditionView.animateAlpha(t: 0.3, a: 0)
+     requestPresentationStyle(.compact)
+     statusLabel.text = "SEND THE MESSAGE!"
+     statusLabel.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.width/2)
+     createArmy()
+     createMessage(didWin: didWinGame, attackWave: armyString)
+     
+     }
+     }*/
     
-
-
-
+    
+    
+    
 }
 
 

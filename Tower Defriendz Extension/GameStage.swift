@@ -12,4 +12,6 @@ enum GameStage {
     case game
     case soldierSelection
     case attack
+    case initialAttack
+    case initialSoldierSelection
 }

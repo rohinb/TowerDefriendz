@@ -46,10 +46,10 @@ class GameHandler {
 
     func gameExists(completion: @escaping (_ success: Bool) -> ()) {
         ref.child("Game").child(self.remoteUserId).observe(.value, with: { (snap) in
-            if snap.value == nil {
-                completion(false)
-            } else {
+            if snap.hasChildren() {
                 completion(true)
+            } else {
+                completion(false)
             }
         })
     }
