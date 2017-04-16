@@ -20,7 +20,7 @@ extension TowerDefriendzViewController {
         if !retrieveAttack(fromConversation: conversation) {
             stages = [.initial, .initialSoldierSelection, .initialAttack]
         } else {
-            stages = [.defend, .game, .soldierSelection, .attack]
+            stages = [.openingDefend, .defend, .game, .soldierSelection, .attack]
         }
     }
 
@@ -28,7 +28,7 @@ extension TowerDefriendzViewController {
         if !retrieveAttack(fromConversation: conversation) {
             stages = [.initial, .initialSoldierSelection, .initialAttack]
         } else {
-            stages = [.defend, .game, .soldierSelection, .attack]
+            stages = [.openingDefend, .defend, .game, .soldierSelection, .attack]
             gameStage = .defend
         }
     }

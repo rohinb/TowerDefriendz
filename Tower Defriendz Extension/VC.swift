@@ -39,6 +39,11 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
                 hideSoldierSelection()
                 break
 
+            case .openingDefend:
+                mainButton.stage = .openingDefend
+                statusLabel.stage = .openingDefend
+                break
+
             case .defend:
                 mainButton.stage = .defend
                 statusLabel.stage = .defend
@@ -53,6 +58,8 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
             case .soldierSelection:
                 mainButton.stage = .soldierSelection
                 statusLabel.stage = .soldierSelection
+                pendingAttack = Attack(gameid: gameHandler!.gameId, atackerid: gameHandler!.currentUserId, defenderid: gameHandler!.remoteUserId, turnnumber: 0, soldierarray: [Int]())
+                showSoldierSelection()
                 break
 
             case .attack:
@@ -60,16 +67,17 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
                 statusLabel.stage = .attack
                 gameHandler?.getGame(withGameId: gameHandler!.gameId, completion: { (success, game) in
                     if success {
-                        self.pendingAttack = Attack(gameid: self.gameHandler!.gameId, atackerid: self.gameHandler!.currentUserId, defenderid: self.gameHandler!.remoteUserId, turnnumber: game!.turnNumber!, soldierarray: self.soldierArray!)
+                        self.pendingAttack = Attack(gameid: self.gameHandler!.gameId, atackerid: self.gameHandler!.currentUserId, defenderid: self.gameHandler!.remoteUserId, turnnumber: game!.turnNumber!, soldierarray: self.pendingAttack!.soldierArray!)
                         self.createAttackMessage(withAttack: self.pendingAttack!, defenseDidWin: self.defenseSucceeded)
                     }
                 })
+                hideSoldierSelection()
                 break
             }
 
         }
     }
-    var stages : [GameStage] = [.initial, .initialAttack, .defend, .game, .soldierSelection, .attack]
+    var stages : [GameStage] = [.initial, .initialAttack, .openingDefend, .defend, .game, .soldierSelection, .attack]
     var gameView : GameView?
     var defenseSucceeded = false
 
