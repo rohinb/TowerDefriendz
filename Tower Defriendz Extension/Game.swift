@@ -31,7 +31,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
     var defenderBudget = 0
 	var hearts = [UIImageView]()
 	let towerTypes = ["normal", "ranged", "deadly"]
-	var selectedTowerType = TowerType.normal
+	var selectedTowerType : TowerType?
 	var currentConfirmPosition : (Int, Int)?
 	var currentConfirmTower : Tower?
 	var currentConfirmCircle : UIView?
@@ -50,6 +50,22 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
             }
         }
     }
+	
+	// TODO: create another array like this as you are playing and pass it to Sahand.
+	var isReplay = false //doesn't do anything yet
+	var replayTimer = Timer()
+	var replayTicks = 0
+	var replayPlacements : [Int: [String: Any]] = [   // ticks are in tenths of a second
+													34  : ["name" : "normal" , "x" : 8, "y" : 7],
+													24  : ["name" : "normal" , "x" : 7, "y" : 9],
+													14  : ["name" : "normal" , "x" : 6, "y" : 10],
+													54  : ["name" : "normal" , "x" : 5, "y" : 8],
+													86  : ["name" : "normal" , "x" : 4, "y" : 7],
+													73  : ["name" : "normal" , "x" : 3, "y" : 6],
+													1   : ["name" : "normal" , "x" : 2, "y" : 5],
+													104 : ["name" : "normal" , "x" : 1, "y" : 4]
+																									]
+	
 	
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -91,6 +107,17 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
 		coin.image = #imageLiteral(resourceName: "coin")
 		coin.center.y = budgetLabel!.center.y
 		self.addSubview(coin)
+		
+		replayTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (timer) in
+			self.replayTicks += 1
+			if let item = self.replayPlacements[self.replayTicks] {
+				let tower = Tower(posX: item["x"] as! Int, posY: item["y"] as! Int, type: TowerType(name: item["name"] as! String))
+				self.addSubview(tower)
+				tower.delegate = self
+				towerArray?.append(tower)
+				tower.startShooting()
+			}
+		})
     }
 	
 	@IBAction func setSelectedTowerType(sender: UIButton) {
@@ -106,6 +133,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
 	}
 	
 	func tapReceived(gestureRecognizer: UITapGestureRecognizer) {
+		guard selectedTowerType != nil else { return }
 		let point = gestureRecognizer.location(in: self)
 		let posX = Int(point.x) / Constants.scale
 		let posY = Int(point.y) / Constants.scale
@@ -132,11 +160,12 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
 	}
 	
 	func showTowerRadius(posX: Int, posY : Int) {
-		let tower = Tower(posX: posX, posY: posY, type: selectedTowerType)
+		guard selectedTowerType != nil else { return }
+		let tower = Tower(posX: posX, posY: posY, type: selectedTowerType!)
 		addSubview(tower)
 		tower.alpha = 0.3
 		
-		let circleView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: selectedTowerType.radius, height: selectedTowerType.radius))
+		let circleView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: selectedTowerType!.radius, height: selectedTowerType!.radius))
 		circleView.center = tower.center
 		let color = defenderBudget - tower.type.price >= 0 ? UIColor(hex: 0x00A6ED): UIColor(hex: 0xF6511D)
 		circleView.backgroundColor = color.withAlphaComponent(0.25)
