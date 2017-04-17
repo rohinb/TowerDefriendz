@@ -91,6 +91,13 @@ enum TowerType {
 		case .deadly: return 0.8
 		}
 	}
+	
+	var isPiercing : Bool {
+		switch self {
+		case .ranged: return true
+		default: return false
+		}
+	}
 }
 
 class Tower:UIImageView {
@@ -121,6 +128,8 @@ class Tower:UIImageView {
     }
 	
 	func startShooting() {
+		//FIXME: Does not create a true rate of fire because only checks for enemies every firing inteval.
+			//   It should check for enemies constantly and begin the firing cycle when it finds one.
 		self.shootTimer = Timer.scheduledTimer(withTimeInterval: self.type.firingInterval, repeats: true, block: { (_) in
 			self.shoot(speed: self.type.bulletSpeed, color: self.type.bulletColor)
 		})
@@ -137,8 +146,9 @@ class Tower:UIImageView {
                 UIView.animate(withDuration: self.TOWER_ROTATION_INTERVAL, delay: 0.0, options: .curveLinear, animations: {
                     self.transform = CGAffineTransform(rotationAngle: direction)
                 }, completion: { (success) in
-                    if success {
+                    if success { 
                         let bullet = Bullet(locationX: self.posX, locationY: self.posY, vel: speed, direction: Double(direction), damage : self.type.damage, color : color)
+						bullet.isPiercing = self.type.isPiercing
                         self.delegate?.addedBullet(bullet: bullet)
                     }
                 })

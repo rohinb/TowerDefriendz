@@ -107,17 +107,18 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
 		coin.image = #imageLiteral(resourceName: "coin")
 		coin.center.y = budgetLabel!.center.y
 		self.addSubview(coin)
-		
-		replayTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (timer) in
-			self.replayTicks += 1
-			if let item = self.replayPlacements[self.replayTicks] {
-				let tower = Tower(posX: item["x"] as! Int, posY: item["y"] as! Int, type: TowerType(name: item["name"] as! String))
-				self.addSubview(tower)
-				tower.delegate = self
-				towerArray?.append(tower)
-				tower.startShooting()
-			}
-		})
+		if isReplay {
+			replayTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (timer) in
+				self.replayTicks += 1
+				if let item = self.replayPlacements[self.replayTicks] {
+					let tower = Tower(posX: item["x"] as! Int, posY: item["y"] as! Int, type: TowerType(name: item["name"] as! String))
+					self.addSubview(tower)
+					tower.delegate = self
+					towerArray?.append(tower)
+					tower.startShooting()
+				}
+			})
+		}
     }
 	
 	@IBAction func setSelectedTowerType(sender: UIButton) {

@@ -66,7 +66,7 @@ extension TowerDefriendzViewController {
                     yourScore = game!.user2Score!
                     opponentScore = game!.user1Score!
                 }
-                let caption = "Defense \(defenseDidWin ? "succeded!" : "failed!")"
+                let caption = "Defense \(defenseDidWin ? "succeeded!" : "failed!")"
                 let subcaption = "Tap to defend your base! You are \((yourScore > opponentScore) ? "in the lead" : "losing")!"
                 self.sendMessage(withCaption: caption, withSubcaption: subcaption, withQueries: ["gameId" : self.gameHandler!.gameId])
                 self.createAttack()
