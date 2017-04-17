@@ -7,73 +7,46 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0F5EB5351EA3048500D02355 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 873D32721E9C56A2002C8FA3 /* GoogleService-Info.plist */; };
-		0F5EB5371EA3487600D02355 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5EB5361EA3487600D02355 /* UIColorExtensions.swift */; };
-		0F5EB5381EA3487E00D02355 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5EB5361EA3487600D02355 /* UIColorExtensions.swift */; };
-		873D32731E9C56A2002C8FA3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 873D32721E9C56A2002C8FA3 /* GoogleService-Info.plist */; };
-		87A0C4041EA0016F006A2237 /* GameHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A0C4031EA0016F006A2237 /* GameHandler.swift */; };
-		87AF42AE1E9C50BB00BF5498 /* Army.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AF42991E9C50BB00BF5498 /* Army.swift */; };
-		87AF42AF1E9C50BB00BF5498 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87AF429A1E9C50BB00BF5498 /* Assets.xcassets */; };
-		87AF42B11E9C50BB00BF5498 /* Bullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AF429C1E9C50BB00BF5498 /* Bullet.swift */; };
-		87AF42B21E9C50BB00BF5498 /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AF429D1E9C50BB00BF5498 /* Enemy.swift */; };
-		87AF42B31E9C50BB00BF5498 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AF429E1E9C50BB00BF5498 /* Game.swift */; };
-		87AF42B41E9C50BB00BF5498 /* GameStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AF429F1E9C50BB00BF5498 /* GameStage.swift */; };
-		87AF42B51E9C50BB00BF5498 /* Glimpse.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AF42A11E9C50BB00BF5498 /* Glimpse.m */; };
-		87AF42B61E9C50BB00BF5498 /* GlimpseAssetWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AF42A31E9C50BB00BF5498 /* GlimpseAssetWriter.m */; };
-		87AF42B71E9C50BB00BF5498 /* MainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AF42A41E9C50BB00BF5498 /* MainButton.swift */; };
-		87AF42B81E9C50BB00BF5498 /* StatusLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AF42A71E9C50BB00BF5498 /* StatusLabel.swift */; };
-		87AF42B91E9C50BB00BF5498 /* Tower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AF42A81E9C50BB00BF5498 /* Tower.swift */; };
-		87AF42BA1E9C50BB00BF5498 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AF42A91E9C50BB00BF5498 /* UIViewExtension.swift */; };
-		87AF42BB1E9C50BB00BF5498 /* VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AF42AA1E9C50BB00BF5498 /* VC.swift */; };
-		87AF42BC1E9C50BB00BF5498 /* VCAttackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AF42AB1E9C50BB00BF5498 /* VCAttackView.swift */; };
-		87AF42BD1E9C50BB00BF5498 /* VCGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AF42AC1E9C50BB00BF5498 /* VCGameView.swift */; };
-		87AF42BE1E9C50BB00BF5498 /* VCMessageHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AF42AD1E9C50BB00BF5498 /* VCMessageHandling.swift */; };
-		87AF42C61E9C51EB00BF5498 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87AF42C51E9C51EB00BF5498 /* MainInterface.storyboard */; };
-		87FFB6791E9C4FFD0099A13A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FFB6781E9C4FFD0099A13A /* AppDelegate.swift */; };
-		87FFB67B1E9C4FFD0099A13A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FFB67A1E9C4FFD0099A13A /* ViewController.swift */; };
-		87FFB67E1E9C4FFD0099A13A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87FFB67C1E9C4FFD0099A13A /* Main.storyboard */; };
-		87FFB6801E9C4FFD0099A13A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87FFB67F1E9C4FFD0099A13A /* Assets.xcassets */; };
-		87FFB6831E9C4FFD0099A13A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87FFB6811E9C4FFD0099A13A /* LaunchScreen.storyboard */; };
-		87FFB68E1E9C4FFD0099A13A /* Tower_DefriendzTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FFB68D1E9C4FFD0099A13A /* Tower_DefriendzTests.swift */; };
-		87FFB6991E9C4FFD0099A13A /* Tower_DefriendzUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87FFB6981E9C4FFD0099A13A /* Tower_DefriendzUITests.swift */; };
-		87FFB6AD1E9C50250099A13A /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87FFB6AC1E9C50250099A13A /* Messages.framework */; };
-		87FFB6B91E9C50250099A13A /* Tower Defriendz Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 87FFB6AA1E9C50250099A13A /* Tower Defriendz Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		C684A1894592D53E2F70535D /* Pods_Tower_Defriendz_Extension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9CF06950A0FF99DE2FEEB00 /* Pods_Tower_Defriendz_Extension.framework */; };
-		D9C0DC6E5B2070213AA3C1A9 /* Pods_Tower_Defriendz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3E04D52044CC286C1AEA856 /* Pods_Tower_Defriendz.framework */; };
+		874420D41EA5886F00F9A572 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 874420D31EA5886F00F9A572 /* Assets.xcassets */; };
+		874420DB1EA5886F00F9A572 /* MessagesExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 874420DA1EA5886F00F9A572 /* MessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		874420E01EA5886F00F9A572 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 874420DF1EA5886F00F9A572 /* Messages.framework */; };
+		874420E81EA5886F00F9A572 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 874420E71EA5886F00F9A572 /* Assets.xcassets */; };
+		87552B651EA5898700EA10BC /* Army.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87552B601EA5898700EA10BC /* Army.swift */; };
+		87552B661EA5898700EA10BC /* Bullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87552B611EA5898700EA10BC /* Bullet.swift */; };
+		87552B671EA5898700EA10BC /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87552B621EA5898700EA10BC /* Enemy.swift */; };
+		87552B681EA5898700EA10BC /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87552B631EA5898700EA10BC /* GameView.swift */; };
+		87552B691EA5898700EA10BC /* Tower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87552B641EA5898700EA10BC /* Tower.swift */; };
+		87552B791EA58A3500EA10BC /* GameHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87552B6E1EA58A3500EA10BC /* GameHandler.swift */; };
+		87552B7A1EA58A3500EA10BC /* GameStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87552B6F1EA58A3500EA10BC /* GameStage.swift */; };
+		87552B7B1EA58A3500EA10BC /* MainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87552B701EA58A3500EA10BC /* MainButton.swift */; };
+		87552B7C1EA58A3500EA10BC /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87552B711EA58A3500EA10BC /* MainInterface.storyboard */; };
+		87552B7D1EA58A3500EA10BC /* StatusLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87552B721EA58A3500EA10BC /* StatusLabel.swift */; };
+		87552B7E1EA58A3500EA10BC /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87552B731EA58A3500EA10BC /* UIColorExtensions.swift */; };
+		87552B7F1EA58A3500EA10BC /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87552B741EA58A3500EA10BC /* UIViewExtension.swift */; };
+		87552B801EA58A3500EA10BC /* VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87552B751EA58A3500EA10BC /* VC.swift */; };
+		87552B811EA58A3500EA10BC /* VCAttackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87552B761EA58A3500EA10BC /* VCAttackView.swift */; };
+		87552B821EA58A3500EA10BC /* VCGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87552B771EA58A3500EA10BC /* VCGameView.swift */; };
+		87552B831EA58A3500EA10BC /* VCMessageHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87552B781EA58A3500EA10BC /* VCMessageHandling.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		87FFB68A1E9C4FFD0099A13A /* PBXContainerItemProxy */ = {
+		874420DC1EA5886F00F9A572 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 87FFB66D1E9C4FFD0099A13A /* Project object */;
+			containerPortal = 874420CA1EA5886F00F9A572 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 87FFB6741E9C4FFD0099A13A;
-			remoteInfo = "Tower Defriendz";
-		};
-		87FFB6951E9C4FFD0099A13A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 87FFB66D1E9C4FFD0099A13A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 87FFB6741E9C4FFD0099A13A;
-			remoteInfo = "Tower Defriendz";
-		};
-		87FFB6B71E9C50250099A13A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 87FFB66D1E9C4FFD0099A13A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 87FFB6A91E9C50250099A13A;
-			remoteInfo = "Tower Defriendz Extension";
+			remoteGlobalIDString = 874420D91EA5886F00F9A572;
+			remoteInfo = MessagesExtension;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		87FFB6BD1E9C50250099A13A /* Embed App Extensions */ = {
+		874420EF1EA5886F00F9A572 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				87FFB6B91E9C50250099A13A /* Tower Defriendz Extension.appex in Embed App Extensions */,
+				874420DB1EA5886F00F9A572 /* MessagesExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -81,359 +54,196 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0F5EB5361EA3487600D02355 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
-		1AA151642BAA4D3A3A1AA27B /* Pods-Tower Defriendz Extension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tower Defriendz Extension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tower Defriendz Extension/Pods-Tower Defriendz Extension.debug.xcconfig"; sourceTree = "<group>"; };
-		1CB92B8BF4FDE8D3BC9C5C48 /* Pods-Tower Defriendz Extension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tower Defriendz Extension.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tower Defriendz Extension/Pods-Tower Defriendz Extension.release.xcconfig"; sourceTree = "<group>"; };
-		87331CE51E9C530F001EE2A3 /* Tower Defriendz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Tower Defriendz.entitlements"; sourceTree = "<group>"; };
-		87331CE61E9C5321001EE2A3 /* Tower Defriendz Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Tower Defriendz Extension.entitlements"; sourceTree = "<group>"; };
-		873D32721E9C56A2002C8FA3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		87A0C4031EA0016F006A2237 /* GameHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameHandler.swift; sourceTree = "<group>"; };
-		87AF42981E9C50BA00BF5498 /* Tower Defriendz Extension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tower Defriendz Extension-Bridging-Header.h"; sourceTree = "<group>"; };
-		87AF42991E9C50BB00BF5498 /* Army.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Army.swift; sourceTree = "<group>"; };
-		87AF429A1E9C50BB00BF5498 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		87AF429C1E9C50BB00BF5498 /* Bullet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bullet.swift; sourceTree = "<group>"; };
-		87AF429D1E9C50BB00BF5498 /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
-		87AF429E1E9C50BB00BF5498 /* Game.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
-		87AF429F1E9C50BB00BF5498 /* GameStage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameStage.swift; sourceTree = "<group>"; };
-		87AF42A01E9C50BB00BF5498 /* Glimpse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Glimpse.h; sourceTree = "<group>"; };
-		87AF42A11E9C50BB00BF5498 /* Glimpse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Glimpse.m; sourceTree = "<group>"; };
-		87AF42A21E9C50BB00BF5498 /* GlimpseAssetWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlimpseAssetWriter.h; sourceTree = "<group>"; };
-		87AF42A31E9C50BB00BF5498 /* GlimpseAssetWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlimpseAssetWriter.m; sourceTree = "<group>"; };
-		87AF42A41E9C50BB00BF5498 /* MainButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainButton.swift; sourceTree = "<group>"; };
-		87AF42A61E9C50BB00BF5498 /* MessagesExtension.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = MessagesExtension.entitlements; sourceTree = "<group>"; };
-		87AF42A71E9C50BB00BF5498 /* StatusLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusLabel.swift; sourceTree = "<group>"; };
-		87AF42A81E9C50BB00BF5498 /* Tower.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tower.swift; sourceTree = "<group>"; };
-		87AF42A91E9C50BB00BF5498 /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
-		87AF42AA1E9C50BB00BF5498 /* VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VC.swift; sourceTree = "<group>"; };
-		87AF42AB1E9C50BB00BF5498 /* VCAttackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCAttackView.swift; sourceTree = "<group>"; };
-		87AF42AC1E9C50BB00BF5498 /* VCGameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCGameView.swift; sourceTree = "<group>"; };
-		87AF42AD1E9C50BB00BF5498 /* VCMessageHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCMessageHandling.swift; sourceTree = "<group>"; };
-		87AF42C51E9C51EB00BF5498 /* MainInterface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
-		87FFB6751E9C4FFD0099A13A /* Tower Defriendz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tower Defriendz.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		87FFB6781E9C4FFD0099A13A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		87FFB67A1E9C4FFD0099A13A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		87FFB67D1E9C4FFD0099A13A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		87FFB67F1E9C4FFD0099A13A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		87FFB6821E9C4FFD0099A13A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		87FFB6841E9C4FFD0099A13A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		87FFB6891E9C4FFD0099A13A /* Tower DefriendzTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tower DefriendzTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		87FFB68D1E9C4FFD0099A13A /* Tower_DefriendzTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tower_DefriendzTests.swift; sourceTree = "<group>"; };
-		87FFB68F1E9C4FFD0099A13A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		87FFB6941E9C4FFD0099A13A /* Tower DefriendzUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tower DefriendzUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		87FFB6981E9C4FFD0099A13A /* Tower_DefriendzUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tower_DefriendzUITests.swift; sourceTree = "<group>"; };
-		87FFB69A1E9C4FFD0099A13A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		87FFB6AA1E9C50250099A13A /* Tower Defriendz Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Tower Defriendz Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		87FFB6AC1E9C50250099A13A /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
-		87FFB6B61E9C50250099A13A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8D15AA990F7D5A1A210431EC /* Pods-Tower Defriendz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tower Defriendz.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tower Defriendz/Pods-Tower Defriendz.release.xcconfig"; sourceTree = "<group>"; };
-		A3E04D52044CC286C1AEA856 /* Pods_Tower_Defriendz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tower_Defriendz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C9CF06950A0FF99DE2FEEB00 /* Pods_Tower_Defriendz_Extension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tower_Defriendz_Extension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F649B03C1C55A2B143F6034F /* Pods-Tower Defriendz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tower Defriendz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tower Defriendz/Pods-Tower Defriendz.debug.xcconfig"; sourceTree = "<group>"; };
+		874420D01EA5886F00F9A572 /* Tower Defriendz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tower Defriendz.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		874420D31EA5886F00F9A572 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		874420D51EA5886F00F9A572 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		874420DA1EA5886F00F9A572 /* MessagesExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = MessagesExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		874420DF1EA5886F00F9A572 /* Messages.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Messages.framework; path = System/Library/Frameworks/Messages.framework; sourceTree = SDKROOT; };
+		874420E71EA5886F00F9A572 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		874420E91EA5886F00F9A572 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		87552B601EA5898700EA10BC /* Army.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Army.swift; sourceTree = "<group>"; };
+		87552B611EA5898700EA10BC /* Bullet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bullet.swift; sourceTree = "<group>"; };
+		87552B621EA5898700EA10BC /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+		87552B631EA5898700EA10BC /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		87552B641EA5898700EA10BC /* Tower.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tower.swift; sourceTree = "<group>"; };
+		87552B6E1EA58A3500EA10BC /* GameHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameHandler.swift; sourceTree = "<group>"; };
+		87552B6F1EA58A3500EA10BC /* GameStage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameStage.swift; sourceTree = "<group>"; };
+		87552B701EA58A3500EA10BC /* MainButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainButton.swift; sourceTree = "<group>"; };
+		87552B711EA58A3500EA10BC /* MainInterface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		87552B721EA58A3500EA10BC /* StatusLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusLabel.swift; sourceTree = "<group>"; };
+		87552B731EA58A3500EA10BC /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		87552B741EA58A3500EA10BC /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		87552B751EA58A3500EA10BC /* VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VC.swift; sourceTree = "<group>"; };
+		87552B761EA58A3500EA10BC /* VCAttackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCAttackView.swift; sourceTree = "<group>"; };
+		87552B771EA58A3500EA10BC /* VCGameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCGameView.swift; sourceTree = "<group>"; };
+		87552B781EA58A3500EA10BC /* VCMessageHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCMessageHandling.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		87FFB6721E9C4FFD0099A13A /* Frameworks */ = {
+		874420D71EA5886F00F9A572 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9C0DC6E5B2070213AA3C1A9 /* Pods_Tower_Defriendz.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		87FFB6861E9C4FFD0099A13A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		87FFB6911E9C4FFD0099A13A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		87FFB6A71E9C50250099A13A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				87FFB6AD1E9C50250099A13A /* Messages.framework in Frameworks */,
-				C684A1894592D53E2F70535D /* Pods_Tower_Defriendz_Extension.framework in Frameworks */,
+				874420E01EA5886F00F9A572 /* Messages.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2BF08192260C870F8ADA6427 /* Pods */ = {
+		874420C91EA5886F00F9A572 = {
 			isa = PBXGroup;
 			children = (
-				F649B03C1C55A2B143F6034F /* Pods-Tower Defriendz.debug.xcconfig */,
-				8D15AA990F7D5A1A210431EC /* Pods-Tower Defriendz.release.xcconfig */,
-				1AA151642BAA4D3A3A1AA27B /* Pods-Tower Defriendz Extension.debug.xcconfig */,
-				1CB92B8BF4FDE8D3BC9C5C48 /* Pods-Tower Defriendz Extension.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		87AF42BF1E9C50DA00BF5498 /* VC */ = {
-			isa = PBXGroup;
-			children = (
-				87AF42AA1E9C50BB00BF5498 /* VC.swift */,
-				87AF42AB1E9C50BB00BF5498 /* VCAttackView.swift */,
-				87AF42AC1E9C50BB00BF5498 /* VCGameView.swift */,
-				87AF42AD1E9C50BB00BF5498 /* VCMessageHandling.swift */,
-				87AF429F1E9C50BB00BF5498 /* GameStage.swift */,
-				87AF42A41E9C50BB00BF5498 /* MainButton.swift */,
-				87AF42A71E9C50BB00BF5498 /* StatusLabel.swift */,
-				87A0C4031EA0016F006A2237 /* GameHandler.swift */,
-			);
-			name = VC;
-			sourceTree = "<group>";
-		};
-		87AF42C01E9C50E200BF5498 /* Glimpse */ = {
-			isa = PBXGroup;
-			children = (
-				87AF42A01E9C50BB00BF5498 /* Glimpse.h */,
-				87AF42A11E9C50BB00BF5498 /* Glimpse.m */,
-				87AF42A21E9C50BB00BF5498 /* GlimpseAssetWriter.h */,
-				87AF42A31E9C50BB00BF5498 /* GlimpseAssetWriter.m */,
-			);
-			name = Glimpse;
-			sourceTree = "<group>";
-		};
-		87AF42C11E9C50F200BF5498 /* Game View */ = {
-			isa = PBXGroup;
-			children = (
-				87AF42991E9C50BB00BF5498 /* Army.swift */,
-				87AF429C1E9C50BB00BF5498 /* Bullet.swift */,
-				87AF429D1E9C50BB00BF5498 /* Enemy.swift */,
-				87AF429E1E9C50BB00BF5498 /* Game.swift */,
-				87AF42A81E9C50BB00BF5498 /* Tower.swift */,
-			);
-			name = "Game View";
-			sourceTree = "<group>";
-		};
-		87AF42C21E9C511D00BF5498 /* Extras */ = {
-			isa = PBXGroup;
-			children = (
-				87AF42C51E9C51EB00BF5498 /* MainInterface.storyboard */,
-				87AF429A1E9C50BB00BF5498 /* Assets.xcassets */,
-				0F5EB5361EA3487600D02355 /* UIColorExtensions.swift */,
-				87AF42A61E9C50BB00BF5498 /* MessagesExtension.entitlements */,
-				87AF42A91E9C50BB00BF5498 /* UIViewExtension.swift */,
-				87FFB6B61E9C50250099A13A /* Info.plist */,
-				87AF42981E9C50BA00BF5498 /* Tower Defriendz Extension-Bridging-Header.h */,
-			);
-			name = Extras;
-			sourceTree = "<group>";
-		};
-		87FFB66C1E9C4FFD0099A13A = {
-			isa = PBXGroup;
-			children = (
-				87FFB6771E9C4FFD0099A13A /* Tower Defriendz */,
-				87FFB68C1E9C4FFD0099A13A /* Tower DefriendzTests */,
-				87FFB6971E9C4FFD0099A13A /* Tower DefriendzUITests */,
-				87FFB6AE1E9C50250099A13A /* Tower Defriendz Extension */,
-				87FFB6AB1E9C50250099A13A /* Frameworks */,
-				87FFB6761E9C4FFD0099A13A /* Products */,
-				2BF08192260C870F8ADA6427 /* Pods */,
+				874420D21EA5886F00F9A572 /* Tower Defriendz */,
+				874420E11EA5886F00F9A572 /* MessagesExtension */,
+				874420DE1EA5886F00F9A572 /* Frameworks */,
+				874420D11EA5886F00F9A572 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		87FFB6761E9C4FFD0099A13A /* Products */ = {
+		874420D11EA5886F00F9A572 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				87FFB6751E9C4FFD0099A13A /* Tower Defriendz.app */,
-				87FFB6891E9C4FFD0099A13A /* Tower DefriendzTests.xctest */,
-				87FFB6941E9C4FFD0099A13A /* Tower DefriendzUITests.xctest */,
-				87FFB6AA1E9C50250099A13A /* Tower Defriendz Extension.appex */,
+				874420D01EA5886F00F9A572 /* Tower Defriendz.app */,
+				874420DA1EA5886F00F9A572 /* MessagesExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		87FFB6771E9C4FFD0099A13A /* Tower Defriendz */ = {
+		874420D21EA5886F00F9A572 /* Tower Defriendz */ = {
 			isa = PBXGroup;
 			children = (
-				873D32721E9C56A2002C8FA3 /* GoogleService-Info.plist */,
-				87331CE51E9C530F001EE2A3 /* Tower Defriendz.entitlements */,
-				87FFB6781E9C4FFD0099A13A /* AppDelegate.swift */,
-				87FFB67A1E9C4FFD0099A13A /* ViewController.swift */,
-				87FFB67C1E9C4FFD0099A13A /* Main.storyboard */,
-				87FFB67F1E9C4FFD0099A13A /* Assets.xcassets */,
-				87FFB6811E9C4FFD0099A13A /* LaunchScreen.storyboard */,
-				87FFB6841E9C4FFD0099A13A /* Info.plist */,
+				874420D31EA5886F00F9A572 /* Assets.xcassets */,
+				874420D51EA5886F00F9A572 /* Info.plist */,
 			);
 			path = "Tower Defriendz";
 			sourceTree = "<group>";
 		};
-		87FFB68C1E9C4FFD0099A13A /* Tower DefriendzTests */ = {
+		874420DE1EA5886F00F9A572 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				87FFB68D1E9C4FFD0099A13A /* Tower_DefriendzTests.swift */,
-				87FFB68F1E9C4FFD0099A13A /* Info.plist */,
-			);
-			path = "Tower DefriendzTests";
-			sourceTree = "<group>";
-		};
-		87FFB6971E9C4FFD0099A13A /* Tower DefriendzUITests */ = {
-			isa = PBXGroup;
-			children = (
-				87FFB6981E9C4FFD0099A13A /* Tower_DefriendzUITests.swift */,
-				87FFB69A1E9C4FFD0099A13A /* Info.plist */,
-			);
-			path = "Tower DefriendzUITests";
-			sourceTree = "<group>";
-		};
-		87FFB6AB1E9C50250099A13A /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				87FFB6AC1E9C50250099A13A /* Messages.framework */,
-				A3E04D52044CC286C1AEA856 /* Pods_Tower_Defriendz.framework */,
-				C9CF06950A0FF99DE2FEEB00 /* Pods_Tower_Defriendz_Extension.framework */,
+				874420DF1EA5886F00F9A572 /* Messages.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		87FFB6AE1E9C50250099A13A /* Tower Defriendz Extension */ = {
+		874420E11EA5886F00F9A572 /* MessagesExtension */ = {
 			isa = PBXGroup;
 			children = (
-				87331CE61E9C5321001EE2A3 /* Tower Defriendz Extension.entitlements */,
-				87AF42BF1E9C50DA00BF5498 /* VC */,
-				87AF42C11E9C50F200BF5498 /* Game View */,
-				87AF42C01E9C50E200BF5498 /* Glimpse */,
-				87AF42C21E9C511D00BF5498 /* Extras */,
+				87552B6A1EA5899200EA10BC /* GameView */,
+				87552B841EA58A5300EA10BC /* Classes */,
+				87552B6B1EA589A100EA10BC /* VC */,
+				87552B6C1EA589A900EA10BC /* Extras */,
 			);
-			path = "Tower Defriendz Extension";
+			path = MessagesExtension;
+			sourceTree = "<group>";
+		};
+		87552B6A1EA5899200EA10BC /* GameView */ = {
+			isa = PBXGroup;
+			children = (
+				87552B601EA5898700EA10BC /* Army.swift */,
+				87552B611EA5898700EA10BC /* Bullet.swift */,
+				87552B621EA5898700EA10BC /* Enemy.swift */,
+				87552B631EA5898700EA10BC /* GameView.swift */,
+				87552B641EA5898700EA10BC /* Tower.swift */,
+			);
+			name = GameView;
+			sourceTree = "<group>";
+		};
+		87552B6B1EA589A100EA10BC /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				87552B751EA58A3500EA10BC /* VC.swift */,
+				87552B761EA58A3500EA10BC /* VCAttackView.swift */,
+				87552B771EA58A3500EA10BC /* VCGameView.swift */,
+				87552B781EA58A3500EA10BC /* VCMessageHandling.swift */,
+			);
+			name = VC;
+			sourceTree = "<group>";
+		};
+		87552B6C1EA589A900EA10BC /* Extras */ = {
+			isa = PBXGroup;
+			children = (
+				87552B711EA58A3500EA10BC /* MainInterface.storyboard */,
+				874420E71EA5886F00F9A572 /* Assets.xcassets */,
+				874420E91EA5886F00F9A572 /* Info.plist */,
+			);
+			name = Extras;
+			sourceTree = "<group>";
+		};
+		87552B841EA58A5300EA10BC /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				87552B6E1EA58A3500EA10BC /* GameHandler.swift */,
+				87552B6F1EA58A3500EA10BC /* GameStage.swift */,
+				87552B701EA58A3500EA10BC /* MainButton.swift */,
+				87552B721EA58A3500EA10BC /* StatusLabel.swift */,
+				87552B731EA58A3500EA10BC /* UIColorExtensions.swift */,
+				87552B741EA58A3500EA10BC /* UIViewExtension.swift */,
+			);
+			name = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		87FFB6741E9C4FFD0099A13A /* Tower Defriendz */ = {
+		874420CF1EA5886F00F9A572 /* Tower Defriendz */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 87FFB69D1E9C4FFD0099A13A /* Build configuration list for PBXNativeTarget "Tower Defriendz" */;
+			buildConfigurationList = 874420F01EA5886F00F9A572 /* Build configuration list for PBXNativeTarget "Tower Defriendz" */;
 			buildPhases = (
-				B92A3E64A093CEC8316BE8B9 /* [CP] Check Pods Manifest.lock */,
-				87FFB6711E9C4FFD0099A13A /* Sources */,
-				87FFB6721E9C4FFD0099A13A /* Frameworks */,
-				87FFB6731E9C4FFD0099A13A /* Resources */,
-				87FFB6BD1E9C50250099A13A /* Embed App Extensions */,
-				895E47D4004A6E0C8913A3C6 /* [CP] Embed Pods Frameworks */,
-				4FFF170E22F9D97926C30892 /* [CP] Copy Pods Resources */,
+				874420CE1EA5886F00F9A572 /* Resources */,
+				874420EF1EA5886F00F9A572 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				87FFB6B81E9C50250099A13A /* PBXTargetDependency */,
+				874420DD1EA5886F00F9A572 /* PBXTargetDependency */,
 			);
 			name = "Tower Defriendz";
 			productName = "Tower Defriendz";
-			productReference = 87FFB6751E9C4FFD0099A13A /* Tower Defriendz.app */;
-			productType = "com.apple.product-type.application";
+			productReference = 874420D01EA5886F00F9A572 /* Tower Defriendz.app */;
+			productType = "com.apple.product-type.application.messages";
 		};
-		87FFB6881E9C4FFD0099A13A /* Tower DefriendzTests */ = {
+		874420D91EA5886F00F9A572 /* MessagesExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 87FFB6A01E9C4FFD0099A13A /* Build configuration list for PBXNativeTarget "Tower DefriendzTests" */;
+			buildConfigurationList = 874420EC1EA5886F00F9A572 /* Build configuration list for PBXNativeTarget "MessagesExtension" */;
 			buildPhases = (
-				87FFB6851E9C4FFD0099A13A /* Sources */,
-				87FFB6861E9C4FFD0099A13A /* Frameworks */,
-				87FFB6871E9C4FFD0099A13A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				87FFB68B1E9C4FFD0099A13A /* PBXTargetDependency */,
-			);
-			name = "Tower DefriendzTests";
-			productName = "Tower DefriendzTests";
-			productReference = 87FFB6891E9C4FFD0099A13A /* Tower DefriendzTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		87FFB6931E9C4FFD0099A13A /* Tower DefriendzUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 87FFB6A31E9C4FFD0099A13A /* Build configuration list for PBXNativeTarget "Tower DefriendzUITests" */;
-			buildPhases = (
-				87FFB6901E9C4FFD0099A13A /* Sources */,
-				87FFB6911E9C4FFD0099A13A /* Frameworks */,
-				87FFB6921E9C4FFD0099A13A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				87FFB6961E9C4FFD0099A13A /* PBXTargetDependency */,
-			);
-			name = "Tower DefriendzUITests";
-			productName = "Tower DefriendzUITests";
-			productReference = 87FFB6941E9C4FFD0099A13A /* Tower DefriendzUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
-		87FFB6A91E9C50250099A13A /* Tower Defriendz Extension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 87FFB6BA1E9C50250099A13A /* Build configuration list for PBXNativeTarget "Tower Defriendz Extension" */;
-			buildPhases = (
-				A96E5CA1903FEAF9A362B6A5 /* [CP] Check Pods Manifest.lock */,
-				87FFB6A61E9C50250099A13A /* Sources */,
-				87FFB6A71E9C50250099A13A /* Frameworks */,
-				87FFB6A81E9C50250099A13A /* Resources */,
-				8B9D261E74F02C125908560C /* [CP] Copy Pods Resources */,
+				874420D61EA5886F00F9A572 /* Sources */,
+				874420D71EA5886F00F9A572 /* Frameworks */,
+				874420D81EA5886F00F9A572 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Tower Defriendz Extension";
-			productName = "Tower Defriendz Extension";
-			productReference = 87FFB6AA1E9C50250099A13A /* Tower Defriendz Extension.appex */;
+			name = MessagesExtension;
+			productName = MessagesExtension;
+			productReference = 874420DA1EA5886F00F9A572 /* MessagesExtension.appex */;
 			productType = "com.apple.product-type.app-extension.messages";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		87FFB66D1E9C4FFD0099A13A /* Project object */ = {
+		874420CA1EA5886F00F9A572 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = fiveever;
 				TargetAttributes = {
-					87FFB6741E9C4FFD0099A13A = {
+					874420CF1EA5886F00F9A572 = {
 						CreatedOnToolsVersion = 8.3.1;
 						DevelopmentTeam = C72A48R82V;
 						ProvisioningStyle = Automatic;
-						SystemCapabilities = {
-							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
-							};
-						};
 					};
-					87FFB6881E9C4FFD0099A13A = {
+					874420D91EA5886F00F9A572 = {
 						CreatedOnToolsVersion = 8.3.1;
 						DevelopmentTeam = C72A48R82V;
 						ProvisioningStyle = Automatic;
-						TestTargetID = 87FFB6741E9C4FFD0099A13A;
-					};
-					87FFB6931E9C4FFD0099A13A = {
-						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = C72A48R82V;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 87FFB6741E9C4FFD0099A13A;
-					};
-					87FFB6A91E9C50250099A13A = {
-						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = C72A48R82V;
-						LastSwiftMigration = 0830;
-						ProvisioningStyle = Automatic;
-						SystemCapabilities = {
-							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
-							};
-						};
 					};
 				};
 			};
-			buildConfigurationList = 87FFB6701E9C4FFD0099A13A /* Build configuration list for PBXProject "Tower Defriendz" */;
+			buildConfigurationList = 874420CD1EA5886F00F9A572 /* Build configuration list for PBXProject "Tower Defriendz" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -441,227 +251,72 @@
 				en,
 				Base,
 			);
-			mainGroup = 87FFB66C1E9C4FFD0099A13A;
-			productRefGroup = 87FFB6761E9C4FFD0099A13A /* Products */;
+			mainGroup = 874420C91EA5886F00F9A572;
+			productRefGroup = 874420D11EA5886F00F9A572 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				87FFB6741E9C4FFD0099A13A /* Tower Defriendz */,
-				87FFB6881E9C4FFD0099A13A /* Tower DefriendzTests */,
-				87FFB6931E9C4FFD0099A13A /* Tower DefriendzUITests */,
-				87FFB6A91E9C50250099A13A /* Tower Defriendz Extension */,
+				874420CF1EA5886F00F9A572 /* Tower Defriendz */,
+				874420D91EA5886F00F9A572 /* MessagesExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		87FFB6731E9C4FFD0099A13A /* Resources */ = {
+		874420CE1EA5886F00F9A572 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87FFB6831E9C4FFD0099A13A /* LaunchScreen.storyboard in Resources */,
-				873D32731E9C56A2002C8FA3 /* GoogleService-Info.plist in Resources */,
-				87FFB6801E9C4FFD0099A13A /* Assets.xcassets in Resources */,
-				87FFB67E1E9C4FFD0099A13A /* Main.storyboard in Resources */,
+				874420D41EA5886F00F9A572 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		87FFB6871E9C4FFD0099A13A /* Resources */ = {
+		874420D81EA5886F00F9A572 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		87FFB6921E9C4FFD0099A13A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		87FFB6A81E9C50250099A13A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				87AF42AF1E9C50BB00BF5498 /* Assets.xcassets in Resources */,
-				87AF42C61E9C51EB00BF5498 /* MainInterface.storyboard in Resources */,
-				0F5EB5351EA3048500D02355 /* GoogleService-Info.plist in Resources */,
+				874420E81EA5886F00F9A572 /* Assets.xcassets in Resources */,
+				87552B7C1EA58A3500EA10BC /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		4FFF170E22F9D97926C30892 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tower Defriendz/Pods-Tower Defriendz-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		895E47D4004A6E0C8913A3C6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tower Defriendz/Pods-Tower Defriendz-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8B9D261E74F02C125908560C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tower Defriendz Extension/Pods-Tower Defriendz Extension-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A96E5CA1903FEAF9A362B6A5 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		B92A3E64A093CEC8316BE8B9 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		87FFB6711E9C4FFD0099A13A /* Sources */ = {
+		874420D61EA5886F00F9A572 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F5EB5381EA3487E00D02355 /* UIColorExtensions.swift in Sources */,
-				87FFB67B1E9C4FFD0099A13A /* ViewController.swift in Sources */,
-				87FFB6791E9C4FFD0099A13A /* AppDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		87FFB6851E9C4FFD0099A13A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				87FFB68E1E9C4FFD0099A13A /* Tower_DefriendzTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		87FFB6901E9C4FFD0099A13A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				87FFB6991E9C4FFD0099A13A /* Tower_DefriendzUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		87FFB6A61E9C50250099A13A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				87AF42B61E9C50BB00BF5498 /* GlimpseAssetWriter.m in Sources */,
-				87AF42B81E9C50BB00BF5498 /* StatusLabel.swift in Sources */,
-				87AF42BA1E9C50BB00BF5498 /* UIViewExtension.swift in Sources */,
-				87AF42AE1E9C50BB00BF5498 /* Army.swift in Sources */,
-				87A0C4041EA0016F006A2237 /* GameHandler.swift in Sources */,
-				87AF42BE1E9C50BB00BF5498 /* VCMessageHandling.swift in Sources */,
-				87AF42BC1E9C50BB00BF5498 /* VCAttackView.swift in Sources */,
-				87AF42B51E9C50BB00BF5498 /* Glimpse.m in Sources */,
-				0F5EB5371EA3487600D02355 /* UIColorExtensions.swift in Sources */,
-				87AF42B11E9C50BB00BF5498 /* Bullet.swift in Sources */,
-				87AF42BD1E9C50BB00BF5498 /* VCGameView.swift in Sources */,
-				87AF42B71E9C50BB00BF5498 /* MainButton.swift in Sources */,
-				87AF42B21E9C50BB00BF5498 /* Enemy.swift in Sources */,
-				87AF42BB1E9C50BB00BF5498 /* VC.swift in Sources */,
-				87AF42B91E9C50BB00BF5498 /* Tower.swift in Sources */,
-				87AF42B31E9C50BB00BF5498 /* Game.swift in Sources */,
-				87AF42B41E9C50BB00BF5498 /* GameStage.swift in Sources */,
+				87552B7A1EA58A3500EA10BC /* GameStage.swift in Sources */,
+				87552B671EA5898700EA10BC /* Enemy.swift in Sources */,
+				87552B7B1EA58A3500EA10BC /* MainButton.swift in Sources */,
+				87552B681EA5898700EA10BC /* GameView.swift in Sources */,
+				87552B7D1EA58A3500EA10BC /* StatusLabel.swift in Sources */,
+				87552B831EA58A3500EA10BC /* VCMessageHandling.swift in Sources */,
+				87552B651EA5898700EA10BC /* Army.swift in Sources */,
+				87552B821EA58A3500EA10BC /* VCGameView.swift in Sources */,
+				87552B7F1EA58A3500EA10BC /* UIViewExtension.swift in Sources */,
+				87552B811EA58A3500EA10BC /* VCAttackView.swift in Sources */,
+				87552B801EA58A3500EA10BC /* VC.swift in Sources */,
+				87552B7E1EA58A3500EA10BC /* UIColorExtensions.swift in Sources */,
+				87552B791EA58A3500EA10BC /* GameHandler.swift in Sources */,
+				87552B691EA5898700EA10BC /* Tower.swift in Sources */,
+				87552B661EA5898700EA10BC /* Bullet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		87FFB68B1E9C4FFD0099A13A /* PBXTargetDependency */ = {
+		874420DD1EA5886F00F9A572 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 87FFB6741E9C4FFD0099A13A /* Tower Defriendz */;
-			targetProxy = 87FFB68A1E9C4FFD0099A13A /* PBXContainerItemProxy */;
-		};
-		87FFB6961E9C4FFD0099A13A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 87FFB6741E9C4FFD0099A13A /* Tower Defriendz */;
-			targetProxy = 87FFB6951E9C4FFD0099A13A /* PBXContainerItemProxy */;
-		};
-		87FFB6B81E9C50250099A13A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 87FFB6A91E9C50250099A13A /* Tower Defriendz Extension */;
-			targetProxy = 87FFB6B71E9C50250099A13A /* PBXContainerItemProxy */;
+			target = 874420D91EA5886F00F9A572 /* MessagesExtension */;
+			targetProxy = 874420DC1EA5886F00F9A572 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		87FFB67C1E9C4FFD0099A13A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				87FFB67D1E9C4FFD0099A13A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		87FFB6811E9C4FFD0099A13A /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				87FFB6821E9C4FFD0099A13A /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
-		87FFB69B1E9C4FFD0099A13A /* Debug */ = {
+		874420EA1EA5886F00F9A572 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -708,10 +363,11 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		87FFB69C1E9C4FFD0099A13A /* Release */ = {
+		874420EB1EA5886F00F9A572 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -750,143 +406,61 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		87FFB69E1E9C4FFD0099A13A /* Debug */ = {
+		874420ED1EA5886F00F9A572 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F649B03C1C55A2B143F6034F /* Pods-Tower Defriendz.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				DEVELOPMENT_TEAM = C72A48R82V;
+				INFOPLIST_FILE = MessagesExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fiveever.Tower-Defriendz.MessagesExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		874420EE1EA5886F00F9A572 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				DEVELOPMENT_TEAM = C72A48R82V;
+				INFOPLIST_FILE = MessagesExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.fiveever.Tower-Defriendz.MessagesExtension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		874420F11EA5886F00F9A572 /* Debug */ = {
+			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Tower Defriendz/Tower Defriendz.entitlements";
 				DEVELOPMENT_TEAM = C72A48R82V;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"COCOAPODS=1",
-					"GTM_BACKGROUND_TASK_FETCHING=0",
-				);
 				INFOPLIST_FILE = "Tower Defriendz/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fiveever.Tower-Defriendz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
-		87FFB69F1E9C4FFD0099A13A /* Release */ = {
+		874420F21EA5886F00F9A572 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8D15AA990F7D5A1A210431EC /* Pods-Tower Defriendz.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Tower Defriendz/Tower Defriendz.entitlements";
 				DEVELOPMENT_TEAM = C72A48R82V;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"COCOAPODS=1",
-					"GTM_BACKGROUND_TASK_FETCHING=0",
-				);
 				INFOPLIST_FILE = "Tower Defriendz/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fiveever.Tower-Defriendz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
-		87FFB6A11E9C4FFD0099A13A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = C72A48R82V;
-				INFOPLIST_FILE = "Tower DefriendzTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.fiveever.Tower-DefriendzTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tower Defriendz.app/Tower Defriendz";
-			};
-			name = Debug;
-		};
-		87FFB6A21E9C4FFD0099A13A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = C72A48R82V;
-				INFOPLIST_FILE = "Tower DefriendzTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.fiveever.Tower-DefriendzTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tower Defriendz.app/Tower Defriendz";
-			};
-			name = Release;
-		};
-		87FFB6A41E9C4FFD0099A13A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = C72A48R82V;
-				INFOPLIST_FILE = "Tower DefriendzUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.fiveever.Tower-DefriendzUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = "Tower Defriendz";
-			};
-			name = Debug;
-		};
-		87FFB6A51E9C4FFD0099A13A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				DEVELOPMENT_TEAM = C72A48R82V;
-				INFOPLIST_FILE = "Tower DefriendzUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.fiveever.Tower-DefriendzUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = "Tower Defriendz";
-			};
-			name = Release;
-		};
-		87FFB6BB1E9C50250099A13A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1AA151642BAA4D3A3A1AA27B /* Pods-Tower Defriendz Extension.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "Tower Defriendz Extension/Tower Defriendz Extension.entitlements";
-				DEVELOPMENT_TEAM = C72A48R82V;
-				INFOPLIST_FILE = "Tower Defriendz Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.fiveever.Tower-Defriendz.Tower-Defriendz-Extension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Tower Defriendz Extension/Tower Defriendz Extension-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Debug;
-		};
-		87FFB6BC1E9C50250099A13A /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1CB92B8BF4FDE8D3BC9C5C48 /* Pods-Tower Defriendz Extension.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = "Tower Defriendz Extension/Tower Defriendz Extension.entitlements";
-				DEVELOPMENT_TEAM = C72A48R82V;
-				INFOPLIST_FILE = "Tower Defriendz Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.fiveever.Tower-Defriendz.Tower-Defriendz-Extension";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Tower Defriendz Extension/Tower Defriendz Extension-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -894,52 +468,34 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		87FFB6701E9C4FFD0099A13A /* Build configuration list for PBXProject "Tower Defriendz" */ = {
+		874420CD1EA5886F00F9A572 /* Build configuration list for PBXProject "Tower Defriendz" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				87FFB69B1E9C4FFD0099A13A /* Debug */,
-				87FFB69C1E9C4FFD0099A13A /* Release */,
+				874420EA1EA5886F00F9A572 /* Debug */,
+				874420EB1EA5886F00F9A572 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		87FFB69D1E9C4FFD0099A13A /* Build configuration list for PBXNativeTarget "Tower Defriendz" */ = {
+		874420EC1EA5886F00F9A572 /* Build configuration list for PBXNativeTarget "MessagesExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				87FFB69E1E9C4FFD0099A13A /* Debug */,
-				87FFB69F1E9C4FFD0099A13A /* Release */,
+				874420ED1EA5886F00F9A572 /* Debug */,
+				874420EE1EA5886F00F9A572 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		87FFB6A01E9C4FFD0099A13A /* Build configuration list for PBXNativeTarget "Tower DefriendzTests" */ = {
+		874420F01EA5886F00F9A572 /* Build configuration list for PBXNativeTarget "Tower Defriendz" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				87FFB6A11E9C4FFD0099A13A /* Debug */,
-				87FFB6A21E9C4FFD0099A13A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		87FFB6A31E9C4FFD0099A13A /* Build configuration list for PBXNativeTarget "Tower DefriendzUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				87FFB6A41E9C4FFD0099A13A /* Debug */,
-				87FFB6A51E9C4FFD0099A13A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		87FFB6BA1E9C50250099A13A /* Build configuration list for PBXNativeTarget "Tower Defriendz Extension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				87FFB6BB1E9C50250099A13A /* Debug */,
-				87FFB6BC1E9C50250099A13A /* Release */,
+				874420F11EA5886F00F9A572 /* Debug */,
+				874420F21EA5886F00F9A572 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 87FFB66D1E9C4FFD0099A13A /* Project object */;
+	rootObject = 874420CA1EA5886F00F9A572 /* Project object */;
 }

@@ -4,12 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Tower Defriendz Extension.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
-		</dict>
-		<key>Tower Defriendz.xcscheme</key>
+		<key>MessagesExtension.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -17,22 +12,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>87FFB6741E9C4FFD0099A13A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>87FFB6881E9C4FFD0099A13A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>87FFB6931E9C4FFD0099A13A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>87FFB6A91E9C50250099A13A</key>
+		<key>874420D91EA5886F00F9A572</key>
 		<dict>
 			<key>primary</key>
 			<true/>
