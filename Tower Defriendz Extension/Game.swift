@@ -143,6 +143,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
 	
 	func tapReceived(gestureRecognizer: UITapGestureRecognizer) {
 		guard selectedTowerType != nil else { return }
+		
 		let point = gestureRecognizer.location(in: self)
 		let posX = Int(point.x) / Constants.scale
 		let posY = Int(point.y) / Constants.scale
@@ -153,10 +154,11 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
 				occupied = true
 			}
 		}
+		
 		if !contains(arr: pathPoints, tuple: (posX, posY)) && !occupied {
 			currentConfirmCircle?.removeFromSuperview()
 			currentConfirmCircle = nil
-			if posX == currentConfirmPosition?.0 && posY == currentConfirmPosition?.1 {
+			if currentConfirmTower != nil && abs(currentConfirmPosition!.0) - posX < 2 && abs(currentConfirmPosition!.1 - posY) < 2  { //enlarge tap radius for the tower in question
 				confirmTower(posX: posX, posY: posY, tower: currentConfirmTower!)
 				return
 			} else {
