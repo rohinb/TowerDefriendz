@@ -8,83 +8,46 @@
 
 import UIKit
 import Messages
+import Firebase
 
 extension TowerDefriendzViewController {
 
 
     override func willBecomeActive(with conversation: MSConversation) {
-
+        currentUDID = conversation.localParticipantIdentifier.uuidString
         if conversation.selectedMessage == nil {
-            let currentUserId = conversation.localParticipantIdentifier.uuidString
-            let remoteUserId = conversation.remoteParticipantIdentifiers.first!.uuidString
-            gameHandler = GameHandler(withCurrentUserId: currentUserId, withRemoteUserId: remoteUserId)
             self.stages = [.initial, .initialSoldierSelection, .initialAttack]
             self.gameStage = .initial
         }
     }
 
     override func didSelect(_ message: MSMessage, conversation: MSConversation) {
-        let gameId = getKeyVal(str: getGameId(message: message)).1
-        if gameId != "" {
-            gameHandler?.getLatestAttack(inGameId: gameId, completion: { (success, attack) in
-                if success {
-//                    if attack?.attackerId != self.gameHandler?.currentUserId {
-                        self.stages = [.defend, .game, .soldierSelection, .attack]
-                        self.gameStage = .defend
-                        self.incomingAttack = attack
-//                    } else {
-//                        self.stages = [.waitingForOpponent]
-//                        self.gameStage = .waitingForOpponent
-//                    }
-                } else {
-                    self.gameStage = .cannotGetAttack
-                }
-            })
+
+        incomingMessage = Message(str: message.url!.absoluteString.removingPercentEncoding!)
+        self.stages = [.defend, .game, .soldierSelection, .attack]
+        self.gameStage = .defend
+    }
+
+    func createAttackMessage(withMessage: Message, defenseDidWin: Bool) {
+
+        if defenseDidWin {
+            withMessage.fromScore += 1
+        } else {
+            withMessage.toScore += 1
         }
+
+        let caption = "Defense \(defenseDidWin ? "succeded!" : "failed!")"
+        let subcaption = "Tap to defend your base! You are \((withMessage.fromScore > withMessage.toScore) ? "in the lead" : "losing")!"
+        self.sendMessage(withCaption: caption, withSubcaption: subcaption)
     }
 
-    func getGameId(message: MSMessage) -> String {
-        if let messageStr = message.url?.description {
-            if messageStr != "" {
-                let queries = getQueries(str: messageStr)
-                return queries[0]
-            }
-        }
-        return ""
+    func createInitialAttackMessage(withMessage: Message) {
+        let caption = "PREPARE FOR WAR!"
+        let subcaption = "Tap to defend your base!"
+        self.sendMessage(withCaption: caption, withSubcaption: subcaption)
     }
 
-    func createAttackMessage(withAttack: Attack, defenseDidWin: Bool) {
-        gameHandler?.getGame(withGameId: withAttack.gameId!) { (success, game) in
-            if success {
-                var yourScore = 0
-                var opponentScore = 0
-                if game?.user1Id == self.gameHandler?.currentUserId {
-                    yourScore = game!.user1Score!
-                    opponentScore = game!.user2Score!
-                } else {
-                    yourScore = game!.user2Score!
-                    opponentScore = game!.user1Score!
-                }
-                let caption = "Defense \(defenseDidWin ? "succeded!" : "failed!")"
-                let subcaption = "Tap to defend your base! You are \((yourScore > opponentScore) ? "in the lead" : "losing")!"
-                self.sendMessage(withCaption: caption, withSubcaption: subcaption, withQueries: ["gameId" : self.gameHandler!.gameId])
-                self.createAttack()
-            }
-        }
-    }
-
-    func createInitialAttackMessage(withAttack: Attack) {
-        gameHandler?.createGame(completion: { (success) in
-            if success {
-                let caption = "PREPARE FOR WAR!"
-                let subcaption = "Tap to defend your base!"
-                self.sendMessage(withCaption: caption, withSubcaption: subcaption, withQueries: ["gameId" : self.gameHandler!.gameId])
-                self.createAttack()
-            }
-        })
-    }
-
-    func sendMessage(withCaption: String, withSubcaption: String, withQueries : [String : String]) {
+    func sendMessage(withCaption: String, withSubcaption: String) {
         let conversation = activeConversation
         let session = conversation?.selectedMessage?.session ?? MSSession()
         let layout = MSMessageTemplateLayout()
@@ -92,30 +55,20 @@ extension TowerDefriendzViewController {
         layout.subcaption = withSubcaption
         //layout.image = UIImage(named: "message-background.png")
         //layout.imageTitle = "iMessage Extension"
-        var components = URLComponents()
-        let queryItem = URLQueryItem(name: withQueries.first!.key, value: withQueries.first!.value)
-        components.queryItems = [queryItem]
         let message = MSMessage(session: session)
         message.layout = layout
-        message.url = components.url!
-        message.summaryText = withCaption
-        conversation?.insert(message)
+        let str = pendingMessage!.messageString!
+        if let correctedstr = str.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            let url = URL(string: correctedstr)
+            message.url = url
+            message.summaryText = withCaption
+            conversation?.insert(message)
+        }
     }
 
     override func didReceive(_ message: MSMessage, conversation: MSConversation) {
 
     }
-
-    func createAttack() {
-        self.gameHandler?.createAttack(withAttack: pendingAttack!, completion: { (success) in
-            if success {
-                print("Attack created successfully")
-            } else {
-                print("Error creating attack")
-            }
-        })
-    }
-
 
 
     ///////////////////////////////////////////////////////
@@ -136,7 +89,7 @@ extension TowerDefriendzViewController {
             return Int(char.description)!
         })
     }
-    
+
     ///////////////////////////////////////////////////////
     
 }

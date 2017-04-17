@@ -13,9 +13,10 @@ import Firebase
 
 class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
 
-    var gameHandler : GameHandler?
-    var incomingAttack : Attack?
-    var pendingAttack : Attack?
+    var incomingMessage : Message? = nil
+    var pendingMessage : Message? = nil
+    var currentUDID : String?
+
     var gameStage = GameStage.initial {
         didSet {
             handleGameStages()
@@ -41,8 +42,10 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        FIRApp.configure()
+        if(FIRApp.defaultApp() == nil){
+            FIRApp.configure()
+        }
+        sleep(1)
     }
 
     override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
@@ -69,12 +72,18 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
             break
 
         case .initialSoldierSelection:
-            pendingAttack = Attack(gameid: gameHandler!.gameId, atackerid: gameHandler!.currentUserId, defenderid: gameHandler!.remoteUserId, turnnumber: 0, soldierarray: [Int]())
+            let dic : [String : Any] = [MessageOptions.fromUUID.rawValue : currentUDID!,
+                        MessageOptions.soldierArray.rawValue : [Int](),
+                        MessageOptions.turnNumber.rawValue : 0,
+                        MessageOptions.fromScore.rawValue : 0,
+                        MessageOptions.toScore.rawValue : 0]
+
+            pendingMessage = Message(dic: dic)
             showSoldierSelection()
             break
 
         case .initialAttack:
-            createInitialAttackMessage(withAttack: pendingAttack!)
+            createInitialAttackMessage(withMessage: pendingMessage!)
             hideSoldierSelection()
             requestPresentationStyle(.compact)
             break
@@ -90,17 +99,19 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
             break
 
         case .soldierSelection:
-            pendingAttack = Attack(gameid: gameHandler!.gameId, atackerid: gameHandler!.currentUserId, defenderid: gameHandler!.remoteUserId, turnnumber: 0, soldierarray: [Int]())
+            let dic : [String : Any] = [MessageOptions.fromUUID.rawValue : currentUDID!,
+                                        MessageOptions.soldierArray.rawValue : [Int](),
+                                        MessageOptions.turnNumber.rawValue : incomingMessage!.turnNumber + 1,
+                                        MessageOptions.fromScore.rawValue : incomingMessage!.toScore,
+                                        MessageOptions.toScore.rawValue : incomingMessage!.fromScore]
+            
+            pendingMessage = Message(dic: dic)
             showSoldierSelection()
             break
 
         case .attack:
-            gameHandler?.getGame(withGameId: gameHandler!.gameId, completion: { (success, game) in
-                if success {
-                    self.pendingAttack = Attack(gameid: self.gameHandler!.gameId, atackerid: self.gameHandler!.currentUserId, defenderid: self.gameHandler!.remoteUserId, turnnumber: game!.turnNumber!, soldierarray: self.pendingAttack!.soldierArray!)
-                    self.createAttackMessage(withAttack: self.pendingAttack!, defenseDidWin: self.defenseSucceeded)
-                }
-            })
+
+            self.createAttackMessage(withMessage: pendingMessage!, defenseDidWin: self.defenseSucceeded)
             hideSoldierSelection()
             requestPresentationStyle(.compact)
             break

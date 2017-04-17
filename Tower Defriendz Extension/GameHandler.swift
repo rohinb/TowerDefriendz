@@ -9,204 +9,94 @@
 import UIKit
 import Firebase
 
-class GameHandler {
+class Message {
 
-    var currentUserId = ""
-    var remoteUserId = ""
-    let ref = FIRDatabase.database().reference()
-    var gameId = ""
-
-    init(withCurrentUserId: String, withRemoteUserId: String) {
-        currentUserId = withCurrentUserId
-        remoteUserId = withRemoteUserId
-        gameId = "\(currentUserId)+\(remoteUserId)"
+    var dictionary : [String : Any]?
+    var messageString : String?
+    var fromUUID : String = "" {
+        didSet {
+            updateMessageStringFromProperties()
+        }
     }
-
-    init() {
-
+    var soldierArray : [Int] = [0] {
+        didSet {
+            updateMessageStringFromProperties()
+        }
     }
-
-    func createGame(completion: @escaping (_ success: Bool) -> ()) {
-        gameExists() { (exists) in
-            if exists {
-                completion(false)
-            } else {
-                let gameDictionary : [String : Any] = [FirebaseGameOptions.turnNumber.rawValue : 0,
-                                                       FirebaseGameOptions.user1Id.rawValue : self.currentUserId,
-                                                       FirebaseGameOptions.user2Id.rawValue : self.remoteUserId,
-                                                       FirebaseGameOptions.user1Score.rawValue : 0,
-                                                       FirebaseGameOptions.user2Score.rawValue : 0]
-                self.ref.child("Game").child(self.gameId).setValue(gameDictionary, withCompletionBlock: { (error, gameRef) in
-                    if error != nil {
-                        print("error creating game")
-                    } else {
-                        completion(true)
-                    }
-                })
-            }
+    var turnNumber : Int = 0 {
+        didSet {
+            updateMessageStringFromProperties()
+        }
+    }
+    var fromScore : Int = 0 {
+        didSet {
+            updateMessageStringFromProperties()
+        }
+    }
+    var toScore : Int = 0 {
+        didSet {
+            updateMessageStringFromProperties()
         }
     }
 
-    func gameExists(completion: @escaping (_ success: Bool) -> ()) {
-        ref.child("Game").child(self.remoteUserId).observe(.value, with: { (snap) in
-            if snap.hasChildren() {
-                completion(true)
-            } else {
-                completion(false)
-            }
-        })
+    init(str: String) {
+        messageString = str
+        updatePropertiesFromMessageString()
     }
 
-    func getGame(withGameId: String, completion: @escaping (Bool, Game?) -> ()) {
-
-        ref.child("Game").child(withGameId).observe(.value, with: { (snap) in
-            if snap.value != nil {
-                let gameDictionary = snap.value as! [String : Any]
-                let game = Game(gameid: withGameId, user1id: gameDictionary[FirebaseGameOptions.user1Id.rawValue] as! String, user2id: gameDictionary[FirebaseGameOptions.user2Id.rawValue] as! String, turnnumber: gameDictionary[FirebaseGameOptions.turnNumber.rawValue] as! Int, user1score: gameDictionary[FirebaseGameOptions.user1Score.rawValue] as! Int, user2score: gameDictionary[FirebaseGameOptions.user2Score.rawValue] as! Int)
-                completion(true, game)
-            } else {
-                completion(false, nil)
-            }
-        })
+    func updatePropertiesFromMessageString() {
+        let dic = deserialize(text: messageString!)
+        fromUUID = dic![MessageOptions.fromUUID.rawValue] as! String
+        soldierArray = dic![MessageOptions.soldierArray.rawValue] as! [Int]
+        turnNumber = dic![MessageOptions.turnNumber.rawValue] as! Int
+        fromScore = dic![MessageOptions.fromScore.rawValue] as! Int
+        toScore = dic![MessageOptions.toScore.rawValue] as! Int
     }
 
-    func updateGame(game: Game) {
-        let gameDictionary : [String : Any] = [FirebaseGameOptions.turnNumber.rawValue : game.turnNumber!,
-                                               FirebaseGameOptions.user1Id.rawValue : game.user1Id!,
-                                               FirebaseGameOptions.user2Id.rawValue : game.user2Id!,
-                                               FirebaseGameOptions.user1Score.rawValue : game.user1Score!,
-                                               FirebaseGameOptions.user2Score.rawValue : game.user2Score!]
-        ref.child("Game").child(game.gameId!).setValue(gameDictionary) { (error, gameRef) in
-            if error != nil {
-                print("error updating game")
-            } else {
-            }
-        }
+    init(dic: Dictionary<String, Any>) {
+        dictionary = dic
+        messageString = serialize(dic: dictionary)
+        updatePropertiesFromMessageString()
     }
 
-    func attackFinished(inGameId: String, withWinner: GameUser) {
-        getGame(withGameId: inGameId) { (success, game) in
-            if success {
-                if game?.user1Id! == withWinner.uid {
-                    game?.user1Score! += 1
-                } else {
-                    game?.user2Score! += 1
-                }
-                self.updateGame(game: game!)
+    func updateMessageStringFromProperties() {
+        dictionary = [MessageOptions.fromUUID.rawValue : fromUUID,
+                      MessageOptions.soldierArray.rawValue : soldierArray,
+                      MessageOptions.turnNumber.rawValue : turnNumber,
+                      MessageOptions.fromScore.rawValue : fromScore,
+                      MessageOptions.toScore.rawValue : toScore]
+        messageString = serialize(dic: dictionary)
+    }
+
+    func deserialize(text: String) -> [String: Any]? {
+        if let data = text.data(using: .utf8) {
+            do {
+                return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+            } catch {
+                print(error.localizedDescription)
             }
         }
+        return nil
     }
 
-    func createAttack(withAttack : Attack, completion: @escaping (_ success: Bool) -> ()) {
-        let attackDictionary : [String: Any] = [FirebaseGameOptions.gameId.rawValue : gameId,
-                                                FirebaseGameOptions.attackerId.rawValue : self.currentUserId,
-                                                FirebaseGameOptions.defenderId.rawValue : self.remoteUserId,
-                                                FirebaseGameOptions.turnNumber.rawValue : withAttack.turnNumber!,
-                                                FirebaseGameOptions.soldierArray.rawValue : withAttack.soldierArray!]
-        ref.child("Attack").child(self.remoteUserId).child(currentUserId).setValue(attackDictionary) { (error, attackRef) in
-            if error != nil {
-                print("error creating attack")
-                completion(false)
-            } else {
-                completion(true)
-            }
-        }
+    func serialize(dic: [String: Any]?) -> String {
+        var res = dic!.description
+        res.remove(at: res.startIndex)
+        res.insert("{", at: res.startIndex)
+        res = res.substring(to: res.index(before: res.endIndex))
+        res.append("}")
+        return res
     }
 
-    func getLatestAttack(inGameId: String, completion: @escaping ( _ success: Bool, _ attack: Attack?) -> ()) {
-        if inGameId != "" {
-            let users = getUsersFromGameId(gameId: inGameId)
-            currentUserId = users.1
-            remoteUserId = users.0
-            self.gameId = inGameId
-            ref.child("Attack").child(users.0).child(users.1).observe(.value, with: { (snap) in
-                if let attackDictionary = snap.value as? [String : Any] {
-                    let attack = Attack(gameid: inGameId, atackerid: attackDictionary[FirebaseGameOptions.attackerId.rawValue] as! String, defenderid: attackDictionary[FirebaseGameOptions.defenderId.rawValue] as! String, turnnumber: attackDictionary[FirebaseGameOptions.turnNumber.rawValue] as! Int, soldierarray: attackDictionary[FirebaseGameOptions.soldierArray.rawValue] as! [Int])
-                    completion(true, attack)
-                } else {
-                    self.ref.child("Attack").child(users.1).child(users.0).observe(.value, with: { (snap2) in
-                        if let attackDictionary2 = snap2.value as? [String : Any] {
-                            let attack2 = Attack(gameid: inGameId,
-                                                 atackerid: attackDictionary2[FirebaseGameOptions.attackerId.rawValue] as! String,
-                                                 defenderid: attackDictionary2[FirebaseGameOptions.defenderId.rawValue] as! String,
-                                                 turnnumber: attackDictionary2[FirebaseGameOptions.turnNumber.rawValue] as! Int,
-                                                 soldierarray: attackDictionary2[FirebaseGameOptions.soldierArray.rawValue] as! [Int])
-                            completion(true, attack2)
-                        } else {
-                            completion(false, nil)
-                        }
-                    })
-                }
-            })
-        } else {
-            completion(false, nil)
-        }
-    }
-
-    func getUsersFromGameId(gameId: String) -> (String, String){
-        let components = gameId.components(separatedBy: "+")
-        return (components.first!, components.last!)
-    }
 }
 
-enum FirebaseGameOptions : String {
-    case gameId = "gameId"
-    case attackerId = "attackerId"
-    case defenderId = "defenderId"
+enum MessageOptions : String {
+    case fromUUID = "fromUUID"
     case soldierArray = "soldierArray"
-    case user1Id = "user1Id"
-    case user2Id = "user2Id"
     case turnNumber = "turnNumber"
-    case user1Score = "user1Score"
-    case user2Score = "user2Score"
+    case fromScore = "fromScore"
+    case toScore = "toScore"
 }
-
-
-class GameUser {
-    var uid : String
-
-    init(withId : String) {
-        uid = withId
-    }
-}
-
-
-class Attack {
-
-    var gameId : String?
-    var attackerId : String?
-    var defenderId : String?
-    var turnNumber : Int?
-    var soldierArray : [Int]?
-
-    init(gameid: String, atackerid: String, defenderid: String, turnnumber: Int, soldierarray: [Int]) {
-        gameId = gameid
-        attackerId = atackerid
-        defenderId = defenderid
-        turnNumber = turnnumber
-        soldierArray = soldierarray
-    }
-}
-
-class Game {
-
-    var gameId : String?
-    var user1Id : String?
-    var user2Id : String?
-    var turnNumber : Int?
-    var user1Score : Int?
-    var user2Score : Int?
-
-    init(gameid: String, user1id: String, user2id: String, turnnumber: Int, user1score: Int, user2score: Int) {
-        gameId = gameid
-        user1Id = user1id
-        user2Id = user2id
-        turnNumber = turnnumber
-        user1Score = user1score
-        user2Score = user2score
-    }
-}
-
 
 
 

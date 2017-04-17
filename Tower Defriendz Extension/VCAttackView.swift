@@ -24,18 +24,18 @@ extension TowerDefriendzViewController {
         if (armyBudget - 50) > 0 {
             soldierCounter += 1
             soldierCountLabel.text = soldierCounter.description
-            armyBudget = 1000*(pendingAttack!.turnNumber! + 1) - soldierCounter*50 - eagleCounter*70
+            armyBudget = 1000*(pendingMessage!.turnNumber + 1) - soldierCounter*50 - eagleCounter*70
             armyCoinsLabel.text = "\(armyBudget) Coins"
-            pendingAttack?.soldierArray?.append(0)
+            pendingMessage?.soldierArray.append(0)
         }
     }
     @IBAction func increaseEagleClicked(_ sender: Any) {
         if (armyBudget - 70) > 0 {
             eagleCounter += 1
             eagleCountLabel.text = eagleCounter.description
-            armyBudget = 1000*(pendingAttack!.turnNumber! + 1) - soldierCounter*50 - eagleCounter*70
+            armyBudget = 1000*(pendingMessage!.turnNumber + 1) - soldierCounter*50 - eagleCounter*70
             armyCoinsLabel.text = "\(armyBudget) Coins"
-            pendingAttack?.soldierArray?.append(1)
+            pendingMessage?.soldierArray.append(1)
         }
     }
 }

@@ -12,12 +12,12 @@ import Messages
 extension TowerDefriendzViewController {
 
     func gameViewInitiation() {
-        if incomingAttack?.soldierArray!.count != 0 {
+        if incomingMessage?.soldierArray.count != 0 {
             gameView = GameView(frame: view.bounds)
             gameView?.delegate = self
             gameView?.autoresizingMask = [.flexibleHeight, .flexibleWidth]
             view.addSubview(gameView!)
-            gameView?.start(enemyInts: incomingAttack!.soldierArray! ,turnNumber: incomingAttack!.turnNumber!)
+            gameView?.start(enemyInts: incomingMessage!.soldierArray ,turnNumber: incomingMessage!.turnNumber)
         } else {
             alert(withTitle: "Empty attack wave", withMessage: "abort")
         }
