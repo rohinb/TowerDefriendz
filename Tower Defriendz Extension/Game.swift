@@ -53,7 +53,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
 	
 	// TODO: pass these in n out of iMessage
 	
-	var isReplay = false
+	var isReplay = true
 	var recordingTimer = Timer()
 	var recordingTicks = 0
 	var recordingPlacements = [Int: [String: Any]]()
@@ -78,6 +78,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
         self.addSubview(imageView)
 		
 		let tap = UITapGestureRecognizer()
+		tap.isEnabled = !isReplay
 		tap.delegate = self
 		tap.addTarget(self, action: #selector(self.tapReceived(gestureRecognizer:)))
 		addGestureRecognizer(tap)
@@ -104,13 +105,16 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
         
         budgetLabel = UILabel(frame: CGRect(x: self.frame.width - 50, y: 100, width: 50, height: 30))
         budgetLabel?.text = ""
+		budgetLabel?.isHidden = isReplay
         budgetLabel?.textColor = UIColor.yellow
         self.addSubview(budgetLabel!)
 		
 		let coin = UIImageView(frame: CGRect(x: budgetLabel!.frame.origin.x - 20, y: budgetLabel!.frame.origin.y, width: 10, height: 10))
 		coin.image = #imageLiteral(resourceName: "coin")
+		coin.isHidden = isReplay
 		coin.center.y = budgetLabel!.center.y
 		self.addSubview(coin)
+		
 		if isReplay {
 			replayTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (timer) in
 				self.replayTicks += 1
@@ -124,7 +128,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
 			})
 		} else {
 			recordingTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (timer) in
-				self.recordingTicks += 1
+				self.recordingTicks += 1 //these ticks will be used every time the user places a tower
 			})
 		}
     }
