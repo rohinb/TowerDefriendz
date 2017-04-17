@@ -42,10 +42,16 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("-------------------------- IN VIEW DID LOAD --------------------------")
+
         if(FIRApp.defaultApp() == nil){
             FIRApp.configure()
         }
         sleep(1)
+    }
+
+    override func didResignActive(with conversation: MSConversation) {
+        
     }
 
     override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
@@ -92,10 +98,11 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
             break
 
         case .defend:
+            print("-------------------------- IN DEFEND --------------------------")
+            gameViewInitiation()
             break
 
         case .game:
-            gameViewInitiation()
             break
 
         case .soldierSelection:

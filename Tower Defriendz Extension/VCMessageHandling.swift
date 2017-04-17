@@ -14,18 +14,34 @@ extension TowerDefriendzViewController {
 
 
     override func willBecomeActive(with conversation: MSConversation) {
+
         currentUDID = conversation.localParticipantIdentifier.uuidString
+
         if conversation.selectedMessage == nil {
             self.stages = [.initial, .initialSoldierSelection, .initialAttack]
             self.gameStage = .initial
+        } else {
+            incomingMessage = Message(str: conversation.selectedMessage!.url!.absoluteString.removingPercentEncoding!)
+            if incomingMessage?.fromUUID != currentUDID {
+                self.stages = [.defend, .game, .soldierSelection, .attack]
+                self.gameStage = .defend
+            } else {
+                self.stages = [.waitingForOpponent]
+                self.gameStage = .waitingForOpponent
+            }
         }
     }
 
     override func didSelect(_ message: MSMessage, conversation: MSConversation) {
 
         incomingMessage = Message(str: message.url!.absoluteString.removingPercentEncoding!)
-        self.stages = [.defend, .game, .soldierSelection, .attack]
-        self.gameStage = .defend
+        if incomingMessage?.fromUUID != currentUDID {
+            self.stages = [.defend, .game, .soldierSelection, .attack]
+            self.gameStage = .defend
+        } else {
+            self.stages = [.waitingForOpponent]
+            self.gameStage = .waitingForOpponent
+        }
     }
 
     func createAttackMessage(withMessage: Message, defenseDidWin: Bool) {
@@ -37,7 +53,7 @@ extension TowerDefriendzViewController {
         }
 
         let caption = "Defense \(defenseDidWin ? "succeded!" : "failed!")"
-        let subcaption = "Tap to defend your base! You are \((withMessage.fromScore > withMessage.toScore) ? "in the lead" : "losing")!"
+        let subcaption = "You are \((withMessage.fromScore > withMessage.toScore) ? "in the lead" : "losing")!"
         self.sendMessage(withCaption: caption, withSubcaption: subcaption)
     }
 
