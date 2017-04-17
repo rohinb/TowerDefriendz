@@ -51,17 +51,21 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
         }
     }
 	
-	// TODO: create another array like this as you are playing and pass it to Sahand.
-	var isReplay = false //doesn't do anything yet
+	// TODO: pass these in n out of iMessage
+	
+	var isReplay = false
+	var recordingTimer = Timer()
+	var recordingTicks = 0
+	var recordingPlacements = [Int: [String: Any]]()
 	var replayTimer = Timer()
 	var replayTicks = 0
 	var replayPlacements : [Int: [String: Any]] = [   // ticks are in tenths of a second
 													34  : ["name" : "normal" , "x" : 8, "y" : 7],
-													24  : ["name" : "normal" , "x" : 7, "y" : 9],
-													14  : ["name" : "normal" , "x" : 6, "y" : 10],
-													54  : ["name" : "normal" , "x" : 5, "y" : 8],
+													24  : ["name" : "ranged" , "x" : 7, "y" : 9],
+													14  : ["name" : "deadly" , "x" : 6, "y" : 10],
+													54  : ["name" : "ranged" , "x" : 5, "y" : 8],
 													86  : ["name" : "normal" , "x" : 4, "y" : 7],
-													73  : ["name" : "normal" , "x" : 3, "y" : 6],
+													73  : ["name" : "deadly" , "x" : 3, "y" : 6],
 													1   : ["name" : "normal" , "x" : 2, "y" : 5],
 													104 : ["name" : "normal" , "x" : 1, "y" : 4]
 																									]
@@ -117,6 +121,10 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
 					towerArray?.append(tower)
 					tower.startShooting()
 				}
+			})
+		} else {
+			recordingTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (timer) in
+				self.recordingTicks += 1
 			})
 		}
     }
@@ -183,6 +191,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
 	
 	func confirmTower(posX: Int, posY : Int, tower: Tower) { // TODO: Make clickable radius bigger
 		if defenderBudget - tower.type.price >= 0 {
+			recordingPlacements[recordingTicks] = ["name" : tower.type.name, "x" : posX, "y" : posY]
 			
 			tower.alpha = 1.0
 			tower.delegate = self
@@ -224,6 +233,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
     
     func didEnd(didWin: Bool) {
 		if !isRunning { return }
+		print("recording placements at end of game: ", recordingPlacements)
         delegate?.gameDidEnd(didWin: didWin)
 		isRunning = false
 		
