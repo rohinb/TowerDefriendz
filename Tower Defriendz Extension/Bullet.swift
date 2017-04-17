@@ -19,6 +19,7 @@ class Bullet: UIImageView {
     
     var updateTimer = Timer()
 	var isPiercing = false
+	var splashRadius = 0.0
     
     init(locationX: Int, locationY: Int, vel: Double, direction: Double, damage: Int, color: UIColor){
         self.velY = CGFloat(vel*sin(direction)) // unit circle is y opposite
@@ -47,7 +48,9 @@ class Bullet: UIImageView {
             || self.center.y > self.superview!.frame.height || self.center.y < 0 {
             self.die()
         }
-        
+		
+		// FIXME: right now bullets are hitting enemies if they are in the same grid.
+			//    They should be hitting when they actually make contact with the frame
         let posX = Int(self.center.x/CGFloat(Constants.scale))
         let posY = Int(self.center.y/CGFloat(Constants.scale))
 
@@ -57,6 +60,7 @@ class Bullet: UIImageView {
 				hitEnemies.append(enemy)
 				if !self.isPiercing {
 					self.die()
+					break
 				}
             }
         }
@@ -68,8 +72,18 @@ class Bullet: UIImageView {
         if let index = bulletArray?.index(of: self) {
             bulletArray?.remove(at: index)
         }
+		
+		if splashRadius > 0.0 {
+			for enemy in enemyArray {
+				let dx = enemy.center.x - self.center.x
+				let dy = enemy.center.y - self.center.y
+				if pow(dx,2) + pow(dy,2) < CGFloat(pow(self.splashRadius,2)) {
+					enemy.hurt(damage: self.damage / 2)
+				}
+			}
+		}
     }
-    
+	
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

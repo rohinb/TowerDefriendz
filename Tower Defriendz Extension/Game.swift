@@ -181,7 +181,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
 		currentConfirmTower = tower
 	}
 	
-	func confirmTower(posX: Int, posY : Int, tower: Tower) {
+	func confirmTower(posX: Int, posY : Int, tower: Tower) { // TODO: Make clickable radius bigger
 		if defenderBudget - tower.type.price >= 0 {
 			
 			tower.alpha = 1.0
@@ -208,7 +208,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
         defenderBudget = (turnNumber+1) * 1000
         budgetLabel?.text = "\(defenderBudget)"
         for (index, int) in enemyInts.enumerated() {
-			Timer.scheduledTimer(withTimeInterval: ((index > enemyInts.count / 2 && turnNumber > 2) ? 0.5 : 1.5) * Double(count), repeats: false) {_ in
+			Timer.scheduledTimer(withTimeInterval: ((index > enemyInts.count / 2 && turnNumber > 2) ? 0.25 : 0.5) * Double(count), repeats: false) {_ in
                 let enemy = int == 1 ? Enemy(posX: 4, posY: 0, type: .soldier) : Enemy(posX: Int(arc4random_uniform(9))+1, posY: 0, type: .bird)
 				enemy.delegate = self
 				self.addSubview(enemy)

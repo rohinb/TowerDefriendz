@@ -84,6 +84,15 @@ enum TowerType {
 		}
 	}
 	
+	//within the splashRadius, enemies receive 1/2 the bullet damage
+	var splashRadius : Double {
+		switch self {
+		case .normal: return 0.0
+		case .ranged: return 0.0
+		case .deadly: return Double(Constants.scale) 
+		}
+	}
+	
 	var firingInterval : Double {
 		switch self {
 		case .normal: return 0.3
@@ -149,6 +158,7 @@ class Tower:UIImageView {
                     if success { 
                         let bullet = Bullet(locationX: self.posX, locationY: self.posY, vel: speed, direction: Double(direction), damage : self.type.damage, color : color)
 						bullet.isPiercing = self.type.isPiercing
+						bullet.splashRadius = self.type.splashRadius
                         self.delegate?.addedBullet(bullet: bullet)
                     }
                 })

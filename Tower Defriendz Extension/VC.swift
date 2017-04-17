@@ -77,6 +77,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
 
         }
     }
+	
     var stages : [GameStage] = [.initial, .initialAttack, .openingDefend, .defend, .game, .soldierSelection, .attack]
     var gameView : GameView?
     var defenseSucceeded = false

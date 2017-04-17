@@ -193,10 +193,7 @@ class Enemy: UIImageView {
 			self.frame = CGRect(x: self.posX*Constants.scale, y: self.posY*Constants.scale, width: Constants.scale, height: Constants.scale)
 		}
 		pIndex += 1
-		
-		if type == .soldier {
-			print(self.center.y, self.superview!.frame.height)
-		}
+
 		if self.center.y >= self.superview!.frame.height {
 			self.delegate?.enemyReachedEnd()
 			self.die()
