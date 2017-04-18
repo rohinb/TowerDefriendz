@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E7F320001D2EDF23147CD5C /* Pods_Tower_Defriendz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F1691A6D81C7B920AD2CC2F /* Pods_Tower_Defriendz.framework */; };
 		874420D41EA5886F00F9A572 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 874420D31EA5886F00F9A572 /* Assets.xcassets */; };
 		874420DB1EA5886F00F9A572 /* MessagesExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 874420DA1EA5886F00F9A572 /* MessagesExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		874420E01EA5886F00F9A572 /* Messages.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 874420DF1EA5886F00F9A572 /* Messages.framework */; };
@@ -27,6 +28,7 @@
 		87552B811EA58A3500EA10BC /* VCAttackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87552B761EA58A3500EA10BC /* VCAttackView.swift */; };
 		87552B821EA58A3500EA10BC /* VCGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87552B771EA58A3500EA10BC /* VCGameView.swift */; };
 		87552B831EA58A3500EA10BC /* VCMessageHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87552B781EA58A3500EA10BC /* VCMessageHandling.swift */; };
+		95D32E84D31F2BEEEA5FD637 /* Pods_MessagesExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D92CF84175BD6AA8FA4B6D43 /* Pods_MessagesExtension.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1F1691A6D81C7B920AD2CC2F /* Pods_Tower_Defriendz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tower_Defriendz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		40FF09672873547919A208A7 /* Pods-Tower Defriendz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tower Defriendz.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tower Defriendz/Pods-Tower Defriendz.release.xcconfig"; sourceTree = "<group>"; };
+		47A652E441BBE883B9A1A78D /* Pods-Tower Defriendz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tower Defriendz.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tower Defriendz/Pods-Tower Defriendz.debug.xcconfig"; sourceTree = "<group>"; };
+		7AC465D0999853879AD80632 /* Pods-MessagesExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagesExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-MessagesExtension/Pods-MessagesExtension.release.xcconfig"; sourceTree = "<group>"; };
 		874420D01EA5886F00F9A572 /* Tower Defriendz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tower Defriendz.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		874420D31EA5886F00F9A572 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		874420D51EA5886F00F9A572 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -77,20 +83,42 @@
 		87552B761EA58A3500EA10BC /* VCAttackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCAttackView.swift; sourceTree = "<group>"; };
 		87552B771EA58A3500EA10BC /* VCGameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCGameView.swift; sourceTree = "<group>"; };
 		87552B781EA58A3500EA10BC /* VCMessageHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCMessageHandling.swift; sourceTree = "<group>"; };
+		D2A8949EB50698E7BE14AAFA /* Pods-MessagesExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagesExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MessagesExtension/Pods-MessagesExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		D92CF84175BD6AA8FA4B6D43 /* Pods_MessagesExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessagesExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		04F12F3E211FA8770BFE4044 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E7F320001D2EDF23147CD5C /* Pods_Tower_Defriendz.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		874420D71EA5886F00F9A572 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				874420E01EA5886F00F9A572 /* Messages.framework in Frameworks */,
+				95D32E84D31F2BEEEA5FD637 /* Pods_MessagesExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		272F359D54E7CF603E611CCA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D2A8949EB50698E7BE14AAFA /* Pods-MessagesExtension.debug.xcconfig */,
+				7AC465D0999853879AD80632 /* Pods-MessagesExtension.release.xcconfig */,
+				47A652E441BBE883B9A1A78D /* Pods-Tower Defriendz.debug.xcconfig */,
+				40FF09672873547919A208A7 /* Pods-Tower Defriendz.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		874420C91EA5886F00F9A572 = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +126,7 @@
 				874420E11EA5886F00F9A572 /* MessagesExtension */,
 				874420DE1EA5886F00F9A572 /* Frameworks */,
 				874420D11EA5886F00F9A572 /* Products */,
+				272F359D54E7CF603E611CCA /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -123,6 +152,8 @@
 			isa = PBXGroup;
 			children = (
 				874420DF1EA5886F00F9A572 /* Messages.framework */,
+				D92CF84175BD6AA8FA4B6D43 /* Pods_MessagesExtension.framework */,
+				1F1691A6D81C7B920AD2CC2F /* Pods_Tower_Defriendz.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -191,8 +222,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 874420F01EA5886F00F9A572 /* Build configuration list for PBXNativeTarget "Tower Defriendz" */;
 			buildPhases = (
+				1DE24EBDC3BB1B9039C657D4 /* [CP] Check Pods Manifest.lock */,
 				874420CE1EA5886F00F9A572 /* Resources */,
 				874420EF1EA5886F00F9A572 /* Embed App Extensions */,
+				04F12F3E211FA8770BFE4044 /* Frameworks */,
+				6D692F3B023333D160401EBA /* [CP] Embed Pods Frameworks */,
+				C040D6C77ED83E61BE04A222 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -208,9 +243,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 874420EC1EA5886F00F9A572 /* Build configuration list for PBXNativeTarget "MessagesExtension" */;
 			buildPhases = (
+				A28F4EAA4BDBAC469FBA26C6 /* [CP] Check Pods Manifest.lock */,
 				874420D61EA5886F00F9A572 /* Sources */,
 				874420D71EA5886F00F9A572 /* Frameworks */,
 				874420D81EA5886F00F9A572 /* Resources */,
+				228129529EA5B8B587AEDE32 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -281,6 +318,84 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1DE24EBDC3BB1B9039C657D4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		228129529EA5B8B587AEDE32 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MessagesExtension/Pods-MessagesExtension-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6D692F3B023333D160401EBA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tower Defriendz/Pods-Tower Defriendz-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A28F4EAA4BDBAC469FBA26C6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C040D6C77ED83E61BE04A222 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tower Defriendz/Pods-Tower Defriendz-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		874420D61EA5886F00F9A572 /* Sources */ = {
@@ -413,6 +528,7 @@
 		};
 		874420ED1EA5886F00F9A572 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D2A8949EB50698E7BE14AAFA /* Pods-MessagesExtension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				DEVELOPMENT_TEAM = C72A48R82V;
@@ -427,6 +543,7 @@
 		};
 		874420EE1EA5886F00F9A572 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7AC465D0999853879AD80632 /* Pods-MessagesExtension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
 				DEVELOPMENT_TEAM = C72A48R82V;
@@ -441,6 +558,7 @@
 		};
 		874420F11EA5886F00F9A572 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 47A652E441BBE883B9A1A78D /* Pods-Tower Defriendz.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -454,6 +572,7 @@
 		};
 		874420F21EA5886F00F9A572 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 40FF09672873547919A208A7 /* Pods-Tower Defriendz.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

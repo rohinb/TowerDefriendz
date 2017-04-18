@@ -52,9 +52,9 @@ fileprivate enum Direction {
 }
 
 // TODO: Balance with towers and price
-enum EnemyType {
-	case soldier
-	case bird
+enum EnemyType : Int {
+	case soldier = 0
+	case bird = 1
 	// if you add an enemy, you must add a case to ALL
 	// the following switch statements and this array:
 

@@ -20,34 +20,15 @@ extension TowerDefriendzViewController {
         soldierAdditionView.animateAlpha(t: 0.3, a: 0)
     }
 
-    @IBAction func increaseSoldierClicked(_ sender: Any) {
-        if (armyBudget - 50) > 0 {
-            soldierCounter += 1
-            soldierCountLabel.text = soldierCounter.description
-            armyBudget = 1000*(pendingMessage!.turnNumber + 1) - soldierCounter*50 - eagleCounter*70
-            armyCoinsLabel.text = "\(armyBudget) Coins"
-            pendingMessage?.soldierArray.append(0)
-        }
-    }
-    @IBAction func increaseEagleClicked(_ sender: Any) {
-        if (armyBudget - 70) > 0 {
-            eagleCounter += 1
-            eagleCountLabel.text = eagleCounter.description
-            armyBudget = 1000*(pendingMessage!.turnNumber + 1) - soldierCounter*50 - eagleCounter*70
-            armyCoinsLabel.text = "\(armyBudget) Coins"
-            pendingMessage?.soldierArray.append(1)
-        }
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-    }
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+
+        return soldierTypes.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = SoldierTableView.dequeueReusableCell(withIdentifier: "cell") as! SoldierSelectionCell
+        cell.VC = self
+        cell.soldierType = soldierTypes[indexPath.row]
         return UITableViewCell()
     }
 
@@ -56,9 +37,27 @@ extension TowerDefriendzViewController {
     }
 }
 
+import GMStepper
 
 class SoldierSelectionCell: UITableViewCell {
 
+    var soldierType : EnemyType? {
+        didSet {
+            soldierLabel.text = soldierType?.name
+        }
+    }
+    @IBOutlet weak var soldierLabel: UILabel!
+    @IBOutlet weak var stepper: GMStepper!
+    var VC : TowerDefriendzViewController?
+
+    @IBAction func stepperChanged(_ sender: Any) {
+        if (VC!.armyBudget - soldierType!.price) > 0 {
+            VC?.pendingMessage?.soldierArray.append(soldierType!.rawValue)
+            VC?.armyBudget -= soldierType!.price
+        }
+    }
+
+    override func awakeFromNib() { }
 }
 
 

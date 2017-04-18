@@ -12,32 +12,36 @@ import Messages
 
 class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate, UITableViewDelegate, UITableViewDataSource {
 
+    // GENERAL
     var incomingMessage : Message? = nil
     var pendingMessage : Message? = nil
     var currentUDID : String?
-
+    var stages : [GameStage] = [.initial, .initialAttack, .defend, .game, .soldierSelection, .attack]
     var gameStage = GameStage.initial {
         didSet {
             handleGameStages()
         }
     }
-    var stages : [GameStage] = [.initial, .initialAttack, .defend, .game, .soldierSelection, .attack]
+
+    // GAME VIEW
     var gameView : GameView?
     var defenseSucceeded = false
 
     @IBOutlet weak var statusLabel: StatusLabel!
     @IBOutlet weak var mainButton: MainButton!
 
-    var armyBudget = 500
-    var soldierCounter = 0
-    var eagleCounter = 0
-    var soldierArray : [Int]?
-
+    // SOLDIER SELECTION
     @IBOutlet weak var soldierAdditionView: UIView!
-    @IBOutlet weak var armyCoinsLabel: UILabel!
-    @IBOutlet weak var soldierCountLabel: UILabel!
-    @IBOutlet weak var eagleCountLabel: UILabel!
+    @IBOutlet weak var armyCoins: UILabel!
+    var armyBudget = 500 {
+        didSet {
+            armyCoins.text = armyBudget.description
+        }
+    }
+    let soldierTypes = [EnemyType.soldier, EnemyType.bird]
+    @IBOutlet weak var SoldierTableView: UITableView!
 
+    var c = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()

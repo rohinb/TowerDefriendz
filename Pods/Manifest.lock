@@ -1,0 +1,12 @@
+PODS:
+  - GMStepper (2.0.0)
+
+DEPENDENCIES:
+  - GMStepper
+
+SPEC CHECKSUMS:
+  GMStepper: 6aff0c881afac2f432e5c9b0df71e44e14110a06
+
+PODFILE CHECKSUM: 8baaaadba42798cdfc1220a9957dfca4576b81de
+
+COCOAPODS: 1.1.1
