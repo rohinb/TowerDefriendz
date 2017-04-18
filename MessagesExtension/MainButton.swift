@@ -35,8 +35,8 @@ class MainButton : UIButton {
 
     var stage = GameStage.initial {
         didSet {
-            switch stage {
 
+            switch stage {
             case .initial:
                 title = ""
                 location = screenCenter
@@ -49,12 +49,6 @@ class MainButton : UIButton {
                 break
 
             case .initialAttack:
-                title = ""
-                location = screenCenter
-                visible = false
-                break
-
-            case .openingDefend:
                 title = ""
                 location = screenCenter
                 visible = false

@@ -20,10 +20,10 @@ class StatusLabel: UILabel {
         didSet {
             switch fontSize {
             case .small:
-                font = font.withSize(19)
+                font = font.withSize(21)
                 break
             case .large:
-                font = font.withSize(21)
+                font = font.withSize(23)
                 break
             }
         }
@@ -48,7 +48,7 @@ class StatusLabel: UILabel {
         didSet {
 
             var labelCenter = screenCenter
-            labelCenter.y -= 230
+            labelCenter.y -= 70
 
             switch stage {
 
@@ -73,13 +73,6 @@ class StatusLabel: UILabel {
                 fontSize = .large
                 break
 
-            case .openingDefend:
-                title = "Expand to defend your base"
-                location = labelCenter
-                visible = true
-                fontSize = .small
-                break
-
             case .defend:
                 title = "They have attacked our base!"
                 location = labelCenter
@@ -102,7 +95,7 @@ class StatusLabel: UILabel {
                 break
 
             case .attack:
-                title = "Attack sent!"
+                title = "Send the attack!"
                 location = labelCenter
                 visible = true
                 fontSize = .small

@@ -21,26 +21,26 @@ extension TowerDefriendzViewController {
             self.gameStage = .initial
         } else {
             incomingMessage = Message(str: conversation.selectedMessage!.url!.absoluteString.removingPercentEncoding!)
-            if incomingMessage?.fromUUID != currentUDID {
+//            if incomingMessage?.fromUUID != currentUDID {
                 self.stages = [.defend, .game, .soldierSelection, .attack]
                 self.gameStage = .defend
-            } else {
-                self.stages = [.waitingForOpponent]
-                self.gameStage = .waitingForOpponent
-            }
+//            } else {
+//                self.stages = [.waitingForOpponent]
+//                self.gameStage = .waitingForOpponent
+//            }
         }
     }
 
     override func didSelect(_ message: MSMessage, conversation: MSConversation) {
 
         incomingMessage = Message(str: message.url!.absoluteString.removingPercentEncoding!)
-        if incomingMessage?.fromUUID != currentUDID {
+//        if incomingMessage?.fromUUID != currentUDID {
             self.stages = [.defend, .game, .soldierSelection, .attack]
             self.gameStage = .defend
-        } else {
-            self.stages = [.waitingForOpponent]
-            self.gameStage = .waitingForOpponent
-        }
+//        } else {
+//            self.stages = [.waitingForOpponent]
+//            self.gameStage = .waitingForOpponent
+//        }
     }
 
     func createAttackMessage(withMessage: Message, defenseDidWin: Bool) {

@@ -10,7 +10,7 @@ import UIKit
 import Messages
 
 
-class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
+class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate, UITableViewDelegate, UITableViewDataSource {
 
     var incomingMessage : Message? = nil
     var pendingMessage : Message? = nil
@@ -21,7 +21,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
             handleGameStages()
         }
     }
-    var stages : [GameStage] = [.initial, .initialAttack, .openingDefend, .defend, .game, .soldierSelection, .attack]
+    var stages : [GameStage] = [.initial, .initialAttack, .defend, .game, .soldierSelection, .attack]
     var gameView : GameView?
     var defenseSucceeded = false
 
@@ -42,16 +42,35 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        updateLocation()
+    }
+
+    func updateLocation() {
+        Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { (timer) in
+            screenCenter = CGPoint(x: self.view.bounds.size.width/2, y: self.view.bounds.size.height/2)
+            self.mainButton.location = screenCenter
+            self.statusLabel.location = screenCenter
+            if [GameStage.soldierSelection, GameStage.initialSoldierSelection].contains(self.gameStage) {
+                self.statusLabel.location.y -= 210
+            } else {
+                self.statusLabel.location.y -= 70
+            }
+        }
     }
 
     override func didTransition(to presentationStyle: MSMessagesAppPresentationStyle) {
         if presentationStyle == .expanded {
-            if [GameStage.initial, GameStage.defend].contains(gameStage) {
+            if [GameStage.initial].contains(gameStage) {
+                screenCenter = CGPoint(x: view.bounds.size.width/2, y: view.bounds.size.height/2)
                 progressGameStage()
             }
         } else {
 
         }
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        screenCenter = CGPoint(x: size.width/2, y: size.height/2)
     }
 
     func progressGameStage() {
@@ -84,15 +103,11 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate {
             requestPresentationStyle(.compact)
             break
 
-        case .openingDefend:
-            break
-
         case .defend:
-            print("-------------------------- IN DEFEND --------------------------")
-            gameViewInitiation()
             break
 
         case .game:
+            gameViewInitiation()
             break
 
         case .soldierSelection:
