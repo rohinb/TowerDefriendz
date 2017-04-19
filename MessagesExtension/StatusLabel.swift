@@ -20,10 +20,10 @@ class StatusLabel: UILabel {
         didSet {
             switch fontSize {
             case .small:
-                font = font.withSize(21)
+                font = font.withSize(19)
                 break
             case .large:
-                font = font.withSize(23)
+                font = font.withSize(21)
                 break
             }
         }

@@ -270,12 +270,12 @@
 				TargetAttributes = {
 					874420CF1EA5886F00F9A572 = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = C72A48R82V;
+						DevelopmentTeam = 6S335WJ5J9;
 						ProvisioningStyle = Automatic;
 					};
 					874420D91EA5886F00F9A572 = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = C72A48R82V;
+						DevelopmentTeam = 6S335WJ5J9;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -531,7 +531,7 @@
 			baseConfigurationReference = D2A8949EB50698E7BE14AAFA /* Pods-MessagesExtension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				DEVELOPMENT_TEAM = C72A48R82V;
+				DEVELOPMENT_TEAM = 6S335WJ5J9;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fiveever.Tower-Defriendz.MessagesExtension";
@@ -546,7 +546,7 @@
 			baseConfigurationReference = 7AC465D0999853879AD80632 /* Pods-MessagesExtension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
-				DEVELOPMENT_TEAM = C72A48R82V;
+				DEVELOPMENT_TEAM = 6S335WJ5J9;
 				INFOPLIST_FILE = MessagesExtension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fiveever.Tower-Defriendz.MessagesExtension";
@@ -562,7 +562,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = C72A48R82V;
+				DEVELOPMENT_TEAM = 6S335WJ5J9;
 				INFOPLIST_FILE = "Tower Defriendz/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fiveever.Tower-Defriendz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -576,7 +576,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = C72A48R82V;
+				DEVELOPMENT_TEAM = 6S335WJ5J9;
 				INFOPLIST_FILE = "Tower Defriendz/Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.fiveever.Tower-Defriendz";
 				PRODUCT_NAME = "$(TARGET_NAME)";

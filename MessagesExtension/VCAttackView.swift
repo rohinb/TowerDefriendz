@@ -29,7 +29,7 @@ extension TowerDefriendzViewController {
         let cell = SoldierTableView.dequeueReusableCell(withIdentifier: "cell") as! SoldierSelectionCell
         cell.VC = self
         cell.soldierType = soldierTypes[indexPath.row]
-        return UITableViewCell()
+        return cell
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -39,29 +39,42 @@ extension TowerDefriendzViewController {
 
 import GMStepper
 
-class SoldierSelectionCell: UITableViewCell {
+class SoldierSelectionCell: UITableViewCell, GMStepperDelegate {
 
     var soldierType : EnemyType? {
         didSet {
-            soldierLabel.text = soldierType?.name
+            soldierLabel.text = soldierType!.name
         }
     }
     @IBOutlet weak var soldierLabel: UILabel!
-    @IBOutlet weak var stepper: GMStepper!
+    @IBOutlet weak var stepper: GMStepper! {
+        didSet {
+            stepper.delegate = self
+        }
+    }
     var VC : TowerDefriendzViewController?
+    let stepperValue = 0
 
-    @IBAction func stepperChanged(_ sender: Any) {
-        if (VC!.armyBudget - soldierType!.price) > 0 {
+    func valueIncreased() -> Bool {
+        if (VC!.armyBudget - soldierType!.price) >= 0 {
             VC?.pendingMessage?.soldierArray.append(soldierType!.rawValue)
             VC?.armyBudget -= soldierType!.price
+             stepper.maximumValue = floor(Double(VC!.armyBudget / soldierType!.price)) + stepper.value
+        } else {
+            return false
         }
+        return true
+    }
+
+    func valueDecreased() -> Bool {
+        VC?.pendingMessage?.soldierArray.remove(at: VC!.pendingMessage!.soldierArray.index(of: soldierType!.rawValue)!)
+        VC?.armyBudget += soldierType!.price
+        stepper.maximumValue = floor(Double(VC!.armyBudget / soldierType!.price)) + stepper.value
+        return true
     }
 
     override func awakeFromNib() { }
 }
-
-
-
 
 
 

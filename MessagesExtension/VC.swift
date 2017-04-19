@@ -35,7 +35,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate, U
     @IBOutlet weak var armyCoins: UILabel!
     var armyBudget = 500 {
         didSet {
-            armyCoins.text = armyBudget.description
+            armyCoins.text = "\(armyBudget.description) coins"
         }
     }
     let soldierTypes = [EnemyType.soldier, EnemyType.bird]

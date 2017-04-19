@@ -8,7 +8,15 @@
 
 import UIKit
 
+public protocol GMStepperDelegate {
+    func valueIncreased() -> Bool
+    func valueDecreased() -> Bool
+}
+
 @IBDesignable public class GMStepper: UIControl {
+
+    public var lastValue = 0.0
+    public var delegate : GMStepperDelegate?
 
     /// Current value of the stepper. Defaults to 0.
     @IBInspectable public var value: Double = 0 {
@@ -17,22 +25,50 @@ import UIKit
 
             let isInteger = floor(value) == value
             
-            //
-            // If we have items, we will display them as steps
-            //
-            
-            if isInteger && stepValue == 1.0 && items.count > 0 {
-                label.text = items[Int(value)]
-            }
-            else if showIntegerIfDoubleIsInteger && isInteger {
-                label.text = String(stringInterpolationSegment: Int(value))
-            } else {
-                label.text = String(stringInterpolationSegment: value)
-            }
 
-            if oldValue != value {
-                sendActions(for: .valueChanged)
-            }
+            lastValue = oldValue
+
+                if lastValue < value {
+                    if delegate!.valueIncreased() {
+                        if isInteger && stepValue == 1.0 && items.count > 0 {
+                            label.text = items[Int(value)]
+                        }
+                        else if showIntegerIfDoubleIsInteger && isInteger {
+                            label.text = String(stringInterpolationSegment: Int(value))
+                        } else {
+                            label.text = String(stringInterpolationSegment: value)
+                        }
+                    } else {
+                        value = lastValue
+                    }
+                } else if lastValue > value {
+                    if delegate!.valueDecreased() {
+                        if isInteger && stepValue == 1.0 && items.count > 0 {
+                            label.text = items[Int(value)]
+                        }
+                        else if showIntegerIfDoubleIsInteger && isInteger {
+                            label.text = String(stringInterpolationSegment: Int(value))
+                        } else {
+                            label.text = String(stringInterpolationSegment: value)
+                        }
+                    } else {
+                        value = lastValue
+                    }
+                }
+
+        }
+    }
+
+    public var leftButtonEnabled = true {
+        didSet {
+            leftButton.isEnabled = leftButtonEnabled
+
+        }
+    }
+
+    public var rightButtonEnabled = true {
+        didSet {
+            rightButton.isEnabled = rightButtonEnabled
         }
     }
 
@@ -87,6 +123,7 @@ import UIKit
         didSet {
             for button in [leftButton, rightButton] {
                 button.backgroundColor = buttonsBackgroundColor
+                button.tintColor = buttonsBackgroundColor
             }
             backgroundColor = buttonsBackgroundColor
         }
@@ -116,7 +153,7 @@ import UIKit
     }
 
     /// Font of the middle label. Defaults to AvenirNext-Bold, 25.0 points in size.
-    public var labelFont = UIFont(name: "AvenirNext-Bold", size: 25.0)! {
+    public var labelFont = UIFont(name: "AvenirNext-Regular", size: 19.0)! {
         didSet {
             label.font = labelFont
         }
@@ -155,7 +192,7 @@ import UIKit
     }
 
     /// Color of the flashing animation on the buttons in case the value hit the limit.
-    @IBInspectable public var limitHitAnimationColor: UIColor = UIColor(red:0.26, green:0.6, blue:0.87, alpha:1)
+    @IBInspectable public var limitHitAnimationColor: UIColor = #colorLiteral(red: 1, green: 0.4418565035, blue: 0.3848792315, alpha: 1)
 
     /**
         Width of the sliding animation. When buttons clicked, the middle label does a slide animation towards to the clicked button. Defaults to 5.
@@ -273,7 +310,7 @@ import UIKit
     var timerFireCountModulo: Int {
         if timerFireCount > 80 {
             return 1 // 0.05 sec * 1 = 0.05 sec
-        } else if timerFireCount > 50 {
+        } else if timerFireCount > 15 {
             return 2 // 0.05 sec * 2 = 0.1 sec
         } else {
             return 10 // 0.05 sec * 10 = 0.5 sec
@@ -353,8 +390,8 @@ extension GMStepper {
             let translation = gesture.translation(in: label)
             gesture.setTranslation(CGPoint.zero, in: label)
 
-            let slidingRight = gesture.velocity(in: label).x > 0
-            let slidingLeft = gesture.velocity(in: label).x < 0
+            let slidingRight = gesture.velocity(in: label).x > 0 && rightButtonEnabled
+            let slidingLeft = gesture.velocity(in: label).x < 0 && leftButtonEnabled
 
             // Move the label with pan
             if slidingRight {
