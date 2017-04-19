@@ -73,6 +73,13 @@ class StatusLabel: UILabel {
                 fontSize = .large
                 break
 
+            case .replay:
+                title = ""
+                location = labelCenter
+                visible = false
+                fontSize = .large
+                break
+
             case .defend:
                 title = "They have attacked our base!"
                 location = labelCenter

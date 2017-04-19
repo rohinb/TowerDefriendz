@@ -54,6 +54,13 @@ class MainButton : UIButton {
                 visible = false
                 break
 
+            case .replay:
+                title = "SKIP!"
+                location = screenCenter
+                location.y += 200
+                visible = true
+                break
+
             case .defend:
                 title = "DEFEND!"
                 location = screenCenter

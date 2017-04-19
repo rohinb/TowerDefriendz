@@ -11,19 +11,19 @@ import Messages
 
 extension TowerDefriendzViewController {
 
-    func gameViewInitiation() {
+    func gameViewInitiation(isReplay: Bool) {
         if incomingMessage?.soldierArray.count != 0 {
             gameView = GameView(frame: view.bounds)
             gameView?.delegate = self
             gameView?.autoresizingMask = [.flexibleHeight, .flexibleWidth]
             view.addSubview(gameView!)
-            gameView?.start(enemyInts: incomingMessage!.soldierArray ,turnNumber: incomingMessage!.turnNumber)
+            gameView?.start(enemyInts: incomingMessage!.soldierArray ,turnNumber: incomingMessage!.turnNumber, replay: incomingMessage?.replay)
         } else {
             alert(withTitle: "Empty attack wave", withMessage: "abort")
         }
     }
 
-    func gameDidEnd(didWin: Bool) {
+    func gameDidEnd(didWin: Bool, replay: [Int: [String: Any]]) {
 
         progressGameStage()
         gameView?.animateAlpha(t: 0.3, a: 0)
@@ -31,6 +31,7 @@ extension TowerDefriendzViewController {
             self.gameView?.removeFromSuperview()
         }
         defenseSucceeded = didWin
+        self.replay = replay
     }
 
 }

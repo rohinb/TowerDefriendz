@@ -14,8 +14,7 @@ struct Constants {
 
 protocol GameDelegate {
     
-    func gameDidEnd(didWin: Bool)
-    
+    func gameDidEnd(didWin: Bool, replay: [Int: [String: Any]])
 }
 
 var enemyArray = [Enemy]()
@@ -67,8 +66,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
 													86  : ["name" : "normal" , "x" : 4, "y" : 7],
 													73  : ["name" : "deadly" , "x" : 3, "y" : 6],
 													1   : ["name" : "normal" , "x" : 2, "y" : 5],
-													104 : ["name" : "normal" , "x" : 1, "y" : 4]
-																									]
+													104 : ["name" : "normal" , "x" : 1, "y" : 4]]
 	
 	
     override init(frame: CGRect) {
@@ -218,7 +216,10 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
         super.init(coder: aDecoder)
     }
 	
-    func start(enemyInts: [Int], turnNumber: Int) {
+    func start(enemyInts: [Int], turnNumber: Int, replay: [Int: [String: Any]]?) {
+        if replay == nil {
+            isReplay = false
+        }
 		var count = 0
         defenderBudget = (turnNumber+1) * 1000
         budgetLabel?.text = "\(defenderBudget)"
@@ -240,7 +241,9 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
     func didEnd(didWin: Bool) {
 		if !isRunning { return }
 		print("recording placements at end of game: ", recordingPlacements)
-        delegate?.gameDidEnd(didWin: didWin)
+
+        //      ----------------------------- TO FIX ------------------
+        delegate?.gameDidEnd(didWin: didWin, replay: [Int: [String: Any]]())
 		isRunning = false
 		
 		//kill everything

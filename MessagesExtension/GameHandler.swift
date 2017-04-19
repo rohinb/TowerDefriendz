@@ -37,6 +37,16 @@ class Message {
             updateMessageStringFromProperties()
         }
     }
+    var replay : [Int: [String: Any]] = [34  : ["name" : "normal" , "x" : 8, "y" : 7]] {
+        didSet {
+            updateMessageStringFromProperties()
+        }
+    }
+    var previousSoldierArray : [Int] = [0] {
+        didSet {
+            updateMessageStringFromProperties()
+        }
+    }
 
     init(str: String) {
         messageString = str
@@ -50,6 +60,8 @@ class Message {
         turnNumber = dic![MessageOptions.turnNumber.rawValue] as! Int
         fromScore = dic![MessageOptions.fromScore.rawValue] as! Int
         toScore = dic![MessageOptions.toScore.rawValue] as! Int
+        replay = dic![MessageOptions.replay.rawValue] as! [Int: [String: Any]]
+        previousSoldierArray = dic![MessageOptions.previousSoldierArray.rawValue] as! [Int]
     }
 
     init(dic: Dictionary<String, Any>) {
@@ -63,7 +75,9 @@ class Message {
                       MessageOptions.soldierArray.rawValue : soldierArray,
                       MessageOptions.turnNumber.rawValue : turnNumber,
                       MessageOptions.fromScore.rawValue : fromScore,
-                      MessageOptions.toScore.rawValue : toScore]
+                      MessageOptions.toScore.rawValue : toScore,
+                      MessageOptions.replay.rawValue : replay,
+                      MessageOptions.previousSoldierArray.rawValue : previousSoldierArray]
         messageString = serialize(dic: dictionary)
     }
 
@@ -95,6 +109,8 @@ enum MessageOptions : String {
     case turnNumber = "turnNumber"
     case fromScore = "fromScore"
     case toScore = "toScore"
+    case replay = "replay"
+    case previousSoldierArray = "previousSoldierArray"
 }
 
 

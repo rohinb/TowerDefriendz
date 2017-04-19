@@ -10,6 +10,7 @@ enum GameStage {
     case initial
     case initialSoldierSelection
     case initialAttack
+    case replay
     case defend
     case game
     case soldierSelection

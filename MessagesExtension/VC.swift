@@ -16,7 +16,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate, U
     var incomingMessage : Message? = nil
     var pendingMessage : Message? = nil
     var currentUDID : String?
-    var stages : [GameStage] = [.initial, .initialAttack, .defend, .game, .soldierSelection, .attack]
+    var stages : [GameStage] = [.initial, .initialAttack, .replay, .defend, .game, .soldierSelection, .attack]
     var gameStage = GameStage.initial {
         didSet {
             handleGameStages()
@@ -26,6 +26,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate, U
     // GAME VIEW
     var gameView : GameView?
     var defenseSucceeded = false
+    var replay : [Int: [String: Any]]?
 
     @IBOutlet weak var statusLabel: StatusLabel!
     @IBOutlet weak var mainButton: MainButton!
@@ -107,11 +108,15 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate, U
             requestPresentationStyle(.compact)
             break
 
+        case .replay:
+            gameViewInitiation(isReplay: true)
+            break
+
         case .defend:
             break
 
         case .game:
-            gameViewInitiation()
+            gameViewInitiation(isReplay: false)
             break
 
         case .soldierSelection:
@@ -119,8 +124,10 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate, U
                                         MessageOptions.soldierArray.rawValue : [Int](),
                                         MessageOptions.turnNumber.rawValue : incomingMessage!.turnNumber + 1,
                                         MessageOptions.fromScore.rawValue : incomingMessage!.toScore,
-                                        MessageOptions.toScore.rawValue : incomingMessage!.fromScore]
-            
+                                        MessageOptions.toScore.rawValue : incomingMessage!.fromScore,
+                                        MessageOptions.previousSoldierArray.rawValue : incomingMessage!.soldierArray,
+                                        MessageOptions.replay.rawValue : [Int: [String: Any]]()]
+
             pendingMessage = Message(dic: dic)
             showSoldierSelection()
             break
