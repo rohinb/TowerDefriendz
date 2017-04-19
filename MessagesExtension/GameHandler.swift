@@ -54,29 +54,37 @@ class Message {
     }
 
     func updatePropertiesFromMessageString() {
-        let dic = deserialize(text: messageString!)
-        fromUUID = dic![MessageOptions.fromUUID.rawValue] as! String
-        soldierArray = dic![MessageOptions.soldierArray.rawValue] as! [Int]
-        turnNumber = dic![MessageOptions.turnNumber.rawValue] as! Int
-        fromScore = dic![MessageOptions.fromScore.rawValue] as! Int
-        toScore = dic![MessageOptions.toScore.rawValue] as! Int
-        replay = dic![MessageOptions.replay.rawValue] as! [Int: [String: Any]]
-        previousSoldierArray = dic![MessageOptions.previousSoldierArray.rawValue] as! [Int]
+		if let dic = deserialize(text: messageString!) {
+			fromUUID = dic[MessageOptions.fromUUID.rawValue] as! String
+			soldierArray = dic[MessageOptions.soldierArray.rawValue] as! [Int]
+			turnNumber = dic[MessageOptions.turnNumber.rawValue] as! Int
+			fromScore = dic[MessageOptions.fromScore.rawValue] as! Int
+			toScore = dic[MessageOptions.toScore.rawValue] as! Int
+			replay = dic[MessageOptions.replay.rawValue] as? [Int: [String: Any]] ?? [Int: [String: Any]]() // needed to add this catch to get it to not crash the first time
+			previousSoldierArray = dic[MessageOptions.previousSoldierArray.rawValue] as? [Int] ?? [Int]()
+		}
     }
 
     init(dic: Dictionary<String, Any>) {
         dictionary = dic
         messageString = serialize(dic: dictionary)
         updatePropertiesFromMessageString()
+		dictionary = [MessageOptions.fromUUID.rawValue : fromUUID,
+		              MessageOptions.soldierArray.rawValue : soldierArray.count > 0 ? soldierArray : [-1],
+		              MessageOptions.turnNumber.rawValue : turnNumber,
+		              MessageOptions.fromScore.rawValue : fromScore,
+		              MessageOptions.toScore.rawValue : toScore,
+		              MessageOptions.replay.rawValue : replay.keys.count > 0 ? replay : [-1  : ["name" : "normal" , "x" : 8, "y" : 7]],
+		              MessageOptions.previousSoldierArray.rawValue : previousSoldierArray]
     }
 
     func updateMessageStringFromProperties() {
         dictionary = [MessageOptions.fromUUID.rawValue : fromUUID,
-                      MessageOptions.soldierArray.rawValue : soldierArray,
+                      MessageOptions.soldierArray.rawValue : soldierArray.count > 0 ? soldierArray : [-1],
                       MessageOptions.turnNumber.rawValue : turnNumber,
                       MessageOptions.fromScore.rawValue : fromScore,
                       MessageOptions.toScore.rawValue : toScore,
-                      MessageOptions.replay.rawValue : replay,
+                      MessageOptions.replay.rawValue : replay.keys.count > 0 ? replay : [-1  : ["name" : "normal" , "x" : 8, "y" : 7]],
                       MessageOptions.previousSoldierArray.rawValue : previousSoldierArray]
         messageString = serialize(dic: dictionary)
     }
@@ -87,6 +95,7 @@ class Message {
                 return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
             } catch {
                 print(error.localizedDescription)
+				print("bad text: ", text)
             }
         }
         return nil
