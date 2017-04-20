@@ -85,6 +85,7 @@
 		87552B781EA58A3500EA10BC /* VCMessageHandling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCMessageHandling.swift; sourceTree = "<group>"; };
 		D2A8949EB50698E7BE14AAFA /* Pods-MessagesExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MessagesExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MessagesExtension/Pods-MessagesExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		D92CF84175BD6AA8FA4B6D43 /* Pods_MessagesExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MessagesExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4DFEF261EA8F77300132B9C /* PixelOperatorSC.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PixelOperatorSC.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -196,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				87552B711EA58A3500EA10BC /* MainInterface.storyboard */,
+				F4DFEF261EA8F77300132B9C /* PixelOperatorSC.ttf */,
 				874420E71EA5886F00F9A572 /* Assets.xcassets */,
 				874420E91EA5886F00F9A572 /* Info.plist */,
 			);
