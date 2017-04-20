@@ -26,7 +26,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
 
     var delegate : GameDelegate?
 	var lives = 3
-	var isRunning = true
+	var isRunning = true 
     var defenderBudget = 0
 	var hearts = [UIImageView]()
 	let towerTypes = ["normal", "ranged", "deadly"]
