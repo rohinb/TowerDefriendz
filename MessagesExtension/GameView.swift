@@ -52,7 +52,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
 	
 	// TODO: pass these in n out of iMessage
 	
-	var isReplay = true
+	var isReplay = false
 	var recordingTimer = Timer()
 	var recordingTicks = 0
 	var recordingPlacements = [Int: [String: Any]]()
@@ -217,9 +217,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
     }
 	
     func start(enemyInts: [Int], turnNumber: Int, replay: [Int: [String: Any]]?) {
-        if replay == nil {
-            isReplay = false
-        }
+        isReplay = replay != nil
 		var count = 0
         defenderBudget = (turnNumber+1) * 1000
         budgetLabel?.text = "\(defenderBudget)"
@@ -243,7 +241,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
 		print("recording placements at end of game: ", recordingPlacements)
 
         //      ----------------------------- TO FIX ------------------
-        delegate?.gameDidEnd(didWin: didWin, replay: [Int: [String: Any]]())
+        delegate?.gameDidEnd(didWin: didWin, replay: recordingPlacements)
 		isRunning = false
 		
 		//kill everything
