@@ -60,8 +60,7 @@ class Message {
 			turnNumber = dic[MessageOptions.turnNumber.rawValue] as! Int
 			fromScore = dic[MessageOptions.fromScore.rawValue] as! Int
 			toScore = dic[MessageOptions.toScore.rawValue] as! Int
-			replay = dic[MessageOptions.replay.rawValue] as? [Int: [String: Any]] ?? [Int: [String: Any]]() // needed to add this catch to get it to not crash the first time
-			previousSoldierArray = dic[MessageOptions.previousSoldierArray.rawValue] as? [Int] ?? [Int]()
+			replay = dic[MessageOptions.replay.rawValue] as? [Int: [String: Any]] ?? [Int: [String: Any]]()
 		}
     }
 
@@ -74,8 +73,7 @@ class Message {
 		              MessageOptions.turnNumber.rawValue : turnNumber,
 		              MessageOptions.fromScore.rawValue : fromScore,
 		              MessageOptions.toScore.rawValue : toScore,
-		              MessageOptions.replay.rawValue : replay.keys.count > 0 ? replay : [-1  : ["name" : "normal" , "x" : 8, "y" : 7]],
-		              MessageOptions.previousSoldierArray.rawValue : previousSoldierArray]
+		              MessageOptions.replay.rawValue : replay.keys.count > 0 ? replay : [-1  : ["name" : "normal" , "x" : 8, "y" : 7]]]
     }
 
     func updateMessageStringFromProperties() {
@@ -84,8 +82,7 @@ class Message {
                       MessageOptions.turnNumber.rawValue : turnNumber,
                       MessageOptions.fromScore.rawValue : fromScore,
                       MessageOptions.toScore.rawValue : toScore,
-                      MessageOptions.replay.rawValue : replay.keys.count > 0 ? replay : [-1  : ["name" : "normal" , "x" : 8, "y" : 7]],
-                      MessageOptions.previousSoldierArray.rawValue : previousSoldierArray]
+                      MessageOptions.replay.rawValue : replay.keys.count > 0 ? replay : [-1  : ["name" : "normal" , "x" : 8, "y" : 7]]]
         messageString = serialize(dic: dictionary)
     }
 
@@ -119,7 +116,6 @@ enum MessageOptions : String {
     case fromScore = "fromScore"
     case toScore = "toScore"
     case replay = "replay"
-    case previousSoldierArray = "previousSoldierArray"
 }
 
 

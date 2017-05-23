@@ -13,7 +13,7 @@ extension TowerDefriendzViewController {
 
     func showSoldierSelection() {
         soldierAdditionView.animateAlpha(t: 0.3, a: 1)
-        soldierAdditionView.animateView(direction: .up, t: 0.3, pixels: 70)
+//        soldierAdditionView.animateView(direction: .up, t: 0.3, pixels: 70)
     }
 
     func hideSoldierSelection() {

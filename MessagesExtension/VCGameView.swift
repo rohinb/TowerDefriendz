@@ -13,6 +13,7 @@ extension TowerDefriendzViewController {
 
     func gameViewInitiation(isReplay: Bool) {
         if incomingMessage?.soldierArray.count != 0 {
+            
             gameView = GameView(frame: view.bounds)
             gameView?.delegate = self
             gameView?.autoresizingMask = [.flexibleHeight, .flexibleWidth]

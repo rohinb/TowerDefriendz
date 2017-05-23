@@ -125,8 +125,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate, U
                                         MessageOptions.turnNumber.rawValue : incomingMessage!.turnNumber + 1,
                                         MessageOptions.fromScore.rawValue : incomingMessage!.toScore,
                                         MessageOptions.toScore.rawValue : incomingMessage!.fromScore,
-                                        MessageOptions.previousSoldierArray.rawValue : incomingMessage!.soldierArray,
-                                        MessageOptions.replay.rawValue : [Int: [String: Any]]()]
+                                        MessageOptions.replay.rawValue : self.replay ?? [Int: [String: Any]]()]
 
             pendingMessage = Message(dic: dic)
             showSoldierSelection()
