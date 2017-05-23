@@ -52,7 +52,6 @@ class Message {
         messageString = str
         updatePropertiesFromMessageString()
     }
-
     func updatePropertiesFromMessageString() {
 		if let dic = deserialize(text: messageString!) {
 			fromUUID = dic[MessageOptions.fromUUID.rawValue] as! String
@@ -67,8 +66,6 @@ class Message {
 
     init(dic: Dictionary<String, Any>) {
         dictionary = dic
-        messageString = serialize(dic: dictionary)
-        updatePropertiesFromMessageString()
 		dictionary = [MessageOptions.fromUUID.rawValue : fromUUID,
 		              MessageOptions.soldierArray.rawValue : soldierArray.count > 0 ? soldierArray : [-1],
 		              MessageOptions.turnNumber.rawValue : turnNumber,
@@ -76,6 +73,8 @@ class Message {
 		              MessageOptions.toScore.rawValue : toScore,
 		              MessageOptions.replay.rawValue : replay.keys.count > 0 ? replay : [-1  : ["name" : "normal" , "x" : 8, "y" : 7]],
 		              MessageOptions.previousSoldierArray.rawValue : previousSoldierArray.count > 0 ? previousSoldierArray : [-1]]
+		messageString = serialize(dic: dictionary)
+		updatePropertiesFromMessageString()
     }
 
     func updateMessageStringFromProperties() {
@@ -92,6 +91,7 @@ class Message {
     func deserialize(text: String) -> [String: Any]? {
         if let data = text.data(using: .utf8) {
             do {
+				print("good text: ", text)
                 return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
             } catch {
                 print(error.localizedDescription)
