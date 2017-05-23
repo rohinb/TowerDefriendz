@@ -86,22 +86,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MessagesExtension/VCMessageHandling.swift"
-            timestampString = "517272886.446712"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "willBecomeActive(with:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -122,12 +106,12 @@
             ignoreCount = "5"
             continueAfterRunningActions = "No"
             filePath = "MessagesExtension/GameHandler.swift"
-            timestampString = "517273632.679556"
+            timestampString = "517274551.223389"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "updateMessageStringFromProperties()"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "init(dic:)"
             landmarkType = "7">
             <Actions>
                <BreakpointActionProxy
@@ -174,7 +158,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MessagesExtension/VCMessageHandling.swift"
@@ -184,6 +168,23 @@
             startingLineNumber = "75"
             endingLineNumber = "75"
             landmarkName = "sendMessage(withCaption:withSubcaption:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            condition = "po dic!"
+            continueAfterRunningActions = "No"
+            filePath = "MessagesExtension/GameHandler.swift"
+            timestampString = "517275077.520472"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "serialize(dic:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

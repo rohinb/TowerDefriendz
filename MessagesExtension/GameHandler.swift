@@ -73,7 +73,8 @@ class Message {
 		              MessageOptions.turnNumber.rawValue : turnNumber,
 		              MessageOptions.fromScore.rawValue : fromScore,
 		              MessageOptions.toScore.rawValue : toScore,
-		              MessageOptions.replay.rawValue : replay.keys.count > 0 ? replay : [-1  : ["name" : "normal" , "x" : 8, "y" : 7]]]
+		              MessageOptions.replay.rawValue : replay.keys.count > 0 ? replay : [-1  : ["name" : "normal" , "x" : 8, "y" : 7]],
+		              MessageOptions.previousSoldierArray.rawValue : previousSoldierArray.count > 0 ? previousSoldierArray : [-1]]
     }
 
     func updateMessageStringFromProperties() {
@@ -82,7 +83,8 @@ class Message {
                       MessageOptions.turnNumber.rawValue : turnNumber,
                       MessageOptions.fromScore.rawValue : fromScore,
                       MessageOptions.toScore.rawValue : toScore,
-                      MessageOptions.replay.rawValue : replay.keys.count > 0 ? replay : [-1  : ["name" : "normal" , "x" : 8, "y" : 7]]]
+                      MessageOptions.replay.rawValue : replay.keys.count > 0 ? replay : [-1  : ["name" : "normal" , "x" : 8, "y" : 7]],
+                      MessageOptions.previousSoldierArray.rawValue : previousSoldierArray.count > 0 ? previousSoldierArray : [-1]]
         messageString = serialize(dic: dictionary)
     }
 
@@ -116,6 +118,7 @@ enum MessageOptions : String {
     case fromScore = "fromScore"
     case toScore = "toScore"
     case replay = "replay"
+    case previousSoldierArray = "previousSoldierArray"
 }
 
 

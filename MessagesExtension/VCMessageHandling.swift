@@ -33,6 +33,8 @@ extension TowerDefriendzViewController {
 
     override func didSelect(_ message: MSMessage, conversation: MSConversation) {
 
+        currentUDID = conversation.localParticipantIdentifier.uuidString
+
         incomingMessage = Message(str: message.url!.absoluteString.removingPercentEncoding!)
 //        if incomingMessage?.fromUUID != currentUDID {
             self.stages = [.defend, .game, .soldierSelection, .attack]
