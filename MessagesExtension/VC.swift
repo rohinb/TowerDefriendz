@@ -26,7 +26,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate, U
     // GAME VIEW
     var gameView : GameView?
     var defenseSucceeded = false
-    var replay : [Int: [String: Any]]?
+    var replay : [String: [String: Any]]?
 
     @IBOutlet weak var statusLabel: StatusLabel!
     @IBOutlet weak var mainButton: MainButton!

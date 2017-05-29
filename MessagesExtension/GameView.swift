@@ -14,7 +14,7 @@ struct Constants {
 
 protocol GameDelegate {
     
-    func gameDidEnd(didWin: Bool, replay: [Int: [String: Any]])
+    func gameDidEnd(didWin: Bool, replay: [String: [String: String]])
 }
 
 var enemyArray = [Enemy]()
@@ -55,18 +55,18 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
 	var isReplay = false
 	var recordingTimer = Timer()
 	var recordingTicks = 0
-	var recordingPlacements = [Int: [String: Any]]()
+	var recordingPlacements = [String: [String: String]]()
 	var replayTimer = Timer()
 	var replayTicks = 0
-	var replayPlacements : [Int: [String: Any]] = [   // ticks are in tenths of a second
-													34  : ["name" : "normal" , "x" : 8, "y" : 7],
-													24  : ["name" : "ranged" , "x" : 7, "y" : 9],
-													14  : ["name" : "deadly" , "x" : 6, "y" : 10],
-													54  : ["name" : "ranged" , "x" : 5, "y" : 8],
-													86  : ["name" : "normal" , "x" : 4, "y" : 7],
-													73  : ["name" : "deadly" , "x" : 3, "y" : 6],
-													1   : ["name" : "normal" , "x" : 2, "y" : 5],
-													104 : ["name" : "normal" , "x" : 1, "y" : 4]]
+	var replayPlacements : [String: [String: String]] = [   // ticks are in tenths of a second
+													"34"  : ["name" : "normal" , "x" : "8", "y" : "7"],
+													"24"  : ["name" : "ranged" , "x" : "7", "y" : "9"],
+													"14"  : ["name" : "deadly" , "x" : "6", "y" : "10"],
+													"54"  : ["name" : "ranged" , "x" : "5", "y" : "8"],
+													"86"  : ["name" : "normal" , "x" : "4", "y" : "7"],
+													"73"  : ["name" : "deadly" , "x" : "3", "y" : "6"],
+													"1"   : ["name" : "normal" , "x" : "2", "y" : "5"],
+													"104" : ["name" : "normal" , "x" : "1", "y" : "4"]]
 	
 	
     override init(frame: CGRect) {
@@ -116,8 +116,8 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
 		if isReplay {
 			replayTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (timer) in
 				self.replayTicks += 1
-				if let item = self.replayPlacements[self.replayTicks] {
-					let tower = Tower(posX: item["x"] as! Int, posY: item["y"] as! Int, type: TowerType(name: item["name"] as! String))
+				if let item = self.replayPlacements[self.replayTicks.description] {
+					let tower = Tower(posX: Int(item["x"]!)!, posY: Int(item["y"]!)!, type: TowerType(name: item["name"]!))
 					self.addSubview(tower)
 					tower.delegate = self
 					towerArray?.append(tower)
@@ -195,7 +195,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
 	
 	func confirmTower(posX: Int, posY : Int, tower: Tower) { // TODO: Make clickable radius bigger
 		if defenderBudget - tower.type.price >= 0 {
-			recordingPlacements[recordingTicks] = ["name" : tower.type.name, "x" : posX, "y" : posY]
+			recordingPlacements[recordingTicks.description] = ["name" : tower.type.name, "x" : posX.description, "y" : posY.description]
 			
 			tower.alpha = 1.0
 			tower.delegate = self
@@ -216,7 +216,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
         super.init(coder: aDecoder)
     }
 	
-    func start(enemyInts: [Int], turnNumber: Int, replay: [Int: [String: Any]]?) {
+    func start(enemyInts: [Int], turnNumber: Int, replay: [String: [String: Any]]?) {
         isReplay = replay != nil
 		var count = 0
         defenderBudget = (turnNumber+1) * 1000
