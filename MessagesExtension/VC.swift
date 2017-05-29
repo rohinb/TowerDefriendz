@@ -26,7 +26,7 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate, U
     // GAME VIEW
     var gameView : GameView?
     var defenseSucceeded = false
-    var replay : [Int: [String: Any]]?
+    var replay : [String: [String: Any]]?
 
     @IBOutlet weak var statusLabel: StatusLabel!
     @IBOutlet weak var mainButton: MainButton!
@@ -120,12 +120,15 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate, U
             break
 
         case .soldierSelection:
+            armyBudget = (incomingMessage!.turnNumber + 1 ) * 500
+            print(incomingMessage!.turnNumber)
             let dic : [String : Any] = [MessageOptions.fromUUID.rawValue : currentUDID!,
-                                        MessageOptions.soldierArray.rawValue : [Int](),
+                                        MessageOptions.soldierArray.rawValue : [-1],
                                         MessageOptions.turnNumber.rawValue : incomingMessage!.turnNumber + 1,
                                         MessageOptions.fromScore.rawValue : incomingMessage!.toScore,
                                         MessageOptions.toScore.rawValue : incomingMessage!.fromScore,
-                                        MessageOptions.replay.rawValue : self.replay ?? [Int: [String: Any]]()]
+                                        MessageOptions.replay.rawValue : ["-1"  : ["name" : "normal" , "x" : "8", "y" : "7"]],
+                                        MessageOptions.previousSoldierArray.rawValue : incomingMessage!.soldierArray]
 
             pendingMessage = Message(dic: dic)
             showSoldierSelection()

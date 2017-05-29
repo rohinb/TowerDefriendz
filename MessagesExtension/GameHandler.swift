@@ -11,7 +11,11 @@ import UIKit
 class Message {
 
     var dictionary : [String : Any]?
-    var messageString : String?
+	var messageString : String? {
+		didSet {
+		//	print(messageString)
+		}
+	}
     var fromUUID : String = "" {
         didSet {
             updateMessageStringFromProperties()
@@ -37,7 +41,7 @@ class Message {
             updateMessageStringFromProperties()
         }
     }
-    var replay : [Int: [String: Any]] = [34  : ["name" : "normal" , "x" : 8, "y" : 7]] {
+    var replay : [String: [String: Any]] = [String: [String: String]]() {
         didSet {
             updateMessageStringFromProperties()
         }
@@ -59,19 +63,13 @@ class Message {
 			turnNumber = dic[MessageOptions.turnNumber.rawValue] as! Int
 			fromScore = dic[MessageOptions.fromScore.rawValue] as! Int
 			toScore = dic[MessageOptions.toScore.rawValue] as! Int
-			replay = dic[MessageOptions.replay.rawValue] as? [Int: [String: Any]] ?? [Int: [String: Any]]()
+			replay = dic[MessageOptions.replay.rawValue] as? [String: [String: String]] ?? [String: [String: String]]() // needed to add this catch to get it to not crash the first time
+			previousSoldierArray = dic[MessageOptions.previousSoldierArray.rawValue] as? [Int] ?? [Int]()
 		}
     }
 
     init(dic: Dictionary<String, Any>) {
         dictionary = dic
-		dictionary = [MessageOptions.fromUUID.rawValue : fromUUID,
-		              MessageOptions.soldierArray.rawValue : soldierArray.count > 0 ? soldierArray : [-1],
-		              MessageOptions.turnNumber.rawValue : turnNumber,
-		              MessageOptions.fromScore.rawValue : fromScore,
-		              MessageOptions.toScore.rawValue : toScore,
-		              MessageOptions.replay.rawValue : replay.keys.count > 0 ? replay : [-1  : ["name" : "normal" , "x" : 8, "y" : 7]],
-		              MessageOptions.previousSoldierArray.rawValue : previousSoldierArray.count > 0 ? previousSoldierArray : [-1]]
 		messageString = serialize(dic: dictionary)
 		updatePropertiesFromMessageString()
     }
@@ -82,7 +80,7 @@ class Message {
                       MessageOptions.turnNumber.rawValue : turnNumber,
                       MessageOptions.fromScore.rawValue : fromScore,
                       MessageOptions.toScore.rawValue : toScore,
-                      MessageOptions.replay.rawValue : replay.keys.count > 0 ? replay : [-1  : ["name" : "normal" , "x" : 8, "y" : 7]],
+                      MessageOptions.replay.rawValue : replay.keys.count > 0 ? replay : ["-1"  : ["name" : "normal" , "x" : "8", "y" : "7"]],
                       MessageOptions.previousSoldierArray.rawValue : previousSoldierArray.count > 0 ? previousSoldierArray : [-1]]
         messageString = serialize(dic: dictionary)
     }
@@ -90,7 +88,6 @@ class Message {
     func deserialize(text: String) -> [String: Any]? {
         if let data = text.data(using: .utf8) {
             do {
-				print("good text: ", text)
                 return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
             } catch {
                 print(error.localizedDescription)
@@ -100,14 +97,21 @@ class Message {
         return nil
     }
 
-    func serialize(dic: [String: Any]?) -> String {
-        var res = dic!.description
-        res.remove(at: res.startIndex)
-        res.insert("{", at: res.startIndex)
-        res = res.substring(to: res.index(before: res.endIndex))
-        res.append("}")
-        return res
-    }
+	func serialize(dic: [String: Any]?) -> String {
+		var res = dic!.description
+		res.remove(at: res.startIndex)
+		res.insert("{", at: res.startIndex)
+		res = res.substring(to: res.index(before: res.endIndex))
+		res.append("}")
+		
+		if let range = res.localizedStandardRange(of: "replay") {
+			res = res.replacingOccurrences(of: "[", with: "{", options: .caseInsensitive, range: range.upperBound..<res.endIndex)
+			res = res.replacingOccurrences(of: "]", with: "}", options: .caseInsensitive, range: range.upperBound..<res.endIndex)
+		}
+
+		return res
+	}
+
 
 }
 

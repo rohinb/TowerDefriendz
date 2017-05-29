@@ -13,7 +13,9 @@ extension TowerDefriendzViewController {
 
     func showSoldierSelection() {
         soldierAdditionView.animateAlpha(t: 0.3, a: 1)
-//        soldierAdditionView.animateView(direction: .up, t: 0.3, pixels: 70)
+        for cell in SoldierTableView.visibleCells as! [SoldierSelectionCell]{
+            cell.stepper.value = 0
+        }
     }
 
     func hideSoldierSelection() {
@@ -59,7 +61,7 @@ class SoldierSelectionCell: UITableViewCell, GMStepperDelegate {
         if (VC!.armyBudget - soldierType!.price) >= 0 {
             VC?.pendingMessage?.soldierArray.append(soldierType!.rawValue)
             VC?.armyBudget -= soldierType!.price
-             stepper.maximumValue = floor(Double(VC!.armyBudget / soldierType!.price)) + stepper.value
+            stepper.maximumValue = floor(Double(VC!.armyBudget / soldierType!.price)) + stepper.value
         } else {
             return false
         }
@@ -67,9 +69,11 @@ class SoldierSelectionCell: UITableViewCell, GMStepperDelegate {
     }
 
     func valueDecreased() -> Bool {
-        VC?.pendingMessage?.soldierArray.remove(at: VC!.pendingMessage!.soldierArray.index(of: soldierType!.rawValue)!)
-        VC?.armyBudget += soldierType!.price
-        stepper.maximumValue = floor(Double(VC!.armyBudget / soldierType!.price)) + stepper.value
+        if stepper.value != 0 && VC!.pendingMessage!.soldierArray.count > 1 {
+            VC?.pendingMessage?.soldierArray.remove(at: VC!.pendingMessage!.soldierArray.index(of: soldierType!.rawValue)!)
+            VC?.armyBudget += soldierType!.price
+            stepper.maximumValue = floor(Double(VC!.armyBudget / soldierType!.price)) + stepper.value
+        }
         return true
     }
 

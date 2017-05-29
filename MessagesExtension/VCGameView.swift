@@ -24,7 +24,7 @@ extension TowerDefriendzViewController {
         }
     }
 
-    func gameDidEnd(didWin: Bool, replay: [Int: [String: Any]]) {
+    func gameDidEnd(didWin: Bool, replay: [String: [String: String]]) {
 
         progressGameStage()
         gameView?.animateAlpha(t: 0.3, a: 0)
