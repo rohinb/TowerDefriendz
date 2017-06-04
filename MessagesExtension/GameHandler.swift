@@ -41,7 +41,7 @@ class Message {
             updateMessageStringFromProperties()
         }
     }
-    var replay : [String: [String: Any]] = [String: [String: String]]() {
+    var replay : [String: [String: String]] = [String: [String: String]]() {
         didSet {
             updateMessageStringFromProperties()
         }
@@ -63,7 +63,13 @@ class Message {
 			turnNumber = dic[MessageOptions.turnNumber.rawValue] as! Int
 			fromScore = dic[MessageOptions.fromScore.rawValue] as! Int
 			toScore = dic[MessageOptions.toScore.rawValue] as! Int
-			replay = dic[MessageOptions.replay.rawValue] as? [String: [String: String]] ?? [String: [String: String]]() // needed to add this catch to get it to not crash the first time
+            if let rply = dic[MessageOptions.replay.rawValue] as? [String: [String: String]] {
+                if let _ = rply["-1"] {
+                    replay = [String: [String: String]]()
+                } else {
+                    replay = rply
+                }
+            }
 			previousSoldierArray = dic[MessageOptions.previousSoldierArray.rawValue] as? [Int] ?? [Int]()
 		}
     }

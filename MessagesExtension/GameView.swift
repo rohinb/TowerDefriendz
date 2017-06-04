@@ -6,7 +6,7 @@ struct Constants {
 
 protocol GameDelegate {
 
-    func gameDidEnd(didWin: Bool, replay: [String: [String: String]])
+    func gameDidEnd(didWin: Bool, replay: [String: [String: String]]?)
 }
 
 var enemyArray = [Enemy]()
@@ -44,21 +44,18 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
 
     // TODO: pass these in n out of iMessage
 
-    var isReplay = false
+    var isReplay = false {
+        didSet {
+            self.gestureRecognizers?.first!.isEnabled = !isReplay
+            setupReplayTimer()
+        }
+    }
     var recordingTimer = Timer()
     var recordingTicks = 0
     var recordingPlacements = [String: [String: String]]()
     var replayTimer = Timer()
     var replayTicks = 0
-    var replayPlacements : [String: [String: String]] = [   // ticks are in tenths of a second
-        "34"  : ["name" : "normal" , "x" : "8", "y" : "7"],
-        "24"  : ["name" : "ranged" , "x" : "7", "y" : "9"],
-        "14"  : ["name" : "deadly" , "x" : "6", "y" : "10"],
-        "54"  : ["name" : "ranged" , "x" : "5", "y" : "8"],
-        "86"  : ["name" : "normal" , "x" : "4", "y" : "7"],
-        "73"  : ["name" : "deadly" , "x" : "3", "y" : "6"],
-        "1"   : ["name" : "normal" , "x" : "2", "y" : "5"],
-        "104" : ["name" : "normal" , "x" : "1", "y" : "4"]]
+    var replayPlacements : [String: [String: String]]?
 
 
     override init(frame: CGRect) {
@@ -104,11 +101,13 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
         coin.isHidden = isReplay
         coin.center.y = budgetLabel!.center.y
         self.addSubview(coin)
+    }
 
+    func setupReplayTimer() {
         if isReplay {
             replayTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (timer) in
                 self.replayTicks += 1
-                if let item = self.replayPlacements[self.replayTicks.description] {
+                if let item = self.replayPlacements![self.replayTicks.description] {
                     let tower = Tower(posX: Int(item["x"]!)!, posY: Int(item["y"]!)!, type: TowerType(name: item["name"]!))
                     self.addSubview(tower)
                     tower.delegate = self
@@ -208,8 +207,9 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
         super.init(coder: aDecoder)
     }
 
-    func start(enemyInts: [Int], turnNumber: Int, replay: [String: [String: Any]]?) {
+    func start(enemyInts: [Int], turnNumber: Int, replay: [String: [String: String]]?) {
         isReplay = replay != nil
+        replayPlacements = replay
         var count = 0
         defenderBudget = (turnNumber+1) * 1000
         budgetLabel?.text = "\(defenderBudget)"

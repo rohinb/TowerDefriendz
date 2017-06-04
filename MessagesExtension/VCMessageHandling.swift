@@ -22,8 +22,8 @@ extension TowerDefriendzViewController {
         } else {
             incomingMessage = Message(str: conversation.selectedMessage!.url!.absoluteString.removingPercentEncoding!)
 //            if incomingMessage?.fromUUID != currentUDID {
-                self.stages = [.defend, .game, .soldierSelection, .attack]
-                self.gameStage = .defend
+                self.stages = [.replay, .defend, .game, .soldierSelection, .attack]
+                self.gameStage = self.stages.first!
 //            } else {
 //                self.stages = [.waitingForOpponent]
 //                self.gameStage = .waitingForOpponent
@@ -37,8 +37,8 @@ extension TowerDefriendzViewController {
 
         incomingMessage = Message(str: message.url!.absoluteString.removingPercentEncoding!)
 //        if incomingMessage?.fromUUID != currentUDID {
-            self.stages = [.defend, .game, .soldierSelection, .attack]
-            self.gameStage = .defend
+            self.stages = [.replay, .defend, .game, .soldierSelection, .attack]
+            self.gameStage = self.stages.first!
 //        } else {
 //            self.stages = [.waitingForOpponent]
 //            self.gameStage = .waitingForOpponent

@@ -87,10 +87,8 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate, U
         mainButton.stage = gameStage
         statusLabel.stage = gameStage
         switch gameStage {
-
         case .initial:
             break
-
         case .initialSoldierSelection:
             let dic : [String : Any] = [MessageOptions.fromUUID.rawValue : currentUDID!,
                         MessageOptions.soldierArray.rawValue : [Int](),
@@ -100,25 +98,16 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate, U
 
             pendingMessage = Message(dic: dic)
             showSoldierSelection()
-            break
-
         case .initialAttack:
             createInitialAttackMessage(withMessage: pendingMessage!)
             hideSoldierSelection()
             requestPresentationStyle(.compact)
-            break
-
         case .replay:
             gameViewInitiation(isReplay: true)
-            break
-
         case .defend:
             break
-
         case .game:
             gameViewInitiation(isReplay: false)
-            break
-
         case .soldierSelection:
             armyBudget = (incomingMessage!.turnNumber + 1 ) * 500
             print(incomingMessage!.turnNumber)
@@ -127,26 +116,18 @@ class TowerDefriendzViewController: MSMessagesAppViewController, GameDelegate, U
                                         MessageOptions.turnNumber.rawValue : incomingMessage!.turnNumber + 1,
                                         MessageOptions.fromScore.rawValue : incomingMessage!.toScore,
                                         MessageOptions.toScore.rawValue : incomingMessage!.fromScore,
-                                        MessageOptions.replay.rawValue : ["-1"  : ["name" : "normal" , "x" : "8", "y" : "7"]],
+                                        MessageOptions.replay.rawValue : replay ?? ["-1"  : ["name" : "normal" , "x" : "8", "y" : "7"]],
                                         MessageOptions.previousSoldierArray.rawValue : incomingMessage!.soldierArray]
-
             pendingMessage = Message(dic: dic)
             showSoldierSelection()
-            break
-
         case .attack:
-
             self.createAttackMessage(withMessage: pendingMessage!, defenseDidWin: self.defenseSucceeded)
             hideSoldierSelection()
             requestPresentationStyle(.compact)
-            break
-
         case .waitingForOpponent:
             break
-
         case .cannotGetAttack:
             break
-
         }
     }
 
