@@ -215,10 +215,10 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
     func start(enemyInts: [Int], turnNumber: Int, replay: [String: [String: String]]?) {
         isReplay = replay != nil
         replayPlacements = replay
-        var count = 0
 		replayBudget = turnNumber * 1000
         defenderBudget = (turnNumber+1) * 1000
 		budgetLabel?.text = "\(isReplay ? replayBudget : defenderBudget)"
+		var count = 0
         for (index, int) in enemyInts.enumerated() {
             Timer.scheduledTimer(withTimeInterval: ((index > enemyInts.count / 2 && turnNumber > 2) ? 0.25 : 0.5) * Double(count), repeats: false) {_ in
                 let enemy = int == 1 ? Enemy(posX: 4, posY: 0, type: .soldier) : Enemy(posX: Int(arc4random_uniform(9))+1, posY: 0, type: .bird)
