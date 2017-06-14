@@ -1,4 +1,5 @@
 import UIKit
+import SpriteKit
 
 struct Constants {
     static var scale = 30

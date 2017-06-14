@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SpriteKit
 
 
 // TODO: Balance towers for price; right now .normal is overpowered
@@ -109,7 +110,7 @@ enum TowerType {
 	}
 }
 
-class Tower:UIImageView {
+class Tower:SKSpriteNode {
 	
 	var type : TowerType
     var posX: Int
@@ -123,12 +124,8 @@ class Tower:UIImageView {
         self.posY = posY
         self.type = type
 		
-        super.init(frame: CGRect(x: posX * Constants.scale,
-                                 y: posY * Constants.scale,
-                                 width: Constants.scale * 375 / 255, //FIXME: Get rid of these magic numbers
-                                 height: Constants.scale))
-		
-		self.image = type.image
+        super.init(texture: SKTexture(image: type.image), color: UIColor.clear, size: CGSize(width: Constants.scale * 375 / 255, height: Constants.scale))
+        self.position = CGPoint(x: CGFloat(posX * Constants.scale) + self.size.width/2, y: (self.parent?.frame.height)! - CGFloat(posY * Constants.scale) - self.size.height/2)
 	}
     
     
@@ -148,12 +145,12 @@ class Tower:UIImageView {
         // we want to traverse (for loop) array of enemies and find first one that is within radius
         // then transform/rotate to face it and instantly shoot (with that direction's vel)
         for enemy in enemyArray {
-            let dx = enemy.center.x - self.center.x
-            let dy = enemy.center.y - self.center.y
+            let dx = enemy.position.x - self.position.x
+            let dy = enemy.position.y - self.position.y
             if pow(dx,2) + pow(dy,2) < pow(type.radius,2) {
                 let direction = dx < 0 ? atan(dy/dx) + 3.14159265535 : atan(dy/dx)
                 UIView.animate(withDuration: self.TOWER_ROTATION_INTERVAL, delay: 0.0, options: .curveLinear, animations: {
-                    self.transform = CGAffineTransform(rotationAngle: direction)
+                    self.run(SKAction.rotate(byAngle: direction, duration: 0.05))
                 }, completion: { (success) in
                     if success { 
                         let bullet = Bullet(locationX: self.posX, locationY: self.posY, vel: speed, direction: Double(direction), damage : self.type.damage, color : color)

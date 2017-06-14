@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SpriteKit
 
 let startPathPoint = (4, 0)
 let pathPoints =	[startPathPoint,
@@ -112,7 +113,7 @@ enum EnemyType : Int {
 	}
 }
 
-class Enemy: UIImageView {
+class Enemy: SKSpriteNode {
 	
 	var posX: Int
 	var posY: Int
@@ -130,12 +131,15 @@ class Enemy: UIImageView {
 		self.posY = posY
 		self.type = type
 		self.pIndex = 0
-		super.init(frame: CGRect(x: posX*Constants.scale, y: posY*Constants.scale, width: Constants.scale, height: Constants.scale))
+        super.init(texture: SKTexture(image: type.image.withRenderingMode(.alwaysOriginal)), color: UIColor.clear, size: CGSize(width: Constants.scale, height: Constants.scale))
+        let halfConstants = Constants.scale / 2
+        let positionXEnemy = posX*Constants.scale + halfConstants
+        let positionYEnemy = (self.parent?.frame.height)! - CGFloat(posY*Constants.scale - halfConstants)
+        self.position = CGPoint(x: CGFloat(positionXEnemy), y: CGFloat(positionYEnemy))
 		updateTimer = Timer.scheduledTimer(withTimeInterval: 0.8, repeats: true, block: { (timer) in
 			self.update()
 		})
 		health = type.initialHealth
-		self.image = type.image.withRenderingMode(.alwaysOriginal)
 	}
 	
 	func die() {
@@ -146,7 +150,7 @@ class Enemy: UIImageView {
 		UIView.animate(withDuration: 0.3, animations: {
 			self.alpha = 0.0
 		}) { (success) in
-			self.removeFromSuperview()
+			self.removeFromParent()
 		}
 		if enemyArray.count <= 0 {
 			self.delegate?.allEnemiesDead()
@@ -155,7 +159,7 @@ class Enemy: UIImageView {
 	
 	func hurt(damage: Int) {
 		health -= damage
-		self.image = type.image.withRenderingMode(.alwaysTemplate)
+        self.texture = SKTexture(image: type.image.withRenderingMode(.alwaysTemplate))
 		
 		self.flashRed()
 		if health <= 0{
@@ -165,10 +169,11 @@ class Enemy: UIImageView {
 	
 	//TODO: Test when Sahand fixes imessage flow
 	fileprivate func flashRed() {
-		self.tintColor = UIColor.red
+        self.color = UIColor.red
+        self.colorBlendFactor = 1
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.07, execute: {
-			self.tintColor = UIColor.clear
-			self.image = self.type.image.withRenderingMode(.alwaysOriginal)
+			self.colorBlendFactor = 0
+            self.texture = SKTexture(image: self.type.image.withRenderingMode(.alwaysOriginal))
 		})
 	}
 	
@@ -190,11 +195,13 @@ class Enemy: UIImageView {
 		}
 		
 		animateSmoothly(duration: updateTimer.timeInterval) {
-			self.frame = CGRect(x: self.posX*Constants.scale, y: self.posY*Constants.scale, width: Constants.scale, height: Constants.scale)
+            self.size = CGSize(width: Constants.scale, height: Constants.scale)
+            let halfConstants: CGFloat = CGFloat(Constants.scale / 2)
+            self.position = CGPoint(x: CGFloat(self.posX*Constants.scale) + halfConstants, y: (self.parent?.frame.height)! - CGFloat(self.posY*Constants.scale) - halfConstants)
 		}
 		pIndex += 1
 
-		if self.center.y >= self.superview!.frame.height {
+		if self.position.y >= (self.parent?.frame.height)! {
 			self.delegate?.enemyReachedEnd()
 			self.die()
 		}

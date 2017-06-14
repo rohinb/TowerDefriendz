@@ -8,8 +8,9 @@
 
 import Foundation
 import UIKit
+import SpriteKit
 
-class Bullet: UIImageView {
+class Bullet: SKSpriteNode {
     
     var damage : Int
     
@@ -27,32 +28,37 @@ class Bullet: UIImageView {
         
         self.damage = damage
         
-        super.init(frame: CGRect(x: locationX*Constants.scale + Constants.scale / 2 - 3, y: locationY*Constants.scale + Constants.scale / 2 - 3, width: 7, height: 7))
-        self.layer.cornerRadius = 3.5
+        super.init(texture: SKTexture(image: #imageLiteral(resourceName: "bullet")), color: UIColor.clear, size: CGSize(width: 7, height: 7))
+        //x: original x + 0.5width; y: screen height - original y - 0.5height
+        let halfConstantsScale = Constants.scale / 2
+        let positionXBullet = CGFloat(locationX*Constants.scale + halfConstantsScale) + 0.5
+        let positionYBullet = (self.parent?.frame.height)! - CGFloat(locationY*Constants.scale + halfConstantsScale) - 7.5
+        super.position = CGPoint(x: positionXBullet, y: positionYBullet)
         updateTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true, block: { (Timer) in
             self.update()
         })
-        self.backgroundColor = color
     }
     
     func update() {
         animateSmoothly(duration: updateTimer.timeInterval) {
-            self.frame = CGRect(x: self.frame.origin.x + self.velX, y: self.frame.origin.y + self.velY, width: 7, height: 7)
+            self.size = CGSize(width: 7, height: 7)
+            self.position = CGPoint(x: self.frame.origin.x + self.velX + 3.5, y: (self.parent?.frame.height)! - self.frame.origin.y - self.velY - 3.5)
+            
         }
         // kill bullet if it is off the screen!
-		if superview == nil {
+		if self.parent == nil {
 			self.die()
 			return
 		}
-        if self.center.x > self.superview!.frame.width || self.center.x < 0
-            || self.center.y > self.superview!.frame.height || self.center.y < 0 {
+        if self.position.x > self.parent!.frame.width || self.position.x < 0
+            || self.position.y > self.parent!.frame.height || self.position.y < 0 {
             self.die()
         }
 		
 		// FIXME: right now bullets are hitting enemies if they are in the same grid.
 			//    They should be hitting when they actually make contact with the frame
-        let posX = Int(self.center.x/CGFloat(Constants.scale))
-        let posY = Int(self.center.y/CGFloat(Constants.scale))
+        let posX = Int(self.position.x/CGFloat(Constants.scale))
+        let posY = Int(self.position.y/CGFloat(Constants.scale))
 
 		for enemy in enemyArray where isPiercing ? !hitEnemies.contains(enemy) : true {
             if enemy.posX == posX && enemy.posY == posY {
@@ -67,7 +73,7 @@ class Bullet: UIImageView {
     }
     
     func die() {
-        self.removeFromSuperview()
+        self.removeFromParent()
         updateTimer.invalidate()
         if let index = bulletArray?.index(of: self) {
             bulletArray?.remove(at: index)
@@ -75,8 +81,8 @@ class Bullet: UIImageView {
 		
 		if splashRadius > 0.0 {
 			for enemy in enemyArray {
-				let dx = enemy.center.x - self.center.x
-				let dy = enemy.center.y - self.center.y
+				let dx = enemy.position.x - self.position.x
+				let dy = enemy.position.y - self.position.y
 				if pow(dx,2) + pow(dy,2) < CGFloat(pow(self.splashRadius,2)) {
 					enemy.hurt(damage: self.damage / 2)
 				}
