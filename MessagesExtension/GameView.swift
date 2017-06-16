@@ -20,6 +20,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
     var lives = 3
     var isRunning = true
     var defenderBudget = 0
+	var replayBudget = 0
     var hearts = [UIImageView]()
     let towerTypes = ["normal", "ranged", "deadly"]
     var selectedTowerType : TowerType?
@@ -105,6 +106,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
 
     func setupReplayTimer() {
         if isReplay {
+			replayTimer.invalidate()
             replayTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (timer) in
                 self.replayTicks += 1
                 if let item = self.replayPlacements![self.replayTicks.description] {
@@ -112,10 +114,13 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
                     self.addSubview(tower)
                     tower.delegate = self
                     towerArray?.append(tower)
+					self.replayBudget -= tower.type.price
+					self.budgetLabel?.text = "\(self.replayBudget)"
                     tower.startShooting()
                 }
             })
         } else {
+			recordingTimer.invalidate()
             recordingTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (timer) in
                 self.recordingTicks += 1 //these ticks will be used every time the user places a tower
             })
@@ -210,9 +215,10 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
     func start(enemyInts: [Int], turnNumber: Int, replay: [String: [String: String]]?) {
         isReplay = replay != nil
         replayPlacements = replay
-        var count = 0
+		replayBudget = turnNumber * 1000
         defenderBudget = (turnNumber+1) * 1000
-        budgetLabel?.text = "\(defenderBudget)"
+		budgetLabel?.text = "\(isReplay ? replayBudget : defenderBudget)"
+		var count = 0
         for (index, int) in enemyInts.enumerated() {
             Timer.scheduledTimer(withTimeInterval: ((index > enemyInts.count / 2 && turnNumber > 2) ? 0.25 : 0.5) * Double(count), repeats: false) {_ in
                 let enemy = int == 1 ? Enemy(posX: 4, posY: 0, type: .soldier) : Enemy(posX: Int(arc4random_uniform(9))+1, posY: 0, type: .bird)
