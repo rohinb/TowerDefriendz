@@ -13,21 +13,21 @@ protocol GameDelegate {
 var enemyArray = [Enemy]()
 var towerArray: [Tower]? = [Tower]()
 var bulletArray: [Bullet]? = [Bullet]()
-let imageView = UIImageView(image: #imageLiteral(resourceName: "path"))
+let imageView = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "path")), color: UIColor.clear, size: CGSize.zero)
 
-class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegate {
+class GameScene: SKScene, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegate {
 
     var delegate : GameDelegate?
     var lives = 3
     var isRunning = true
     var defenderBudget = 0
-    var hearts = [UIImageView]()
+    var hearts = [SKSpriteNode]()
     let towerTypes = ["normal", "ranged", "deadly"]
     var selectedTowerType : TowerType?
     var currentConfirmPosition : (Int, Int)?
     var currentConfirmTower : Tower?
     var currentConfirmCircle : UIView?
-    var budgetLabel : UILabel?
+    var budgetLabel : SKLabelNode?
 
     var stage = GameStage.game {
         didSet {
@@ -37,7 +37,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
                 break
 
             default:
-                self.removeFromSuperview()
+                self.removeFromParent()
                 break
             }
         }
@@ -61,12 +61,12 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
         "1"   : ["name" : "normal" , "x" : "2", "y" : "5"],
         "104" : ["name" : "normal" , "x" : "1", "y" : "4"]]
 
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-
-        imageView.frame = self.bounds
-        self.addSubview(imageView)
+    init(frame: CGRect) {
+        super.init(size: frame.size)
+        
+        imageView.size = self.size
+        imageView.position = self.position
+        self.insertChild(imageView, at: 0)
 
         let tap = UITapGestureRecognizer()
         tap.isEnabled = !isReplay
@@ -84,34 +84,41 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
             button.tag = index
             button.addTarget(self, action: #selector(self.setSelectedTowerType(sender:)), for: .touchUpInside)
             self.insertSubview(button, aboveSubview: imageView)
+            
         }
 
         for live in 0..<lives {
-            let imageView = UIImageView(frame: CGRect(x: 10 + live * 25, y: 100, width: 20, height: 20))
-            imageView.image = UIImage(named: "heart")
-            imageView.contentMode = .scaleToFill
+            let imageView = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "heart")), color: UIColor.clear, size: CGSize(width: 20, height: 20))
+            imageView.position = CGPoint(x: CGFloat(20 + live * 25), y: self.size.height - 110)
+            //imageView.contentMode = .scaleToFill
             hearts.insert(imageView, at: 0)
-            self.insertSubview(imageView, aboveSubview: imageView)
+            self.insertChild(imageView, at: 1)
         }
 
-        budgetLabel = UILabel(frame: CGRect(x: self.frame.width - 50, y: 100, width: 50, height: 30))
-        budgetLabel?.text = ""
+        budgetLabel = SKLabelNode(text: "")
+        budgetLabel?.position = CGPoint(x: self.frame.width - 25, y: self.size.height - 115)
         budgetLabel?.isHidden = isReplay
-        budgetLabel?.textColor = UIColor.yellow
-        self.addSubview(budgetLabel!)
+        budgetLabel?.color = UIColor.yellow
+        self.addChild(budgetLabel!)
+        
+//        budgetLabel = UILabel(frame: CGRect(x: self.frame.width - 50, y: 100, width: 50, height: 30))
+//        budgetLabel?.text = ""
+//        budgetLabel?.isHidden = isReplay
+//        budgetLabel?.textColor = UIColor.yellow
+//        self.addSubview(budgetLabel!)
 
-        let coin = UIImageView(frame: CGRect(x: budgetLabel!.frame.origin.x - 20, y: budgetLabel!.frame.origin.y, width: 10, height: 10))
-        coin.image = #imageLiteral(resourceName: "coin")
+        let coin = SKSpriteNode(texture: SKTexture(image: #imageLiteral(resourceName: "coin")), color: UIColor.clear, size: CGSize(width: 10, height: 10))
+        coin.position = CGPoint(x: budgetLabel!.frame.origin.x - 15, y: self.size.height - budgetLabel!.frame.origin.y - 5)
         coin.isHidden = isReplay
-        coin.center.y = budgetLabel!.center.y
-        self.addSubview(coin)
+        coin.position.y = budgetLabel!.position.y
+        self.addChild(coin)
 
         if isReplay {
             replayTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (timer) in
                 self.replayTicks += 1
                 if let item = self.replayPlacements[self.replayTicks.description] {
                     let tower = Tower(posX: Int(item["x"]!)!, posY: Int(item["y"]!)!, type: TowerType(name: item["name"]!))
-                    self.addSubview(tower)
+                    self.addChild(tower)
                     tower.delegate = self
                     towerArray?.append(tower)
                     tower.startShooting()
@@ -158,7 +165,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
                 return
             } else {
                 currentConfirmPosition = nil
-                currentConfirmTower?.removeFromSuperview()
+                currentConfirmTower?.removeFromParent()
                 currentConfirmTower = nil
             }
             showTowerRadius(posX: posX, posY: posY)
@@ -168,11 +175,11 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
     func showTowerRadius(posX: Int, posY : Int) {
         guard selectedTowerType != nil else { return }
         let tower = Tower(posX: posX, posY: posY, type: selectedTowerType!)
-        addSubview(tower)
+        self.addChild(tower)
         tower.alpha = 0.3
 
         let circleView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: selectedTowerType!.radius, height: selectedTowerType!.radius))
-        circleView.center = tower.center
+        circleView.center = tower.position
         let color = defenderBudget - tower.type.price >= 0 ? UIColor(hex: 0x00A6ED): UIColor(hex: 0xF6511D)
         circleView.backgroundColor = color.withAlphaComponent(0.25)
         circleView.layer.masksToBounds = true
@@ -200,7 +207,7 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
             budgetLabel?.text = "\(defenderBudget)"
         } else {
             currentConfirmPosition = nil
-            currentConfirmTower?.removeFromSuperview()
+            currentConfirmTower?.removeFromParent()
             currentConfirmTower = nil
         }
     }
@@ -218,14 +225,14 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
             Timer.scheduledTimer(withTimeInterval: ((index > enemyInts.count / 2 && turnNumber > 2) ? 0.25 : 0.5) * Double(count), repeats: false) {_ in
                 let enemy = int == 1 ? Enemy(posX: 4, posY: 0, type: .soldier) : Enemy(posX: Int(arc4random_uniform(9))+1, posY: 0, type: .bird)
                 enemy.delegate = self
-                self.addSubview(enemy)
+                self.addChild(enemy)
                 enemyArray.append(enemy)
             }
             count += 1
         }
         for tower in towerArray! {
             tower.delegate = self
-            self.addSubview(tower)
+            self.addChild(tower)
         }
     }
     
@@ -247,20 +254,20 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
         }
         
         for i in towerArray! {
-            i.removeFromSuperview()
+            i.removeFromParent()
         }
         towerArray = [Tower]()
     }
     
     func addedBullet(bullet: Bullet) {
         bulletArray?.append(bullet)
-        self.insertSubview(bullet, aboveSubview: imageView)
+        self.insertChild(bullet, at: 1)
     }
     
     func enemyReachedEnd() {
         lives -= 1
         if let heart = hearts.first {
-            heart.removeFromSuperview()
+            heart.removeFromParent()
             hearts.remove(at:0)
         }
         if lives <= 0 {
@@ -273,6 +280,20 @@ class GameView: UIView, TowerDelegate, UIGestureRecognizerDelegate, EnemyDelegat
     }
 }
 
+class GameView: SKView, UIGestureRecognizerDelegate, SKSceneDelegate {
+    
+    var sceneToBePresented: GameScene
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        sceneToBePresented = GameScene(frame: self.frame)
+        self.presentScene(sceneToBePresented)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
 
 func contains(arr:[(Int, Int)], tuple:(Int,Int)) -> Bool {
     let (c1, c2) = tuple

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import UIKit
+//import UIKit
 import SpriteKit
 
 class Bullet: SKSpriteNode {

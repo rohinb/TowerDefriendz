@@ -18,7 +18,7 @@ extension TowerDefriendzViewController {
             gameView?.delegate = self
             gameView?.autoresizingMask = [.flexibleHeight, .flexibleWidth]
             view.addSubview(gameView!)
-            gameView?.start(enemyInts: incomingMessage!.soldierArray ,turnNumber: incomingMessage!.turnNumber, replay: incomingMessage?.replay)
+            gameView?.sceneToBePresented.start(enemyInts: incomingMessage!.soldierArray, turnNumber: incomingMessage!.turnNumber, replay: incomingMessage?.replay)
         } else {
             alert(withTitle: "Empty attack wave", withMessage: "abort")
         }
